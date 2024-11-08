@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="an" prefHeight="512.0" prefWidth="624.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+   <children>
+      <Pane layoutX="7.0" prefHeight="512.0" prefWidth="624.0">
+         <children>
+            <ImageView fitHeight="246.0" fitWidth="241.0" layoutX="36.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/images/login1.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="289.0" layoutY="52.0" prefHeight="60.0" prefWidth="203.0" text="Iniciar sesión">
+               <font>
+                  <Font name="Century Gothic Bold" size="23.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBoxRol" layoutX="337.0" layoutY="152.0" prefHeight="34.0" prefWidth="203.0" promptText="rol universitario" style="-fx-background-color: #FFFFFF;" />
+            <Button fx:id="btn_next" layoutX="459.0" layoutY="424.0" mnemonicParsing="false" onAction="#getNextPage" prefHeight="34.0" prefWidth="81.0" style="-fx-background-color: #1E90FF;" text="siguiente" textFill="WHITE">
+               <font>
+                  <Font name="Century Gothic Bold" size="12.0" />
+               </font>
+            </Button>
+            <TextField fx:id="txt_user" layoutX="337.0" layoutY="230.0" prefHeight="25.0" prefWidth="203.0" promptText="Usuario" />
+            <TextField fx:id="txt_password" layoutX="337.0" layoutY="307.0" prefHeight="25.0" prefWidth="203.0" promptText="Contraseña" />
+            <ImageView fitHeight="180.0" fitWidth="34.0" layoutX="289.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/images/logo.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btn_createAccount" layoutX="165.0" layoutY="446.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="19.0" prefWidth="98.0" style="-fx-background-color: #FFFFFF;" text="crear cuenta." textFill="DODGERBLUE">
+               <font>
+                  <Font name="Arial Italic" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="61.0" layoutY="446.0" prefHeight="23.0" prefWidth="118.0" text="No tienes una cuenta">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="108.0" fitWidth="162.0" layoutX="58.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/images/UNA-logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="625.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SingInController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Button fx:id="btn_createAccount" layoutX="525.0" layoutY="444.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="47.0" prefWidth="87.0" style="-fx-background-color: #ffffff;" text="crear cuenta">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.7543859481811523" green="0.7287740707397461" blue="0.7287740707397461" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Button>
+            <Button fx:id="btn_back" layoutX="11.0" layoutY="12.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="8.0" prefWidth="56.0" style="-fx-background-color: #ffffff;" text="back">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.7368420958518982" green="0.7186484932899475" blue="0.7186484932899475" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Button>
+            <Label layoutX="232.0" layoutY="37.0" prefHeight="60.0" prefWidth="162.0" text="Crear cuenta">
+               <font>
+                  <Font name="Century Gothic Bold" size="23.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.5877193212509155" green="0.5496264100074768" blue="0.5496264100074768" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Label>
+            <ComboBox fx:id="comboBoxRol" layoutX="221.0" layoutY="213.0" prefHeight="25.0" prefWidth="203.0" promptText="rol universitario" style="-fx-background-color: #FFFFFF;">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.7543859481811523" green="0.7287740707397461" blue="0.7287740707397461" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </ComboBox>
+            <Label layoutX="155.0" layoutY="125.0" text="Nombre" />
+            <Label layoutX="155.0" layoutY="170.0" text="Apellido" />
+            <TextField fx:id="txt_user3" layoutX="221.0" layoutY="121.0" prefHeight="25.0" prefWidth="203.0">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8684210777282715" green="0.8496588468551636" blue="0.8496588468551636" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </TextField>
+            <Label layoutX="155.0" layoutY="270.0" prefHeight="17.0" prefWidth="44.0" text="Cédula" />
+            <Label layoutX="155.0" layoutY="324.0" prefHeight="17.0" prefWidth="44.0" text="E-mail" />
+            <Label layoutX="145.0" layoutY="379.0" prefHeight="17.0" prefWidth="75.0" text="Contraseña" />
+            <Label layoutX="155.0" layoutY="221.0" prefHeight="17.0" prefWidth="44.0" text="Rol" />
+            <TextField fx:id="txt_user32" layoutX="221.0" layoutY="166.0" prefHeight="25.0" prefWidth="203.0">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8684210777282715" green="0.8496588468551636" blue="0.8496588468551636" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </TextField>
+            <TextField fx:id="txt_user33" layoutX="221.0" layoutY="266.0" prefHeight="25.0" prefWidth="203.0">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8684210777282715" green="0.8496588468551636" blue="0.8496588468551636" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </TextField>
+            <TextField fx:id="txt_user34" layoutX="221.0" layoutY="320.0" prefHeight="25.0" prefWidth="203.0">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8684210777282715" green="0.8496588468551636" blue="0.8496588468551636" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </TextField>
+            <TextField fx:id="txt_user35" layoutX="221.0" layoutY="375.0" prefHeight="25.0" prefWidth="203.0">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8684210777282715" green="0.8496588468551636" blue="0.8496588468551636" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </TextField>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
