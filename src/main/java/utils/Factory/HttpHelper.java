@@ -87,11 +87,18 @@ public class HttpHelper {
         }
     }
 
-    public static boolean sendDeleteRequest(String url, String token) {
+ public static boolean sendDeleteRequest(String url, String jsonBody) {
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
             connection.setRequestMethod("DELETE");
-            connection.setRequestProperty("Authorization", "Bearer " + token);
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+
+            // Escribir el cuerpo JSON
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = jsonBody.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+            }
 
             int responseCode = connection.getResponseCode();
             return responseCode == HttpURLConnection.HTTP_OK;

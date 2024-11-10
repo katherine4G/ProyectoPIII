@@ -28,7 +28,6 @@ import java.util.List;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 
-
 public class InterAdminController implements Initializable {
 
     @FXML
@@ -118,7 +117,7 @@ public class InterAdminController implements Initializable {
     @FXML
     private TableColumn<?, ?> col_Department_facultyName;
     @FXML
-    private TableColumn<?, ?> col_Department_facultyType;       
+    private TableColumn<?, ?> col_Department_facultyType;
     @FXML
     private TableColumn<?, ?> col_Department_nameDepart;
     @FXML
@@ -131,13 +130,13 @@ public class InterAdminController implements Initializable {
     private Button btn_department_create_inside;
     @FXML
     private ComboBox<String> comboBox_faculty_AllUniversities;
-    
+
     private UniversityAPI universityAPI = new UniversityAPI();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ///universidad///
-        showTableView_university();  
+        showTableView_university();
         TableViewUniversity.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 txt_university_name.setText(newSelection.getUniversityName());
@@ -146,21 +145,21 @@ public class InterAdminController implements Initializable {
                 txt_university_address.setText(newSelection.getUniAdress());
             }
         });
-       ///facultad///
+        ///facultad///
         showTableView_faculty();
         loadUniversitiesForComboBox_faculty();
-       
+
         // AnimatiosUtils.applyHoverAnimations(rootPane);
-    }    
+    }
 
 /////////////////////////////Universities////////////////////////////////////
     @FXML
     private void createUniversity(ActionEvent event) throws IOException { //para moverse entre ventanas(anchors Pane) para crear uni
         switchForm(event);
-        loadUniversities(); 
+        loadUniversities();
 
     }
-    
+
     public void loadUniversities() throws IOException {
         UniversityAPI universityAPI = new UniversityAPI();
         List<University> universities = universityAPI.getAll();
@@ -187,32 +186,87 @@ public class InterAdminController implements Initializable {
         // Llamar al método de la API para crear la universidad
         UniversityAPI universityAPI = new UniversityAPI();
         String json = jsonBody.toString();
-        String token = "tu_token_aqui"; // Reemplaza esto con el token real
+        String token = "123"; // Token provisional
         boolean success = universityAPI.create(json, token);
 
         if (success) {
             // Si la universidad se creó con éxito, recargar la lista de universidades
             loadUniversities();
+            showSuccessMessage("Universidad Creada", "La universidad ha sido creada exitosamente.");
+            clear();
         } else {
             // Manejar error
-            System.out.println("Error al crear la universidad.");
+            showErrorMessage("Error", "No se pudo crear la universidad.");
         }
     }
 
     @FXML
-    private void university_edit_inside(ActionEvent event) {
+    private void university_edit_inside(ActionEvent event) throws IOException {
+         University selectedUniversity = TableViewUniversity.getSelectionModel().getSelectedItem();
+    if (selectedUniversity == null) {
+        showErrorMessage("Error", "Selecciona una universidad para editar");
+        return;
     }
-     @FXML
-    private void university_delete_inside(ActionEvent event) {
+
+    // Obtener datos actualizados
+    String universityName = txt_university_name.getText();
+    String country = txt_university_country.getText();
+    String sede = txt_university_sede.getText();
+    String address = txt_university_address.getText();
+
+    // Crear JSON para actualización
+    JsonObject jsonBody = new JsonObject();
+    jsonBody.addProperty("universityName", universityName);
+    jsonBody.addProperty("uniCountry", country);
+    jsonBody.addProperty("uniSede", sede);
+    jsonBody.addProperty("uniAdress", address);
+
+    boolean success = universityAPI.update(
+        selectedUniversity.getUniversityId(), 
+        jsonBody.toString(), 
+        "123"
+    );
+
+    if (success) {
+        loadUniversities();
+        showSuccessMessage("Universidad Actualizada", "La universidad ha sido actualizada exitosamente.");
+    } else {
+        showErrorMessage("Error", "No se pudo actualizar la universidad.");
     }
+    }
+
+    @FXML
+    private void university_delete_inside(ActionEvent event) throws IOException {
+        University selectedUniversity = TableViewUniversity.getSelectionModel().getSelectedItem();
+    if (selectedUniversity == null) {
+        showErrorMessage("Error", "Selecciona una universidad para eliminar");
+        return;
+    }
+
+    boolean confirmed = confirmAction("Eliminar", selectedUniversity);
+    if (confirmed) {
+        boolean success = universityAPI.delete(
+            selectedUniversity.getUniversityId(), 
+            "123"
+        );
+
+        if (success) {
+            loadUniversities();
+            showSuccessMessage("Universidad Eliminada", "La universidad ha sido eliminada exitosamente.");
+        } else {
+            showErrorMessage("Error", "No se pudo eliminar la universidad.");
+        }
+    }
+        
+    }
+
     private void showTableView_university() {
         col_universityName.setCellValueFactory(new PropertyValueFactory<>("universityName"));
         col_universityCountry.setCellValueFactory(new PropertyValueFactory<>("uniCountry"));
         col_universitySede.setCellValueFactory(new PropertyValueFactory<>("uniSede"));
-        col_universityAdress.setCellValueFactory(new PropertyValueFactory<>("uniAdress"));         
+        col_universityAdress.setCellValueFactory(new PropertyValueFactory<>("uniAdress"));
     }
 
-    
 //      public void loadUniversities() {
 //        try {
 //            List<University> universityList = universityAPI.getAllUniversities();
@@ -291,22 +345,23 @@ public class InterAdminController implements Initializable {
 //            showErrorMessage("Error", "Hubo un problema al eliminar la universidad.");
 //        }
 //    }
-    
 ///////////////////////////Facultys////////////////////////////
     @FXML
     private void createFaculty(ActionEvent event) { //para moverse entre ventanas(anchos Pane) para crear facultades
         switchForm(event);
     }
+
     @FXML
     private void faculty_create_inside(ActionEvent event) {
         String name = txt_faculty_name.getText();
         String type = txt_faculty_type.getText();
-        String token = "123";  
+        String token = "123";
 
     }
+
     @FXML
     private void faculty_delete_inside(ActionEvent event) {
-        
+
     }
 
     @FXML
@@ -329,16 +384,16 @@ public class InterAdminController implements Initializable {
 
             // Ordenamos la lista por nombre, país y sede usando un Comparator
             universityList.sort(Comparator.comparing(University::getUniversityName)
-                                          .thenComparing(University::getUniCountry)
-                                          .thenComparing(University::getUniSede));
+                    .thenComparing(University::getUniCountry)
+                    .thenComparing(University::getUniSede));
 
             // Creamos una lista de detalles para mostrar en el ComboBox
             List<String> universityDetails = new ArrayList<>();
             for (University university : universityList) {
-                String universityInfo = String.format("%s, %s, %s", 
-                                                     university.getUniversityName(), 
-                                                     university.getUniCountry(),
-                                                     university.getUniSede());
+                String universityInfo = String.format("%s, %s, %s",
+                        university.getUniversityName(),
+                        university.getUniCountry(),
+                        university.getUniSede());
                 universityDetails.add(universityInfo);
             }
 
@@ -350,13 +405,12 @@ public class InterAdminController implements Initializable {
         }
     }
 
-
 //////////////////////Departments///////////////////////////
     @FXML
     private void createDepartment(ActionEvent event) { //para moverse entre ventanas(anchors Pane)
         switchForm(event);
     }
-     
+
     @FXML
     private void department_delete_inside(ActionEvent event) {
     }
@@ -368,28 +422,30 @@ public class InterAdminController implements Initializable {
     @FXML
     private void department_create_inside(ActionEvent event) {
     }
+
     ///////////////////////Courses//////////////////////////////////
     @FXML
     private void createCourses(ActionEvent event) {  //para moverse entre ventanas(anchors Pane)
         switchForm(event);
     }
+
     ///////////////////////Professors//////////////////////////////////
     @FXML
     private void createTeacher(ActionEvent event) { //para moverse entre ventanas(anchors Pane)
         switchForm(event);
     }
+
     ///////////////////////Students//////////////////////////////////
     @FXML
     private void createStudent(ActionEvent event) { //para moverse entre ventanas(anchors Pane)
         switchForm(event);
     }
 
-
     @FXML
     private void Exit_LoggOut(ActionEvent event) throws IOException {
-        App.setRoot("main"); 
-        App.getStage().setWidth(624); 
-        App.getStage().setHeight(512); 
+        App.setRoot("main");
+        App.getStage().setWidth(624);
+        App.getStage().setHeight(512);
         App.getStage().setResizable(false); // 
     }
 
@@ -399,60 +455,54 @@ public class InterAdminController implements Initializable {
 
             University_form.setVisible(true);
             Faculty_form.setVisible(false);
-            Department_form.setVisible(false);           
+            Department_form.setVisible(false);
             Course_form.setVisible(false);
             Teacher_form.setVisible(false);
             Student_form.setVisible(false);
 
+        } else if (event.getSource() == btn_createFaculty) {
 
-        }else if (event.getSource() == btn_createFaculty)
-        {
-       
             University_form.setVisible(false);
             Faculty_form.setVisible(true);
-            Department_form.setVisible(false);           
+            Department_form.setVisible(false);
             Course_form.setVisible(false);
             Teacher_form.setVisible(false);
             Student_form.setVisible(false);
-            
-        }else if (event.getSource() == btn_createDepartment)
-        {
-       
+
+        } else if (event.getSource() == btn_createDepartment) {
+
             University_form.setVisible(false);
             Faculty_form.setVisible(false);
-            Department_form.setVisible(true);           
+            Department_form.setVisible(true);
             Course_form.setVisible(false);
             Teacher_form.setVisible(false);
             Student_form.setVisible(false);
-        }else if (event.getSource() == btn_createCourses)
-        {
-       
+        } else if (event.getSource() == btn_createCourses) {
+
             University_form.setVisible(false);
             Faculty_form.setVisible(false);
-            Department_form.setVisible(false);           
+            Department_form.setVisible(false);
             Course_form.setVisible(true);
             Teacher_form.setVisible(false);
             Student_form.setVisible(false);
-        }else if (event.getSource() == btn_createTeacher)
-        {      
+        } else if (event.getSource() == btn_createTeacher) {
             University_form.setVisible(false);
             Faculty_form.setVisible(false);
-            Department_form.setVisible(false);           
+            Department_form.setVisible(false);
             Course_form.setVisible(false);
             Teacher_form.setVisible(true);
             Student_form.setVisible(false);
-        }else if (event.getSource() == btn_createStudent)
-        {
-       
+        } else if (event.getSource() == btn_createStudent) {
+
             University_form.setVisible(false);
             Faculty_form.setVisible(false);
-            Department_form.setVisible(false);           
+            Department_form.setVisible(false);
             Course_form.setVisible(false);
             Teacher_form.setVisible(false);
             Student_form.setVisible(true);
         }
     }
-     
+
     private void showSuccessMessage(String title, String content) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle(title);
@@ -466,26 +516,24 @@ public class InterAdminController implements Initializable {
         alert.setContentText(content);
         alert.showAndWait();
     }
-    
-    private void clear(){
+
+    private void clear() {
         txt_university_name.setText(" ");
         txt_university_country.setText(" ");
         txt_university_sede.setText(" ");
         txt_university_address.setText(" ");
-        
-        
+
     }
-    
+
     private boolean confirmAction(String action, University university) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(action + " Universidad");
         alert.setHeaderText("¿Estás seguro de que deseas " + action.toLowerCase() + " esta universidad?");
-        alert.setContentText("Nombre: " + university.getUniversityName() + "\n" +
-                             "País: " + university.getUniCountry() + "\n" +
-                             "Sede: " + university.getUniSede() + "\n" +
-                             "Dirección: " + university.getUniAdress());
+        alert.setContentText("Nombre: " + university.getUniversityName() + "\n"
+                + "País: " + university.getUniCountry() + "\n"
+                + "Sede: " + university.getUniSede() + "\n"
+                + "Dirección: " + university.getUniAdress());
         return alert.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK;
     }
-
 
 }//fin clase
