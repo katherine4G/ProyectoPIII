@@ -21,16 +21,16 @@
 
 /* Estilos de Label */
 Label {
-    -fx-font-size: 10pt; /* Tamaño de fuente reducido */
+    -fx-font-size: 9pt; /* Tamaño de fuente reducido */
     -fx-font-family: "Segoe UI", "Helvetica", "Arial", sans-serif;
     -fx-text-fill: #34495E;
     -fx-opacity: 0.9;
-    -fx-padding: 2 14 2 14; /* Menor padding */
+    -fx-padding: 1 13 1 13; /* Menor padding */
 }
 
 /* Estilos de título */
 .title {
-    -fx-font-size: 14pt; /* Tamaño de fuente reducido */
+    -fx-font-size: 11pt; /* Tamaño de fuente reducido */
     -fx-font-family: "Segoe UI", "Helvetica", "Arial", sans-serif;
     -fx-text-fill: #ECF0F1;
     -fx-opacity: 1;
@@ -46,6 +46,10 @@ Label {
     -fx-font-size: 12pt;
     -fx-text-fill: #E67E22;
     -fx-text-align: center;
+}
+ComboBox {
+    /*-fx-pref-width: 200px;  Establece el ancho que prefieras */
+    -fx-pref-height: 10px;
 }
 
 /* TextField */

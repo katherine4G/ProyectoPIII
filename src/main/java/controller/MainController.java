@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import pack.universityplatform.App;
@@ -26,9 +27,9 @@ public class MainController implements Initializable {
     @FXML
     private TextField txt_user;
     @FXML
-    private TextField txt_password;
-    @FXML
     private Button btn_createAccount;
+    @FXML
+    private PasswordField PassTxt_password;
 
   
     @Override
@@ -62,22 +63,22 @@ public class MainController implements Initializable {
         switch (userType) {
             case "Estudiante" -> {
                 App.setRoot("InterStudent");
-                App.getStage().setWidth(870); 
-                App.getStage().setHeight(650); 
+                App.getStage().setWidth(900); 
+                App.getStage().setHeight(800); 
                 App.getStage().setResizable(true); 
                // App.getStage().setMaximized(true);  // Pantalla completa solo para estudiante
             }
             case "Profesor" -> {
                 App.setRoot("InterTeacher");
                // App.getStage().setMaximized(true);  // Pantalla completa solo para profesor
-                App.getStage().setWidth(850); // Establecer el ancho deseado
-                App.getStage().setHeight(660); // Establecer la altura deseada
+                App.getStage().setWidth(900); // Establecer el ancho deseado
+                App.getStage().setHeight(800); // Establecer la altura deseada
                 App.getStage().setResizable(true); // 
             }
             case "Administrativo" -> {
                 App.setRoot("InterAdmin");
                 //App.getStage().setMaximized(true); // Pantalla completa solo para administrativo
-                App.getStage().setWidth(800); // Establecer el ancho deseado
+                App.getStage().setWidth(900); // Establecer el ancho deseado
                 App.getStage().setHeight(800); // Establecer la altura deseada
                 App.getStage().setResizable(true); //
             }
@@ -91,6 +92,16 @@ public class MainController implements Initializable {
         alert.setTitle(title);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void get_User(ActionEvent event) {
+        
+    }
+
+    @FXML
+    private void get_passwordUser(ActionEvent event) {
+        
     }
 
     

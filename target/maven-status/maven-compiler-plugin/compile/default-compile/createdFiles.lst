@@ -4,6 +4,7 @@ Model\Student.class
 utils\Factory\APIClientFactory.class
 Model\Professor.class
 Model\University.class
+utils\MessagesToUser.class
 Model\Faculty.class
 utils\Factory\HttpHelper.class
 APIs\UniversityAPI.class

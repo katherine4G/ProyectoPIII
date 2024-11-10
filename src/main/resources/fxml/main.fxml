@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -30,8 +31,7 @@
                   <Font name="Century Gothic Bold" size="12.0" />
                </font>
             </Button>
-            <TextField fx:id="txt_user" layoutX="337.0" layoutY="230.0" prefHeight="25.0" prefWidth="203.0" promptText="Usuario" />
-            <TextField fx:id="txt_password" layoutX="337.0" layoutY="307.0" prefHeight="25.0" prefWidth="203.0" promptText="Contraseña" />
+            <TextField fx:id="txt_user" layoutX="337.0" layoutY="230.0" onAction="#get_User" prefHeight="25.0" prefWidth="203.0" promptText="Usuario" />
             <ImageView fitHeight="180.0" fitWidth="34.0" layoutX="289.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@/images/logo.png" />
@@ -52,6 +52,7 @@
                   <Image url="@/images/UNA-logo.png" />
                </image>
             </ImageView>
+            <PasswordField fx:id="PassTxt_password" layoutX="337.0" layoutY="307.0" onAction="#get_passwordUser" prefHeight="25.0" prefWidth="203.0" promptText="Contraseña" />
          </children>
       </Pane>
    </children>
