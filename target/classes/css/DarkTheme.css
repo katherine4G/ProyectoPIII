@@ -1,0 +1,243 @@
+/* Ajustes generales */
+* {
+    -fx-color-accent: #E67E22;
+}
+
+.background {
+    -fx-background-color: #2C3E50;
+    -fx-text-align: center;
+    -fx-padding: 5px;
+}
+
+.left-background, .rigth-background {
+    -fx-background-color: #BDC3C7; /* Gris Claro */
+    -fx-text-align: center;
+    -fx-padding: 5px;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #E67E22;
+}
+
+/* Estilos de Label */
+Label {
+    -fx-font-size: 10pt; /* Tamaño de fuente reducido */
+    -fx-font-family: "Segoe UI", "Helvetica", "Arial", sans-serif;
+    -fx-text-fill: #34495E;
+    -fx-opacity: 0.9;
+    -fx-padding: 2 14 2 14; /* Menor padding */
+}
+
+/* Estilos de título */
+.title {
+    -fx-font-size: 14pt; /* Tamaño de fuente reducido */
+    -fx-font-family: "Segoe UI", "Helvetica", "Arial", sans-serif;
+    -fx-text-fill: #ECF0F1;
+    -fx-opacity: 1;
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+    -fx-background-color: #2C3E50;
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
+}
+
+/* Subtítulo */
+.subtitle {
+    -fx-font-size: 12pt;
+    -fx-text-fill: #E67E22;
+    -fx-text-align: center;
+}
+
+/* TextField */
+TextField {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI", "Helvetica", "Arial", sans-serif;
+    -fx-background-color: #BDC3C7;
+    -fx-background-radius: 5px;
+    -fx-border-color: #2C3E50;
+    -fx-border-width: 1px; /* Reducción del ancho del borde */
+    -fx-text-fill: #34495E;
+}
+
+TextField {
+    -fx-background-color: #BDC3C7;
+    -fx-border-color: #2C3E50;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-transition: all 0.3s ease;
+}
+
+TextField:hover {
+    -fx-background-color: #ECF0F1;
+    -fx-border-color: #E67E22; /* Cambia el borde al pasar el ratón */
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+
+Button {
+    -fx-padding: 3 15 3 15;
+    -fx-border-color: #2C3E50;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-color: #E67E22;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 8pt;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.4), 10, 0.2, 0, 5);
+    -fx-transition: all 0.3s ease; /* Transición suave */
+}
+
+Button:hover {
+    -fx-background-color: #D35400; /* Cambia a un tono más oscuro al pasar el ratón */
+    -fx-scale-x: 1.05; /* Escala en X */
+    -fx-scale-y: 1.05; /* Escala en Y */
+}
+
+/* TableView */
+.table-view {
+    -fx-font-size: 10pt;
+}
+
+.table-view .column-header {
+    -fx-font-size: 9pt;
+    -fx-font-weight: bold;
+}
+.combo-box {
+    -fx-background-color: #ECF0F1; /* Fondo gris claro */
+    -fx-border-color: #2C3E50; /* Azul profundo */
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+}
+.combo-box .arrow {
+    -fx-background-color: #2C3E50; /* Azul profundo */
+    -fx-padding: 5px;
+}
+
+ComboBox:hover {
+    -fx-background-color: #D5D8DC; /* Cambia a un tono más claro */
+    -fx-border-color: #E67E22;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+
+
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+
+ 
+    Created on : 18 abr. 2022, 11:14:30
+    Author     : jgabr
+
+
+* {
+    -fx-color-accent: orange;
+}
+
+.background {
+    -fx-background-color: #1d1d1d;
+    -fx-text-align: center;
+    -fx-padding: 10px;
+}
+
+.left-background {
+    -fx-background-color: #aed6f1;
+    -fx-text-align: center;
+    -fx-padding: 10px;
+}
+.table-row-cell:selected { 
+    -fx-background-color: b3d9ff; 
+}
+
+
+.rigth-background {
+    -fx-background-color: gainsboro;
+    -fx-text-align: center;
+    -fx-padding: 10px;
+}
+
+Label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #1f618d;
+    -fx-opacity: 0.6;
+    -fx-padding: 5 22 5 22; 
+}
+
+Slider {
+    -fx-padding: 10 5 5 5; 
+}
+
+.title {
+    -fx-font-size: 25pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #1f618d;
+    -fx-opacity: 1;
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+}
+
+.subtitle {
+    -fx-font-size: 18pt;
+    -fx-text-fill: white;
+    -fx-text-align: center;
+}
+
+TextField {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-radius: 0;
+}
+
+Button {
+    -fx-padding: 5 22 5 22;   
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-border-radius: 0;
+    -fx-background-color: #1f618d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 7pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+Button:hover {
+    -fx-text-fill: -fx-color-accent;
+    -fx-border-color: -fx-color-accent;
+}
+
+Button:pressed, Button:default:hover:pressed {
+  -fx-background-color: -fx-color-accent;
+  -fx-text-fill: #1d1d1d;
+}
+
+Button:focused {
+    -fx-border-color: -fx-color-accent, -fx-color-accent;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+Button:disabled, Button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+}
+
+Button:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: #ffffff;
+}
+
+Button:default:hover {
+    -fx-background-color: derive(-fx-focus-color,30%);
+}
+
+Canvas {
+    -fx-background-color: white;
+    -fx-border-color: -fx-color-accent, -fx-color-accent;
+}*/

@@ -6,19 +6,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import pack.universityplatform.App;
-
 
 public class MainController implements Initializable {
 
@@ -48,7 +43,6 @@ public class MainController implements Initializable {
         
          String userType = comboBoxRol.getValue();
 
-        // Validar los campos de entrada
         if ( userType == null) {
             showAlert(AlertType.WARNING, "Form Error!", "Please fill in all fields.");
             return;
@@ -64,6 +58,7 @@ public class MainController implements Initializable {
     
     }
     private void loadUserDashboard(String userType) throws IOException {
+        
         switch (userType) {
             case "Estudiante" -> {
                 App.setRoot("InterStudent");
@@ -82,8 +77,8 @@ public class MainController implements Initializable {
             case "Administrativo" -> {
                 App.setRoot("InterAdmin");
                 //App.getStage().setMaximized(true); // Pantalla completa solo para administrativo
-                App.getStage().setWidth(850); // Establecer el ancho deseado
-                App.getStage().setHeight(660); // Establecer la altura deseada
+                App.getStage().setWidth(800); // Establecer el ancho deseado
+                App.getStage().setHeight(800); // Establecer la altura deseada
                 App.getStage().setResizable(true); //
             }
             default -> throw new IllegalArgumentException("Unexpected value: " + userType);
