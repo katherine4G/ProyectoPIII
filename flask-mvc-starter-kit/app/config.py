@@ -1,6 +1,6 @@
 #config.py
 
-DEBUG = True
+Debug = True
 import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))  
 

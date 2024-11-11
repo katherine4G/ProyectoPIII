@@ -41,6 +41,7 @@ A Flask Starter Kit following the MVC pattern for rapidly building small applica
   * Windows -- `venv\Scripts\activate`
   * MacOS/Unix -- `source venv/bin/activate`
 5. Install requirements -- `pip install -r requirements.txt`
+5.1. set FLASK_ENV=development
 6. Run application -- `flask run`
 7. Go to [localhost:5000](http://localhost:5000) to see the welcome page
 

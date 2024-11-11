@@ -1,5 +1,5 @@
-from .University_route import route  # Importa el Blueprint 
+from .University_route import route as university_route  # Asegúrate de que el nombre sea correcto
+from .user_route import auth_bp as auth_route
 
-main_routes = route  
-
-
+# Exporta los blueprints
+main_routes = [university_route, auth_route]

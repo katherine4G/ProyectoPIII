@@ -1,19 +1,21 @@
+# app/routes/user_route.py
 from flask import Blueprint
-from app.controllers import user_controller
-prefix = 'users'
-route = Blueprint(prefix, __name__)
+from app.controllers.user_controller import create_user, get_user, get_all_users, login
 
-route.get('user/register')(user_controller.register)
-route.post('user/register')(user_controller.register)
-route.get('user/login')(user_controller.login)
-route.post('user/login')(user_controller.login)
-route.get('user/dashboard')(user_controller.dashboard)
-route.get('user/logout')(user_controller.logout)
+auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-# route.get('/')(user_controller.index)
-# route.get('/create')(user_controller.create)
-# route.post('/')(user_controller.store)
-# route.get('/<int:user_id>')(user_controller.show)
-# route.get('/<int:user_id>/edit')(user_controller.edit)
-# route.post('/<int:user_id>')(user_controller.update)
-# route.delete('/<int:user_id>')(user_controller.delete)
+@auth_bp.route('/register', methods=['POST'])
+def register():
+    return create_user()
+
+@auth_bp.route('/login', methods=['POST'])
+def login_user():
+    return login()
+
+@auth_bp.route('/user/<int:user_id>', methods=['GET'])
+def get_single_user(user_id):
+    return get_user(user_id)
+
+@auth_bp.route('/users', methods=['GET'])
+def list_users():
+    return get_all_users()

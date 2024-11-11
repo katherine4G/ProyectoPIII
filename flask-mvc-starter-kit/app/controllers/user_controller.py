@@ -1,117 +1,66 @@
-from flask import render_template, redirect, url_for
+from flask import request, jsonify
+from werkzeug.security import check_password_hash, generate_password_hash
+from flask_jwt_extended import create_access_token
 from app.models.user import User
-from app.forms.user.LoginForm import LoginForm
-from app.forms.user.RegisterForm import RegisterForm
-from flask_login import login_user, login_required, logout_user, current_user
-from app import flask_bcrypt
+from app import db
+
+# Obtener usuario por ID
+def get_user(user_id):
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({"msg": "Usuario no encontrado"}), 404
+
+    return jsonify({"id": user.id, "username": user.username}), 200
+
+# Obtener todos los usuarios
+def get_all_users():
+    users = User.query.all()
+    return jsonify([{"id": user.id, "username": user.username} for user in users]), 200
 
 
-def index():
-    """ 
-    index 
-    """
+# Crear usuario
+def create_user():
+    data = request.get_json()
+    username = data.get("username")
+    password = data.get("password")
 
-    pass
+    if not username or not password:
+        return jsonify({"msg": "Usuario y contraseña son requeridos"}), 400
 
-def create():
-    """ 
-    create 
-    """
+    # Verifica si el usuario ya existe
+    existing_user = User.query.filter_by(username=username).first()
+    if existing_user:
+        return jsonify({"msg": "El nombre de usuario ya está en uso"}), 400
 
-    pass
+    # Hash de la contraseña
+    hashed_password = generate_password_hash(password)
 
+    # Crea el nuevo usuario
+    new_user = User(username=username, password=hashed_password)
+    db.session.add(new_user)
+    db.session.commit()
 
-def store():
-    """ 
-    store 
-    """
+    return jsonify({"msg": "Usuario creado exitosamente", "user": new_user.username}), 201
 
-    pass
-
-
-def show(user_id):
-    """ 
-    show 
-
-    @user_id: id of the user
-     
-    """
-
-    return f"user {user_id}"
-
-def edit(user_id):
-    """ 
-    edit 
-
-    @user_id: id of the user
-    """
-
-    pass
-
-def update(user_id):
-    """ 
-    update 
-
-    @user_id: id of the user
-    """
-
-    pass
-
-
-def delete(user_id):
-    """ 
-    delete 
-
-    @user_id: id of the user
-
-    """
-
-    pass
-
-@login_required
-def dashboard():
-    return render_template('user/dashboard.html')
-
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('users.login'))
-
-
+# Inicio de sesión
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('users.dashboard'))
+    try:
+        data = request.get_json()
+        username = data.get("username")
+        password = data.get("password")
 
+        if not username or not password:
+            return jsonify({"msg": "Usuario y contraseña son requeridos"}), 400
 
-    form = LoginForm()
+        # Busca el usuario en la base de datos
+        user = User.query.filter_by(username=username).first()
+        if not user or not check_password_hash(user.password, password):
+            return jsonify({"msg": "Credenciales inválidas"}), 401
 
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user:
-            if flask_bcrypt.check_password_hash(user.password, form.password.data):
-                login_user(user)
-                return redirect(url_for('users.dashboard'))
+        # Genera el token de acceso
+        access_token = create_access_token(identity=user.id)
+        return jsonify(access_token=access_token), 200
 
-    return render_template('user/login.html', form=form)
-
-def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('users.dashboard'))
-
-
-
-    form = RegisterForm()
-
-    if form.validate_on_submit() and form.password.data == form.confirm_password.data:
-        hashed_password = flask_bcrypt.generate_password_hash(form.password.data)
-
-        # create separate service for this
-        # new_user = User(username=form.username.data, password=hashed_password)
-        # print(new_user)
-        # db.session.add(new_user)
-        # db.session.commit()
-        new_user = User.create(username=form.username.data, password=hashed_password)
-        
-
-        return redirect(url_for('users.login'))
-    return render_template('user/register.html', form=form)
+    except Exception as e:
+        print(f"Error en el servidor: {e}")
+        return jsonify({"msg": "Error en el servidor"}), 500
