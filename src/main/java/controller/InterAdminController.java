@@ -700,9 +700,6 @@ public class InterAdminController implements Initializable {
         loadUniversitiesForComboBox_faculty(comboBox_profe_showUniversities); 
         loadUniversitiesForComboBox_faculty(comboBox_student_showUniversities);
 
-
-        
-
     }
     
 }//fin clase

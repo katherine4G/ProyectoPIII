@@ -1,28 +1,28 @@
 * {
-    -fx-color-accent: #A43820; /* Color de acento granate */
+    -fx-color-accent: #BC8F8F; /* Color de acento */
 }
 
 .background {
-    -fx-background-color: #2C2C2C; 
-    -fx-text-fill: #F8F4E3; /* Texto claro en fondo oscuro */
+    -fx-background-color: #800000; /* Fondo principal oscuro */
+    -fx-text-fill: #F2E7E7; /* Texto claro en fondo oscuro */
     -fx-padding: 5px;
 }
 
 .left-background, .right-background {
-    -fx-background-color: #D9D9D9; /* Fondo gris claro para paneles secundarios */
+    -fx-background-color: #F2E7E7; /* Fondo claro para paneles laterales */
     -fx-text-align: center;
     -fx-padding: 5px;
 }
 
 .table-row-cell:selected {
-    -fx-background-color: #A43820; /* Color de selección granate */
+    -fx-background-color: #BC8F8F; /* Color de selección */
 }
 
 /* Estilos de Label */
 Label {
     -fx-font-size: 9pt;
     -fx-font-family: "Segoe UI", "Helvetica", "Arial", sans-serif;
-    -fx-text-fill: #F8F4E3; /* Texto claro */
+    -fx-text-fill: #F2E7E7; /* Texto claro para buena visibilidad */
     -fx-opacity: 0.9;
     -fx-padding: 1 13 1 13;
 }
@@ -31,11 +31,11 @@ Label {
 .title {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI", "Helvetica", "Arial", sans-serif;
-    -fx-text-fill: #F8F4E3; /* Texto claro */
+    -fx-text-fill: #F2E7E7;
     -fx-opacity: 1;
     -fx-alignment: center;
     -fx-font-weight: bold;
-    -fx-background-color: #2C2C2C; /* Fondo gris antracita */
+    -fx-background-color: #800000;
     -fx-padding: 5px;
     -fx-border-radius: 5px;
 }
@@ -43,15 +43,15 @@ Label {
 /* Subtítulo */
 .subtitle {
     -fx-font-size: 12pt;
-    -fx-text-fill: #A43820; /* Texto granate */
+    -fx-text-fill: #BC8F8F;
     -fx-text-align: center;
 }
 
 /* ComboBox */
 ComboBox {
     -fx-pref-height: 10px;
-    -fx-background-color: #D9D9D9;
-    -fx-border-color: #2C2C2C;
+    -fx-background-color: #F2E7E7;
+    -fx-border-color: #800000;
     -fx-border-radius: 5px;
 }
 
@@ -59,17 +59,17 @@ ComboBox {
 TextField {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI", "Helvetica", "Arial", sans-serif;
-    -fx-background-color: #D9D9D9;
+    -fx-background-color: #F2E7E7;
     -fx-background-radius: 5px;
-    -fx-border-color: #2C2C2C;
+    -fx-border-color: #800000;
     -fx-border-width: 1px;
-    -fx-text-fill: #333333; /* Texto oscuro en fondo claro */
+    -fx-text-fill: #800000; /* Texto oscuro en fondo claro */
     -fx-padding: 5px;
 }
 
 TextField:hover {
-    -fx-background-color: #F8F4E3;
-    -fx-border-color: #A43820; /* Borde granate */
+    -fx-background-color: #A67D7D;
+    -fx-border-color: #BC8F8F;
     -fx-scale-x: 1.02;
     -fx-scale-y: 1.02;
 }
@@ -77,19 +77,19 @@ TextField:hover {
 /* Botón */
 Button {
     -fx-padding: 3 15 3 15;
-    -fx-border-color: #F8F4E3; /* Borde claro para contraste en fondo oscuro */
+    -fx-border-color: #F2E7E7; /* Borde claro para destacar en fondo oscuro */
     -fx-border-width: 1px;
     -fx-border-radius: 5px;
-    -fx-background-color: #A43820; /* Color de botón granate */
+    -fx-background-color: #BC8F8F; /* Color de botón diferente al fondo */
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 8pt;
-    -fx-text-fill: #F8F4E3; /* Texto blanco marfil */
+    -fx-text-fill: #800000; /* Texto oscuro para buen contraste */
     -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.4), 10, 0.2, 0, 5);
     -fx-transition: all 0.3s ease;
 }
 
 Button:hover {
-    -fx-background-color: #8C2F1A; /* Granate más oscuro */
+    -fx-background-color: #A67D7D; /* Fondo más oscuro al pasar el ratón */
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
 }
@@ -102,13 +102,13 @@ Button:hover {
 .table-view .column-header {
     -fx-font-size: 9pt;
     -fx-font-weight: bold;
-    -fx-background-color: #D9D9D9;
+    -fx-background-color: #A67D7D; /* Fondo de encabezado más claro */
 }
 
 /* ComboBox Hover */
 ComboBox:hover {
-    -fx-background-color: #F8F4E3; /* Fondo claro al pasar el ratón */
-    -fx-border-color: #A43820;
+    -fx-background-color: #D5D8DC; /* Fondo más claro al pasar el ratón */
+    -fx-border-color: #BC8F8F;
     -fx-scale-x: 1.02;
     -fx-scale-y: 1.02;
 }

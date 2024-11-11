@@ -1,80 +1,43 @@
 
 package Model;
 
-public abstract class User {
-    protected String id_user;
-    protected String nameUser;
-    protected String lastName;
-    protected String email;
-    protected String password;
-    protected int rol;
+public class User {
+    private String idUser; //cédula
+    private String nameUser;
+    private String lastName;
+    private String email;
+    private String password;
+    private Role role; 
 
-    public User(String id_User, String name, String lastName, String email, String password, int rol) {
-        this.id_user = id_User;
-        this.nameUser = name;
+    public User(String idUser, String nameUser, String lastName, String email, String password, Role role) {
+        this.idUser = idUser;
+        this.nameUser = nameUser;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.rol = rol;
+        this.role = role;
     }
 
-    public void login() {
-        System.out.println(nameUser + " ha iniciado sesión.");
+    public String getIdUser() { return idUser; }
+    public void setIdUser(String idUser) { this.idUser = idUser; }
+    public String getNameUser() { return nameUser; }
+    public void setNameUser(String nameUser) { this.nameUser = nameUser; }
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+    public Role getRole() { return role; }
+    public void setRole(Role role) { this.role = role; }
+    @Override
+    public String toString() {
+        return "User{" +
+                "cédula='" + idUser + '\'' +
+                ", Nombre='" + nameUser + '\'' +
+                ", Apellidos='" + lastName + '\'' +
+                ", correo='" + email + '\'' +
+                '}';
     }
 
-    public void logout() {
-        System.out.println(nameUser + " ha cerrado sesión.");
-    }
-
-    public String getId_User() {
-        return id_user;
-    }
-
-    public void setId_User(String id_User) {
-        this.id_user = id_User;
-    }
-
-    public String getName() {
-        return nameUser;
-    }
-
-    public void setName(String name) {
-        this.nameUser = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getRol() {
-        return rol;
-    }
-
-    public void setRol(int rol) {
-        this.rol = rol;
-    }
-   
-
-
-    public abstract void showInfo();
 }

@@ -20,7 +20,7 @@
 
 <!--C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\resources\css-->
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="880.0" stylesheets="@../../../src/main/resources/css/DarkTheme.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InterAdminController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="880.0" stylesheets="@../../../src/main/resources/css/BlueTheme.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InterAdminController">
    <children>
       <AnchorPane fx:id="rootPane" prefHeight="677.0" prefWidth="902.0">
          <children>
@@ -63,7 +63,7 @@
                <center>
                   <AnchorPane prefHeight="673.0" prefWidth="707.0" style="-fx-background-color: #007399;" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="myProfile_form" layoutX="53.0" layoutY="152.0" prefHeight="733.0" prefWidth="706.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="myProfile_form" layoutX="53.0" layoutY="152.0" prefHeight="733.0" prefWidth="706.0" style="-fx-background-color: #007399;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Pane layoutX="31.0" layoutY="28.0" prefHeight="613.0" prefWidth="647.0" style="-fx-background-color: #b3ecff;">
                                  <children>
@@ -72,7 +72,7 @@
                               </Pane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="University_form" layoutX="5.0" layoutY="14.0" prefHeight="700.0" prefWidth="695.0" style="-fx-background-color: #007399;" visible="false" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="14.0">
+                        <AnchorPane fx:id="University_form" layoutX="5.0" prefHeight="747.0" prefWidth="695.0" style="-fx-background-color: #007399;" visible="false" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="14.0">
                            <children>
                               <Pane layoutX="291.0" layoutY="525.0" prefHeight="138.0" prefWidth="403.0" style="-fx-background-color: #b3ecff;">
                                  <children>
@@ -378,7 +378,7 @@
                                                 <TableColumn fx:id="col_students_id" prefWidth="27.999999403953552" text="ID" />
                                                 <TableColumn fx:id="col_students_name" prefWidth="69.9999828338623" text="Nombre" />
                                                 <TableColumn fx:id="col_students_lastName" prefWidth="66.00003814697266" text="Apellido" />
-                                                <TableColumn fx:id="col_students_email" prefWidth="83.33331298828125" text="Email" />
+                                                <TableColumn fx:id="col_students_email" prefWidth="83.33331298828125" text="Correo" />
                                                 <TableColumn fx:id="col_students_nameUniversity" prefWidth="83.33338928222656" text="Universidad" />
                                                 <TableColumn fx:id="col_students_universitySede" prefWidth="62.0" text="Sede" />
                                              </columns>
@@ -440,7 +440,7 @@
                               </Pane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="viewSolis_form" prefHeight="733.0" prefWidth="706.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="viewSolis_form" prefHeight="733.0" prefWidth="706.0" style="-fx-background-color: #007399;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Pane layoutX="40.0" layoutY="41.0" prefHeight="260.0" prefWidth="638.0" />
                               <Pane layoutX="54.0" layoutY="327.0" prefHeight="260.0" prefWidth="638.0" />

@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="850.0" stylesheets="@../../../src/main/resources/css/LigthTheme.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InterTeacherController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="769.0" prefWidth="899.0" stylesheets="@../../../src/main/resources/css/RedTheme.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InterTeacherController">
    <children>
-      <AnchorPane prefHeight="657.0" prefWidth="850.0">
+      <AnchorPane prefHeight="700.0" prefWidth="899.0">
          <children>
             <BorderPane layoutX="204.0" layoutY="196.0" prefHeight="700.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <left>
-                  <AnchorPane prefHeight="644.0" prefWidth="190.0" style="-fx-background-color: #007399;" BorderPane.alignment="CENTER">
+                  <AnchorPane prefHeight="644.0" prefWidth="190.0" style="-fx-background-color: #800000;" BorderPane.alignment="CENTER">
                      <children>
-                        <Button fx:id="btn_createCourse" layoutX="10.0" layoutY="275.0" mnemonicParsing="false" onAction="#createCourse" prefHeight="45.0" prefWidth="179.0" style="-fx-background-color: #b3ecff;" text="Crear curso" />
-                        <Button fx:id="btn_studentToCourse" layoutX="10.0" layoutY="345.0" mnemonicParsing="false" onAction="#AsignStudentToCourse" prefHeight="45.0" prefWidth="179.0" style="-fx-background-color: #b3ecff;" text="Asignar estudiante a curso" />
-                        <Button fx:id="btn_createAssignation" layoutX="10.0" layoutY="408.0" mnemonicParsing="false" onAction="#createAssignation" prefHeight="45.0" prefWidth="179.0" style="-fx-background-color: #b3ecff;" text="Crear Asignación" />
-                        <Button fx:id="btn_Exit" layoutX="10.0" layoutY="571.0" mnemonicParsing="false" onAction="#Exit_LoggOut" prefHeight="37.0" prefWidth="49.0" style="-fx-background-color: #0088cc;">
+                        <Button fx:id="btn_viewMyCourse" layoutX="13.0" layoutY="243.0" mnemonicParsing="false" onAction="#view_myCourses" prefHeight="45.0" prefWidth="179.0" text="Ver mis cursos" />
+                        <Button fx:id="btn_studentToCourse" layoutX="11.0" layoutY="378.0" mnemonicParsing="false" onAction="#AsignStudentToCourse" prefHeight="45.0" prefWidth="179.0" text="Inscribir estudiante a curso" />
+                        <Button fx:id="btn_createAssignation" layoutX="11.0" layoutY="445.0" mnemonicParsing="false" onAction="#createAssignation" prefHeight="45.0" prefWidth="179.0" text="Crear Asignación" />
+                        <Button fx:id="btn_Exit" layoutX="9.0" layoutY="671.0" mnemonicParsing="false" onAction="#Exit_LoggOut" prefHeight="37.0" prefWidth="49.0">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -32,130 +40,203 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Label layoutX="69.0" layoutY="580.0" text="Salir">
+                        <Label layoutX="68.0" layoutY="680.0" text="Salir">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <Label layoutX="22.0" layoutY="96.0" text="Bienvenido" textFill="WHITE" />
+                        <Label layoutX="14.0" layoutY="49.0" text="Bienvenido" textFill="WHITE" />
                         <Label fx:id="label_userName" layoutX="83.0" layoutY="49.0" prefHeight="17.0" prefWidth="93.0" text=" " textFill="WHITE" />
                         <Label layoutX="22.0" layoutY="66.0" prefHeight="25.0" prefWidth="121.0" text="Profesor" textFill="WHITE">
                            <font>
                               <Font name="Century Gothic Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Separator layoutX="197.0" layoutY="-16.0" orientation="VERTICAL" prefHeight="671.0" prefWidth="6.0" />
+                        <Separator layoutX="197.0" layoutY="-16.0" orientation="VERTICAL" prefHeight="781.0" prefWidth="6.0" />
+                        <Button fx:id="btn_registerToCourse" layoutX="13.0" layoutY="308.0" mnemonicParsing="false" onAction="#registerToCourse" prefHeight="45.0" prefWidth="179.0" text="Inscribirse a un curso" />
+                        <Button fx:id="btn_viewProfile" layoutX="13.0" layoutY="177.0" mnemonicParsing="false" onAction="#viewProfile" prefHeight="45.0" prefWidth="179.0" text="Perfil" />
+                        <Button fx:id="btn_revisarAssignation" layoutX="11.0" layoutY="512.0" mnemonicParsing="false" onAction="#revisarAssignation" prefHeight="45.0" prefWidth="179.0" text="Revisar Asignaciones" />
                      </children>
                   </AnchorPane>
                </left>
                <top>
-                  <AnchorPane prefHeight="33.0" prefWidth="850.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER" />
+                  <AnchorPane prefHeight="4.0" prefWidth="850.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER" />
                </top>
                <center>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #007399;" BorderPane.alignment="CENTER">
+                  <AnchorPane prefHeight="696.0" prefWidth="692.0" style="-fx-background-color: #800000;" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="CreateCourse_form" layoutX="13.333333333333334" layoutY="18.0" prefHeight="666.6666666666666" prefWidth="646.6666666666666" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="perfil_form" prefHeight="667.0" prefWidth="647.0" style="-fx-background-color: #800000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <AnchorPane layoutX="315.3333333333333" layoutY="46.0" prefHeight="569.0" prefWidth="316.0" style="-fx-background-color: #cceeff;" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="315.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="46.0">
-                                 <children>
-                                    <TableView layoutX="14.0" layoutY="52.0" prefHeight="339.0" prefWidth="289.0" AnchorPane.bottomAnchor="239.33333333333331" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="52.0">
-                                       <columns>
-                                          <TableColumn prefWidth="45.33329904079437" style="-fx-background-color: #;" text="NRC" />
-                                          <TableColumn prefWidth="62.00008773803711" text="código" />
-                                          <TableColumn prefWidth="76.00000762939453" text="Universidad" />
-                                          <TableColumn prefWidth="64.66668701171875" text="Facultad" />
-                                          <TableColumn prefWidth="64.66670227050781" text="Depart." />
-                                          <TableColumn prefWidth="57.99993896484375" text="Nombre" />
-                                       </columns>
-  
-                                    </TableView>
-                                    <Label layoutX="14.0" layoutY="26.0" prefHeight="25.0" prefWidth="83.0" text="Cursos">
-                                       <font>
-                                          <Font name="Century Gothic Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="14.0" layoutY="50.0" prefHeight="564.0" prefWidth="285.0" style="-fx-background-color: #cceeff;" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="347.0" AnchorPane.topAnchor="50.0" />
+                              <Pane layoutX="22.0" layoutY="65.0" prefHeight="601.0" prefWidth="649.0" style="-fx-background-color: #333333;" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="asignStudentToCourse_form" layoutX="63.0" layoutY="72.0" prefHeight="668.0" prefWidth="659.0" visible="false" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-9.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="viewMyCourses_form" prefHeight="696.0" prefWidth="663.0" style="-fx-background-color: #800000;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <AnchorPane fx:id="registerCourse_form" layoutX="13.333333333333334" layoutY="18.0" prefHeight="666.6666666666666" prefWidth="646.6666666666666" style="-fx-background-color: #800000;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <AnchorPane layoutX="16.0" layoutY="14.0" prefHeight="339.0" prefWidth="311.0" style="-fx-background-color: #cceeff;" AnchorPane.bottomAnchor="318.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="14.0">
+                              <Pane layoutX="14.0" layoutY="33.0" prefHeight="345.0" prefWidth="663.0" style="-fx-background-color: #333333;">
                                  <children>
-                                    <TableView layoutX="14.0" layoutY="52.0" prefHeight="280.0" prefWidth="289.0">
-                                       <columns>
-                                          <TableColumn prefWidth="45.33329904079437" style="-fx-background-color: #;" text="NRC" />
-                                          <TableColumn prefWidth="62.00008773803711" text="código" />
-                                          <TableColumn prefWidth="76.00000762939453" text="Universidad" />
-                                          <TableColumn prefWidth="64.66668701171875" text="Facultad" />
-                                          <TableColumn prefWidth="64.66670227050781" text="Depart." />
-                                          <TableColumn prefWidth="57.99993896484375" text="Nombre" />
-                                       </columns>
-
-                                    </TableView>
-                                    <Label layoutX="14.0" layoutY="26.0" prefHeight="25.0" prefWidth="83.0" text="Cursos">
+                                    <HBox layoutX="14.0" layoutY="15.0" prefHeight="276.0" prefWidth="629.0">
+                                       <children>
+                                          <TableView fx:id="tableView_course" prefHeight="391.0" prefWidth="667.0">
+                                             <columns>
+                                                <TableColumn fx:id="col_course_NRC" prefWidth="45.33329904079437" text="NRC" />
+                                                <TableColumn fx:id="col_course_codigo" prefWidth="62.00008773803711" text="código" />
+                                                <TableColumn fx:id="col_course_courseName" prefWidth="57.99993896484375" text="Nombre" />
+                                                <TableColumn fx:id="col_course_departmentName" prefWidth="64.66670227050781" text="Depart." />
+                                                <TableColumn fx:id="col_course_facultyName" prefWidth="64.66668701171875" text="Facultad" />
+                                                <TableColumn fx:id="col_course_universityName" prefWidth="76.00000762939453" text="Universidad" />
+                                             </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </children>
+                                    </HBox>
+                                    <Button layoutX="514.0" layoutY="298.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="129.0" text="Ver grupo" />
+                                    <Label layoutX="14.0" layoutY="323.0" text="*Selecciona un curso para ver tú grupo." />
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="14.0" layoutY="410.0" prefHeight="335.0" prefWidth="665.0" style="-fx-background-color: #333333;">
+                                 <children>
+                                    <Label layoutX="20.0" layoutY="26.0" prefHeight="25.0" prefWidth="83.0" text="Grupo:">
                                        <font>
                                           <Font name="Century Gothic Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="340.0" layoutY="16.0" prefHeight="357.0" prefWidth="301.0" style="-fx-background-color: #cceeff;" AnchorPane.bottomAnchor="320.0" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="16.0">
-                                 <children>
-                                    <TableView layoutX="14.0" layoutY="45.0" prefHeight="287.0" prefWidth="278.0">
-                                       <columns>
-                                          <TableColumn prefWidth="27.999999403953552" style="-fx-background-color: #;" text="ID" />
-                                          <TableColumn prefWidth="69.9999828338623" text="Nombre" />
-                                          <TableColumn prefWidth="66.00003814697266" text="Apellido" />
-                                          <TableColumn prefWidth="75.3333740234375" text="Email" />
-                                          <TableColumn prefWidth="76.66670227050781" text="Universidad" />
-                                          <TableColumn prefWidth="54.00006103515625" text="Curso" />
-                                       </columns>
-
-                                    </TableView>
-                                    <Label layoutX="14.0" layoutY="19.0" prefHeight="25.0" prefWidth="83.0" text="Estudiante">
+                                    <HBox layoutX="20.0" layoutY="82.0" prefHeight="228.0" prefWidth="626.0">
+                                       <children>
+                                          <TableView fx:id="TableView_students" prefHeight="228.0" prefWidth="623.0">
+                                             <columns>
+                                                <TableColumn fx:id="col_students_id" prefWidth="99.0" text="ID" />
+                                                <TableColumn fx:id="col_students_name" prefWidth="150.0" text="Nombre" />
+                                                <TableColumn fx:id="col_students_lastName" prefWidth="158.0" text="Apellido" />
+                                                <TableColumn fx:id="col_students_email" prefWidth="163.0" text="Correo" />
+                                             </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </children>
+                                    </HBox>
+                                    <Label layoutX="20.0" layoutY="57.0" prefHeight="25.0" prefWidth="184.0" text="Estudiantes  matriculados">
                                        <font>
                                           <Font name="Century Gothic Bold" size="14.0" />
                                        </font>
                                     </Label>
+                                    <Label layoutX="62.0" layoutY="30.0" prefHeight="17.0" prefWidth="196.0" text="    " />
                                  </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="16.0" layoutY="359.0" prefHeight="261.0" prefWidth="625.0" style="-fx-background-color: #cceeff;" AnchorPane.bottomAnchor="48.33333333333337" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="359.0" />
+                              </Pane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="NewAsignation_form" layoutX="10.0" layoutY="10.0" prefHeight="666.0" prefWidth="650.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="asignStudentToCourse_form" layoutX="63.0" layoutY="72.0" prefHeight="668.0" prefWidth="659.0" style="-fx-background-color: #800000;" visible="false" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-9.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <AnchorPane layoutX="19.333333333333332" layoutY="16.0" prefHeight="297.0" prefWidth="622.0" style="-fx-background-color: #cceeff;" AnchorPane.bottomAnchor="354.0" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="16.0">
+                              <Pane layoutX="14.0" layoutY="31.0" prefHeight="438.0" prefWidth="297.0" style="-fx-background-color: #333333;">
                                  <children>
-                                    <TableView layoutX="14.0" layoutY="45.0" prefHeight="236.0" prefWidth="584.0">
-                                       <columns>
-                                          <TableColumn prefWidth="27.999999403953552" style="-fx-background-color: #;" text="ID" />
-                                          <TableColumn prefWidth="69.9999828338623" text="Título" />
-                                          <TableColumn prefWidth="66.00003814697266" text="Descripcion" />
-                                          <TableColumn prefWidth="75.3333740234375" text="Fecha Límite" />
-                                          <TableColumn prefWidth="54.00006103515625" text="Curso" />
-                                       </columns>
-
-                                    </TableView>
-                                    <Label layoutX="14.0" layoutY="19.0" prefHeight="25.0" prefWidth="106.0" text="Asignaciones">
-                                       <font>
-                                          <Font name="Century Gothic Bold" size="14.0" />
-                                       </font>
-                                    </Label>
+                                    <TextArea layoutX="15.0" layoutY="37.0" prefHeight="107.0" prefWidth="267.0" style="-fx-background-color: #BC8F99;" />
+                                    <Label layoutX="19.0" layoutY="14.0" text="Datos del estudiante:" />
+                                    <Label layoutX="19.0" layoutY="160.0" text="Cursos Matriculados:" />
+                                    <ScrollPane layoutX="13.0" layoutY="219.0" prefHeight="200.0" prefWidth="270.0" style="-fx-background-color: #BC8F8F;">
+                                       <content>
+                                          <ListView prefHeight="200.0" prefWidth="263.0" style="-fx-background-color: #BC8F8F;" />
+                                       </content>
+                                    </ScrollPane>
                                  </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="17.0" layoutY="327.0" prefHeight="295.0" prefWidth="612.0" style="-fx-background-color: #cceeff;" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="327.0">
+                              </Pane>
+                              <Pane layoutX="331.0" layoutY="31.0" prefHeight="674.0" prefWidth="356.0" style="-fx-background-color: #333333;">
                                  <children>
-                                    <Label layoutX="22.0" layoutY="21.0" prefHeight="25.0" prefWidth="125.0" text="Nueva Asignación">
-                                       <font>
-                                          <Font name="Century Gothic Bold" size="14.0" />
-                                       </font>
-                                    </Label>
+                                    <HBox layoutX="6.0" layoutY="98.0" prefHeight="464.0" prefWidth="344.0">
+                                       <children>
+                                          <TableView prefHeight="464.0" prefWidth="348.0">
+                                             <columns>
+                                                <TableColumn prefWidth="27.999999403953552" style="-fx-background-color: #;" text="ID" />
+                                                <TableColumn prefWidth="69.9999828338623" text="Nombre" />
+                                                <TableColumn prefWidth="66.00003814697266" text="Apellido" />
+                                                <TableColumn prefWidth="75.3333740234375" text="Email" />
+                                                <TableColumn prefWidth="54.00006103515625" text="Curso" />
+                                             </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </children>
+                                    </HBox>
+                                    <TextField fx:id="txt_student_serchBy" layoutX="14.0" layoutY="57.0" onAction="#student_serchBy" prefHeight="29.0" prefWidth="151.0" promptText="Buscar por" />
+                                    <ComboBox fx:id="comboBox_student_serchByVariable" layoutX="169.0" layoutY="58.0" onAction="#student_serchByVariable" prefHeight="28.0" prefWidth="150.0" promptText="variable" style="-fx-background-color: #FFFFFF;" />
+                                    <Label layoutX="21.0" layoutY="14.0" text="Lista de estudiantes:" />
+                                    <Label layoutX="25.0" layoutY="590.0" text="Selecciona el estudiante de la Lista, para la inscripción." />
+                                    <HBox layoutX="128.0" layoutY="626.0" prefHeight="34.0" prefWidth="198.0">
+                                       <children>
+                                          <Button fx:id="btn_student_delete_inside" mnemonicParsing="false" onAction="#student_delete_inside" prefHeight="33.0" prefWidth="111.0" text="Dar de baja" />
+                                          <Separator orientation="VERTICAL" prefHeight="23.0" prefWidth="6.0" />
+                                          <Button fx:id="btn_student_create_inside" mnemonicParsing="false" onAction="#student_create_inside" prefHeight="33.0" prefWidth="84.0" text="Inscribir" />
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </AnchorPane>
+                              </Pane>
+                              <Pane layoutX="15.0" layoutY="482.0" prefHeight="223.0" prefWidth="300.0" style="-fx-background-color: #333333;">
+                                 <children>
+                                    <ComboBox layoutX="11.0" layoutY="71.0" prefHeight="31.0" prefWidth="266.0" promptText="Curso" />
+                                    <Label layoutX="14.0" layoutY="25.0" text="Seleccione el curso al que inscribirá o removerá " />
+                                    <Label layoutX="14.0" layoutY="42.0" />
+                                    <Label layoutX="14.0" layoutY="42.0" text="al estudiante:" />
+                                 </children>
+                              </Pane>
                            </children>
                         </AnchorPane>
+                        <AnchorPane fx:id="NewAsignation_form" layoutX="10.0" layoutY="10.0" prefHeight="666.0" prefWidth="650.0" style="-fx-background-color: #800000;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Pane layoutX="16.0" layoutY="19.0" prefHeight="271.0" prefWidth="665.0" style="-fx-background-color: #333333;">
+                                 <children>
+                                    <HBox layoutX="14.0" layoutY="35.0" prefHeight="216.0" prefWidth="638.0">
+                                       <children>
+                                          <TableView prefHeight="276.0" prefWidth="641.0">
+                                             <columns>
+                                                <TableColumn prefWidth="27.999999403953552" style="-fx-background-color: #;" text="ID" />
+                                                <TableColumn prefWidth="69.9999828338623" text="Título" />
+                                                <TableColumn prefWidth="66.00003814697266" text="Descripcion" />
+                                                <TableColumn prefWidth="75.3333740234375" text="Archivo" />
+                                                <TableColumn prefWidth="54.00006103515625" text="Curso" />
+                                                <TableColumn prefWidth="54.00006103515625" text="Grupo" />
+                                                <TableColumn prefWidth="66.00003814697266" text="Fecha límite" />
+                                             </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="16.0" layoutY="306.0" prefHeight="402.0" prefWidth="664.0" style="-fx-background-color: #333333;">
+                                 <children>
+                                    <TextField fx:id="txt_student_id" layoutX="351.0" layoutY="52.0" prefHeight="25.0" prefWidth="282.0" />
+                                    <Label layoutX="350.0" layoutY="27.0" text="Título de la tarea" />
+                                    <HBox layoutX="395.0" layoutY="360.0" prefHeight="34.0" prefWidth="244.0">
+                                       <children>
+                                          <Button fx:id="btn_student_delete_inside1" mnemonicParsing="false" onAction="#student_delete_inside" prefHeight="33.0" prefWidth="87.0" text="eliminar" />
+                                          <Separator orientation="VERTICAL" prefHeight="23.0" prefWidth="6.0" />
+                                          <Button fx:id="btn_student_edit_inside" mnemonicParsing="false" onAction="#student_edit_inside" prefHeight="34.0" prefWidth="75.0" text="editar" />
+                                          <Separator orientation="VERTICAL" prefHeight="23.0" prefWidth="6.0" />
+                                          <Button fx:id="btn_student_create_inside1" mnemonicParsing="false" onAction="#student_create_inside" prefHeight="33.0" prefWidth="66.0" text="crear" />
+                                       </children>
+                                    </HBox>
+                                    <TextField fx:id="txt_student_names" layoutX="350.0" layoutY="123.0" prefHeight="80.0" prefWidth="284.0" />
+                                    <Label layoutX="350.0" layoutY="94.0" text="Descripción" />
+                                    <Label layoutX="36.0" layoutY="155.0" text="Grupo al que se le asignará la Tarea" />
+                                    <DatePicker layoutX="35.0" layoutY="292.0" prefHeight="25.0" prefWidth="219.0" />
+                                    <Label layoutX="40.0" layoutY="266.0" text="Fecha límite de entrega" />
+                                    <ComboBox layoutX="36.0" layoutY="52.0" prefHeight="25.0" prefWidth="213.0" promptText="Cursos" />
+                                    <Separator layoutX="312.0" layoutY="20.0" orientation="VERTICAL" prefHeight="319.0" prefWidth="12.0" />
+                                    <ComboBox layoutX="36.0" layoutY="179.0" prefHeight="25.0" prefWidth="214.0" promptText="Grupo" />
+                                    <Label layoutX="36.0" layoutY="27.0" text="Curso al que se le asignará la Tarea" />
+                                    <Button alignment="BOTTOM_LEFT" layoutX="350.0" layoutY="254.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="283.0" style="-fx-background-color: #FFFFFF;" text="Agregar archivo" />
+                                    <Label layoutX="350.0" layoutY="226.0" text="Deseas agregar un archivo?" />
+                                    <TextArea layoutX="349.0" layoutY="298.0" prefHeight="23.0" prefWidth="288.0" promptText="Nombre del archivo cargado:" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="revisarAsignattions_form" prefHeight="765.0" prefWidth="696.0" style="-fx-background-color: #800000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                </center>

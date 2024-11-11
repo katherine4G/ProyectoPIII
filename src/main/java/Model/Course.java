@@ -5,54 +5,47 @@ package Model;
  *
  * @author kathe
  */
-import java.util.ArrayList;
-import java.util.List;
 
 public class Course {
-    private String nombreCurso;
-    private Professor professor;
-    private List<Student> estudiantes;
-    private List<Assignment> asignaciones;
+    private String NRC;
+    private String codeCourse; 
+    private String nameCourse;
 
-    // Constructor
-    public Course(String nombreCurso, Professor profesor) {
-        this.nombreCurso = nombreCurso;
-        this.professor = profesor;
-        this.estudiantes = new ArrayList<>();
-        this.asignaciones = new ArrayList<>();
+
+    public Course(String NRC, String codeCourse, String nameCourse) {
+        this.NRC = NRC;
+        this.codeCourse = codeCourse;
+        this.nameCourse = nameCourse;
+    }
+    
+    public String getNRC() {
+        return NRC;
     }
 
-    // Método para añadir un estudiante al curso
-    public void agregarEstudiante(Student estudiante) {
-        estudiantes.add(estudiante);
-        System.out.println("Estudiante " + estudiante.getName() + " se ha inscrito en el curso " + nombreCurso);
+    public void setNRC(String NRC) {
+        this.NRC = NRC;
     }
 
-    // Método para añadir una asignación al curso
-    public void crearAsignacion(String titulo, String fechaEntrega) {
-        Assignment asignacion = new Assignment(titulo, fechaEntrega, this);
-        asignaciones.add(asignacion);
-        System.out.println("Asignación " + titulo + " ha sido creada para el curso " + nombreCurso);
+    public String getCodeCourse() {
+        return codeCourse;
+    }
+       public void setCodeCourse(String codeCourse) {    
+        this.codeCourse = codeCourse;
     }
 
-    // Getters y setters
-    public String getNombreCurso() {
-        return nombreCurso;
+    public String getNameCourse() {
+        return nameCourse;
     }
 
-    public void setNombreCurso(String nombreCurso) {
-        this.nombreCurso = nombreCurso;
+    public void setNameCourse(String nameCourse) {
+        this.nameCourse = nameCourse;
     }
-
-    public Professor getProfesor() {
-        return professor;
-    }
-
-    public void setProfesor(Professor profesor) {
-        this.professor = profesor;
-    }
-
-    public List<Student> getEstudiantes() {
-        return estudiantes;
+       @Override
+    public String toString() {
+        return "Course{" +
+                "NRC='" + NRC + '\'' +
+                ", código='" + codeCourse + '\'' +
+                ", Nombre='" + nameCourse + '\'' +
+                '}';
     }
 }

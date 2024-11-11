@@ -17,7 +17,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InterStudentController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="870.0" stylesheets="@../../../src/main/resources/css/DarkTheme.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InterStudentController">
    <children>
       <AnchorPane fx:id="first_view" prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -30,9 +30,9 @@
                   </AnchorPane>
                </top>
                <center>
-                  <AnchorPane prefHeight="477.0" prefWidth="870.0" style="-fx-background-color: #59208e;" BorderPane.alignment="CENTER">
+                  <AnchorPane prefHeight="477.0" prefWidth="870.0" style="-fx-background-color: #2C2C2C;" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="MatricCourse_form" layoutX="199.0" layoutY="27.333333333333332" prefHeight="474.0" prefWidth="870.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="MatricCourse_form" layoutX="199.0" layoutY="27.333333333333332" prefHeight="474.0" prefWidth="870.0" style="-fx-background-color: #2C2C2C;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="19.0" layoutY="19.0" prefHeight="561.0" prefWidth="257.0" style="-fx-background-color: #90d3ff;">
                                  <effect>
@@ -71,7 +71,7 @@
                                  </effect></AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="viewCourse_form" layoutX="10.0" layoutY="10.0" prefHeight="588.6666666666666" prefWidth="880.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="viewCourse_form" layoutX="10.0" layoutY="10.0" prefHeight="588.6666666666666" prefWidth="880.0" style="-fx-background-color: #2C2C2C;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="46.0" layoutY="17.0" prefHeight="285.0" prefWidth="634.0">
                                  <children>
@@ -89,7 +89,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="viewAssignaments_form" layoutX="10.0" layoutY="10.0" prefHeight="598.6666666666666" prefWidth="890.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="viewAssignaments_form" layoutX="10.0" layoutY="10.0" prefHeight="598.6666666666666" prefWidth="890.0" style="-fx-background-color: #2C2C2C;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="384.0" layoutY="17.0" prefHeight="444.0" prefWidth="313.0" style="-fx-background-color: #90d3ff;">
                                  <children>
@@ -140,9 +140,9 @@
                   </AnchorPane>
                </center>
                <left>
-                  <AnchorPane prefHeight="605.0" prefWidth="165.0" style="-fx-background-color: #59208e;" BorderPane.alignment="CENTER">
+                  <AnchorPane prefHeight="605.0" prefWidth="165.0" style="-fx-background-color: #2C2C2C;" BorderPane.alignment="CENTER">
                      <children>
-                        <Button fx:id="btm_MatricularCourse" layoutX="18.0" layoutY="187.0" mnemonicParsing="false" onAction="#matricularCourse" prefHeight="72.0" prefWidth="137.0" style="-fx-background-color: #ba96dc;" text="Matiricular curso">
+                        <Button fx:id="btm_MatricularCourse" layoutX="18.0" layoutY="187.0" mnemonicParsing="false" onAction="#matricularCourse" prefHeight="72.0" prefWidth="137.0" text="Matiricular curso">
                            <effect>
                               <DropShadow>
                                  <color>
@@ -151,7 +151,7 @@
                               </DropShadow>
                            </effect>
                         </Button>
-                        <Button fx:id="btn_viewCourses" layoutX="18.0" layoutY="283.0" mnemonicParsing="false" onAction="#viewCourses" prefHeight="72.0" prefWidth="137.0" style="-fx-background-color: #ba96dc;" text="Ver cursos">
+                        <Button fx:id="btn_viewCourses" layoutX="18.0" layoutY="283.0" mnemonicParsing="false" onAction="#viewCourses" prefHeight="72.0" prefWidth="137.0" text="Ver mis cursos">
                            <effect>
                               <DropShadow>
                                  <color>
@@ -160,7 +160,7 @@
                               </DropShadow>
                            </effect>
                         </Button>
-                        <Button fx:id="btn_viewAssignaments" layoutX="18.0" layoutY="378.0" mnemonicParsing="false" onAction="#viewAssignaments" prefHeight="72.0" prefWidth="137.0" style="-fx-background-color: #ba96dc;" text="Ver Asignaciones ">
+                        <Button fx:id="btn_viewAssignaments" layoutX="18.0" layoutY="378.0" mnemonicParsing="false" onAction="#viewAssignaments" prefHeight="72.0" prefWidth="137.0" text="Ver mis Asignaciones ">
                            <effect>
                               <DropShadow>
                                  <color>
@@ -169,7 +169,7 @@
                               </DropShadow>
                            </effect>
                         </Button>
-                        <Button fx:id="btn_Exit" layoutX="14.0" layoutY="530.0" mnemonicParsing="false" onAction="#Exit_LoggOut" prefHeight="37.0" prefWidth="49.0" style="-fx-background-color: #ba96dc;">
+                        <Button fx:id="btn_Exit" layoutX="14.0" layoutY="530.0" mnemonicParsing="false" onAction="#Exit_LoggOut" prefHeight="37.0" prefWidth="49.0">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -177,9 +177,6 @@
                                  </image>
                               </ImageView>
                            </graphic>
-                           <effect>
-                              <DropShadow />
-                           </effect>
                         </Button>
                         <Label layoutX="73.0" layoutY="539.0" text="Salir" textFill="WHITE">
                            <font>
