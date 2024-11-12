@@ -1,4 +1,3 @@
-
 package controller;
 
 import java.io.BufferedReader;
@@ -39,116 +38,118 @@ public class MainController implements Initializable {
     @FXML
     private TextField txt_userId;
 
-  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        comboBoxRol.getItems().addAll("Estudiante", "Profesor","Administrativo");
-        
-    } 
-    @FXML
-    private void getNextPage(ActionEvent event) throws IOException {
-        String userId = txt_userId.getText();
-        String password = PassTxt_password.getText();
+        comboBoxRol.getItems().addAll("Estudiante", "Profesor", "Administrativo");
 
-        if (userId.isEmpty() || password.isEmpty()) {
-            showAlert(AlertType.WARNING, "Form Error!", "Please fill in all fields.");
-            return;
-        }
-
-        // Crear el JSON con los datos de login
-        JSONObject loginJson = new JSONObject();
-        loginJson.put("password", password);
-        loginJson.put("id_user", userId);
-        
-
-        System.out.println("Login Request: " + loginJson.toString());
-
-        // Hacer la solicitud POST al servidor para iniciar sesión
-        URL url = new URL("http://localhost:5000/auth/login"); // URL de tu endpoint de login
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("POST");
-        connection.setRequestProperty("Content-Type", "application/json");
-        connection.setDoOutput(true);
-
-        // Enviar los datos
-        try (OutputStream os = connection.getOutputStream()) {
-            byte[] input = loginJson.toString().getBytes(StandardCharsets.UTF_8);
-            os.write(input, 0, input.length);
-        }
-
-        // Leer la respuesta
-        int responseCode = connection.getResponseCode();
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            // Respuesta exitosa, procesar el token
-            StringBuilder response = new StringBuilder();
-            try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                String inputLine;
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-            }
-
-            // Procesar la respuesta (por ejemplo, obtener el token)
-            String responseMessage = response.toString();
-            try {
-                JSONObject responseObject = new JSONObject(responseMessage);
-
-                // Verificar si el campo token y role_id existen
-                if (responseObject.has("token") && responseObject.has("role_id")) {
-                    String token = responseObject.getString("token"); // Suponiendo que el token está en esta propiedad
-
-                    // Guardar el token utilizando el Singleton
-                    TokenManager.getInstance().setToken(token); // Guardamos el token
-
-                    // Obtener el rol del usuario desde la respuesta
-                    int roleId = responseObject.getInt("role_id");
-
-                    // Redirigir según el rol
-                    loadUserDashboard(roleId);
-                } else {
-                    showAlert(AlertType.ERROR, "Login Failed", "Unexpected response format from server.");
-                }
-
-            } catch (JSONException e) {
-                showAlert(AlertType.ERROR, "Login Failed", "Error processing server response: " + e.getMessage());
-            }
-        } else {
-            showAlert(AlertType.ERROR, "Login Failed", "Invalid user ID or password.");
-        }
     }
 
+    @FXML
+    private void getNextPage(ActionEvent event) throws IOException {
+ String userId = txt_userId.getText();
+    String password = PassTxt_password.getText();
+    String selectedRole = comboBoxRol.getValue();
 
+    if (userId.isEmpty() || password.isEmpty() || selectedRole == null) {
+        showAlert(AlertType.WARNING, "Form Error!", "Please fill in all fields.");
+        return;
+    }
+
+    // Crear el JSON con los datos de login
+    JSONObject loginJson = new JSONObject();
+    loginJson.put("password", password);
+    loginJson.put("id_user", userId);
+
+    System.out.println("Login Request: " + loginJson.toString());
+
+    // Hacer la solicitud POST al servidor para iniciar sesión
+    URL url = new URL("http://localhost:5000/auth/login"); // URL de tu endpoint de login
+    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    connection.setRequestMethod("POST");
+    connection.setRequestProperty("Content-Type", "application/json");
+    connection.setDoOutput(true);
+
+    // Enviar los datos
+    try (OutputStream os = connection.getOutputStream()) {
+        byte[] input = loginJson.toString().getBytes(StandardCharsets.UTF_8);
+        os.write(input, 0, input.length);
+    }
+
+    int responseCode = connection.getResponseCode();
+    if (responseCode == HttpURLConnection.HTTP_OK) {
+        // Respuesta exitosa, procesar el token
+        StringBuilder response = new StringBuilder();
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+        }
+
+        // Procesar la respuesta (por ejemplo, obtener el token)
+        String responseMessage = response.toString();
+        try {
+            JSONObject responseObject = new JSONObject(responseMessage);
+
+            // Verificar si el campo token y role_id existen
+            if (responseObject.has("access_token") && responseObject.has("role_id")) {
+                String token = responseObject.getString("access_token"); // Suponiendo que el token está en esta propiedad
+
+                // Guardar el token utilizando el Singleton
+                TokenManager.getInstance().setToken(token); // Guardamos el token
+
+                // Obtener el rol del usuario desde la respuesta
+                int roleId = responseObject.getInt("role_id");
+
+                // Verificar si el rol seleccionado coincide con el roleId del servidor
+                if (roleId == getRoleIdFromComboBox(selectedRole)) {
+                    // Redirigir según el rol
+                    loadUserDashboard(roleId); 
+                } else {
+                    showAlert(AlertType.ERROR, "Role Mismatch", "The selected role does not match the user's role.");
+                }
+            } else {
+                showAlert(AlertType.ERROR, "Login Failed", "Unexpected response format from server.");
+            }
+
+        } catch (JSONException e) {
+            showAlert(AlertType.ERROR, "Login Failed", "Error processing server response: " + e.getMessage());
+        }
+    } else {
+        showAlert(AlertType.ERROR, "Login Failed", "Invalid user ID or password.");
+    }
+    }
 
     @FXML
     private void createAccount(ActionEvent event) throws IOException {
         App.setRoot("SingIn");
-    
+
     }
 
-     private void showAlert(AlertType type, String title, String content) {
+    private void showAlert(AlertType type, String title, String content) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setContentText(content);
         alert.showAndWait();
     }
 
-
     @FXML
     private void get_passwordUser(ActionEvent event) {
-        
+
     }
+
     @FXML
     private void get_userId(ActionEvent event) {
-        
+
     }
 
     private void loadUserDashboard(int roleId) throws IOException {
         switch (roleId) {
-            case 1 -> 
+            case 1 ->
                 App.setRoot("InterAdmin");
-            case 2 -> 
+            case 2 ->
                 App.setRoot("InterTeacher");
-            case 3 -> 
+            case 3 ->
                 App.setRoot("InterStudent");
             default -> {
                 showAlert(AlertType.WARNING, "Role Error", "Invalid role for user.");
@@ -156,11 +157,25 @@ public class MainController implements Initializable {
             }
         }
 
-        App.getStage().setWidth(900); 
-        App.getStage().setHeight(800); 
-        App.getStage().setResizable(true); 
-    } 
+        App.getStage().setWidth(900);
+        App.getStage().setHeight(800);
+        App.getStage().setResizable(true);
+    }
+
+    private int getRoleIdFromComboBox(String role) {
+        switch (role) {
+            case "Administrativo":
+                return 1;
+            case "Profesor":
+                return 2;
+            case "Estudiante":
+                return 3;
+            default:
+                return -1; // Rol no válido
+        }
+    }
 }
+
 //    @FXML
 //    private void getNextPage(ActionEvent event) throws IOException {
 //        
