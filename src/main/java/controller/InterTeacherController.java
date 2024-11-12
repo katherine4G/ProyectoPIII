@@ -11,6 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import pack.universityplatform.App;
@@ -93,6 +94,40 @@ public class InterTeacherController implements Initializable {
     private Button btn_revisarAssignation;
     @FXML
     private AnchorPane revisarAsignattions_form;
+    @FXML
+    private Label label_InfoUser;
+    @FXML
+    private Button btn_viewCourses_back;
+    @FXML
+    private Button btn_viewCourses_next;
+    @FXML
+    private Button btn_viewAssign_saveChanges;
+    @FXML
+    private Button btn_viewAssign_editSubmission;
+    @FXML
+    private Button btn_viewAssign_addSubmission;
+    @FXML
+    private Label label_statusRevisionIA;
+    @FXML
+    private TableView<?> TableView_reviewAssig_homeWorksStudents;
+    @FXML
+    private TableColumn<?, ?> col_reviewAssig_idStudent;
+    @FXML
+    private TableColumn<?, ?> col_reviewAssig_nameStudent;
+    @FXML
+    private TableColumn<?, ?> col_reviewAssig_lastName;
+    @FXML
+    private TableColumn<?, ?> col_reviewAssig_EmailStudent;
+    @FXML
+    private TableColumn<?, ?> col_reviewAssig_courseStudent;
+    @FXML
+    private TableColumn<?, ?> col_reviewAssig_groupStudent;
+    @FXML
+    private Button btn_reviewAssig_selectStudent;
+    @FXML
+    private TextField txt_revisaAssign_notaStudent;
+    @FXML
+    private TextArea txt_revisaAssign_commentToStudent;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -207,6 +242,22 @@ public class InterTeacherController implements Initializable {
 
     @FXML
     private void student_edit_inside(ActionEvent event) {
+    }
+
+    @FXML
+    private void btn_viewAssign_saveChanges(ActionEvent event) {
+    }
+
+    @FXML
+    private void viewAssign_editSubmission(ActionEvent event) {
+    }
+
+    @FXML
+    private void viewAssign_addSubmission(ActionEvent event) {
+    }
+
+    @FXML
+    private void reviewAssig_selectStudent(ActionEvent event) {
     }
 
     

@@ -24,8 +24,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import pack.universityplatform.App;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
@@ -281,6 +279,8 @@ public class InterAdminController implements Initializable {
 
     private MessagesToUser message = new MessagesToUser();
     String token = TokenManager.getInstance().getToken();
+    @FXML
+    private Label label_InfoUser;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -585,56 +585,69 @@ public class InterAdminController implements Initializable {
             Course_form.setVisible(false);
             Teacher_form.setVisible(false);
             Student_form.setVisible(false);
+            viewSolis_form.setVisible(false);
 
         } else if (event.getSource() == btn_createUniversity) {
-
+            myProfile_form.setVisible(false);
             University_form.setVisible(true);
             Faculty_form.setVisible(false);
             Department_form.setVisible(false);
             Course_form.setVisible(false);
             Teacher_form.setVisible(false);
             Student_form.setVisible(false);
+            viewSolis_form.setVisible(false);
+            
 
         } else if (event.getSource() == btn_createFaculty) {
-
+            myProfile_form.setVisible(false);
             University_form.setVisible(false);
             Faculty_form.setVisible(true);
             Department_form.setVisible(false);
             Course_form.setVisible(false);
             Teacher_form.setVisible(false);
             Student_form.setVisible(false);
+            viewSolis_form.setVisible(false);
 
         } else if (event.getSource() == btn_createDepartment) {
-
+            myProfile_form.setVisible(false);
             University_form.setVisible(false);
             Faculty_form.setVisible(false);
             Department_form.setVisible(true);
             Course_form.setVisible(false);
             Teacher_form.setVisible(false);
             Student_form.setVisible(false);
+            viewSolis_form.setVisible(false);
+            
         } else if (event.getSource() == btn_createCourses) {
-
+            myProfile_form.setVisible(false);
             University_form.setVisible(false);
             Faculty_form.setVisible(false);
             Department_form.setVisible(false);
             Course_form.setVisible(true);
             Teacher_form.setVisible(false);
             Student_form.setVisible(false);
+            viewSolis_form.setVisible(false);
+           
         } else if (event.getSource() == btn_createTeacher) {
+            myProfile_form.setVisible(false);
             University_form.setVisible(false);
             Faculty_form.setVisible(false);
             Department_form.setVisible(false);
             Course_form.setVisible(false);
             Teacher_form.setVisible(true);
             Student_form.setVisible(false);
+            viewSolis_form.setVisible(false);
+        
         } else if (event.getSource() == btn_createStudent) {
-
+            myProfile_form.setVisible(false);
             University_form.setVisible(false);
             Faculty_form.setVisible(false);
             Department_form.setVisible(false);
             Course_form.setVisible(false);
             Teacher_form.setVisible(false);
             Student_form.setVisible(true);
+            viewSolis_form.setVisible(false);
+           
         } else if (event.getSource() == btn_viewSolis) {
             myProfile_form.setVisible(false);
             University_form.setVisible(false);
