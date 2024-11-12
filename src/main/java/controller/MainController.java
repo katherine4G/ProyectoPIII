@@ -63,13 +63,13 @@ public class MainController implements Initializable {
     System.out.println("Login Request: " + loginJson.toString());
 
     // Hacer la solicitud POST al servidor para iniciar sesión
-    URL url = new URL("http://localhost:5000/auth/login"); // URL de tu endpoint de login
+    URL url = new URL("http://localhost:5000/auth/login");
     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
     connection.setRequestMethod("POST");
     connection.setRequestProperty("Content-Type", "application/json");
     connection.setDoOutput(true);
 
-    // Enviar los datos
+    // Envia los datos
     try (OutputStream os = connection.getOutputStream()) {
         byte[] input = loginJson.toString().getBytes(StandardCharsets.UTF_8);
         os.write(input, 0, input.length);
@@ -77,7 +77,7 @@ public class MainController implements Initializable {
 
     int responseCode = connection.getResponseCode();
     if (responseCode == HttpURLConnection.HTTP_OK) {
-        // Respuesta exitosa, procesar el token
+
         StringBuilder response = new StringBuilder();
         try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
             String inputLine;
@@ -86,17 +86,17 @@ public class MainController implements Initializable {
             }
         }
 
-        // Procesar la respuesta (por ejemplo, obtener el token)
+        // obtener el token
         String responseMessage = response.toString();
         try {
             JSONObject responseObject = new JSONObject(responseMessage);
 
             // Verificar si el campo token y role_id existen
             if (responseObject.has("access_token") && responseObject.has("role_id")) {
-                String token = responseObject.getString("access_token"); // Suponiendo que el token está en esta propiedad
-
+                String token = responseObject.getString("access_token");
+                
                 // Guardar el token utilizando el Singleton
-                TokenManager.getInstance().setToken(token); // Guardamos el token
+                TokenManager.getInstance().setToken(token); 
 
                 // Obtener el rol del usuario desde la respuesta
                 int roleId = responseObject.getInt("role_id");

@@ -1,4 +1,3 @@
-
 package utils.Factory;
 
 import com.google.gson.Gson;
@@ -13,10 +12,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author kathe
- */
 public class HttpHelper {
 
     public static boolean sendPostRequest(String url, String jsonBody, String token) {
@@ -40,11 +35,12 @@ public class HttpHelper {
         }
     }
 
-    public static <T> List<T> sendGetRequest(String url, Class<T> clazz) throws IOException {
+    public static <T> List<T> sendGetRequest(String url, Class<T> clazz, String token) throws IOException {
         List<T> result = new ArrayList<>();
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Accept", "application/json");
+        connection.setRequestProperty("Authorization", "Bearer " + token);
 
         int responseCode = connection.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
@@ -55,21 +51,20 @@ public class HttpHelper {
                     response.append(responseLine.trim());
                 }
 
-                // Cambiar aquí para trabajar con TypeToken de manera correcta
                 result = new Gson().fromJson(response.toString(),
-                    TypeToken.getParameterized(List.class, clazz).getType());
+                        TypeToken.getParameterized(List.class, clazz).getType());
             }
         } else {
-            System.out.println("Error al obtener datos: " + responseCode);
+            throw new IOException("Error al obtener datos: " + responseCode);
         }
         return result;
     }
 
-
-    public static <T> T sendGetRequestById(String url, Class<T> clazz) throws IOException {
+    public static <T> T sendGetRequestById(String url, Class<T> clazz, String token) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Accept", "application/json");
+        connection.setRequestProperty("Authorization", "Bearer " + token);
 
         int responseCode = connection.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
@@ -87,21 +82,21 @@ public class HttpHelper {
         }
     }
 
- public static boolean sendDeleteRequest(String url, String jsonBody) {
+    public static boolean sendDeleteRequest(String url, String token, String jsonBody) {
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
             connection.setRequestMethod("DELETE");
+            connection.setRequestProperty("Authorization", "Bearer " + token);
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setDoOutput(true);
 
-            // Escribir el cuerpo JSON
             try (OutputStream os = connection.getOutputStream()) {
-                byte[] input = jsonBody.getBytes(StandardCharsets.UTF_8);
+                byte[] input = jsonBody.getBytes("utf-8");
                 os.write(input, 0, input.length);
             }
 
             int responseCode = connection.getResponseCode();
-            return responseCode == HttpURLConnection.HTTP_OK;
+            return responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_NO_CONTENT;
         } catch (IOException e) {
             System.out.println("Error en solicitud DELETE: " + e.getMessage());
             return false;

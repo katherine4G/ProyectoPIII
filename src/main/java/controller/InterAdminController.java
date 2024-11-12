@@ -30,6 +30,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import org.json.JSONObject;
 import utils.MessagesToUser;
 import utils.TokenManager;
 
@@ -275,10 +276,10 @@ public class InterAdminController implements Initializable {
     private AnchorPane myProfile_form;
     @FXML
     private AnchorPane viewSolis_form;
-    
+
     private UniversityAPI universityAPI = new UniversityAPI();
-    
-    private MessagesToUser message =new MessagesToUser();
+
+    private MessagesToUser message = new MessagesToUser();
     String token = TokenManager.getInstance().getToken();
 
     @Override
@@ -297,24 +298,19 @@ public class InterAdminController implements Initializable {
         showTableView_faculty();
 
     }
-    
+
     @FXML
     private void admin_myProfile(ActionEvent event) {
         switchForm(event);
-        
+
     }
 
 /////////////////////////////Universities////////////////////////////////////
     @FXML
     private void createUniversity(ActionEvent event) throws IOException { //para moverse entre ventanas(anchors Pane) para crear uni
         switchForm(event);
-        loadUniversities();
-                try {
-            refreshUniversities();
-         
-        } catch (IOException ex) { Logger.getLogger(InterAdminController.class.getName()).log(Level.SEVERE, null, ex);}
-         AnimatiosUtils.applyHoverAnimations(rootPane);
-
+        refreshUniversities();
+        AnimatiosUtils.applyHoverAnimations(rootPane);
     }
 
     public void loadUniversities() throws IOException {
@@ -325,67 +321,65 @@ public class InterAdminController implements Initializable {
         TableViewUniversity.setItems(universityList);
     }
 
+    public void refreshUniversities() throws IOException {
+        loadUniversities();
+    }
+
     @FXML
     private void university_create_iside(ActionEvent event) throws IOException {
-        // Obtener datos del formulario
+
         String universityName = txt_university_name.getText();
         String country = txt_university_country.getText();
         String sede = txt_university_sede.getText();
         String address = txt_university_address.getText();
 
-        // Crear el JSON con los datos
-        JsonObject jsonBody = new JsonObject();
-        jsonBody.addProperty("universityName", universityName);
-        jsonBody.addProperty("uniCountry", country);
-        jsonBody.addProperty("uniSede", sede);
-        jsonBody.addProperty("uniAdress", address);
+        String json = createUniversityJsonCrear(universityName, country, sede, address);
 
-        // Llamar al método de la API para crear la universidad
         UniversityAPI universityAPI = new UniversityAPI();
-        String json = jsonBody.toString();
-    
+        String token = TokenManager.getInstance().getToken(); 
         boolean success = universityAPI.create(json, token);
 
         if (success) {
             loadUniversities();
             message.showSuccessMessage("Universidad Creada", "La universidad ha sido creada exitosamente.");
             clear();
-            refreshUniversities();
-            
         } else {
-            // Manejar error
             message.showErrorMessage("Error", "No se pudo crear la universidad.");
         }
+        loadUniversities();
+
     }
 
     @FXML
     private void university_edit_inside(ActionEvent event) throws IOException {
-         University selectedUniversity = TableViewUniversity.getSelectionModel().getSelectedItem();
+        University selectedUniversity = TableViewUniversity.getSelectionModel().getSelectedItem();
         if (selectedUniversity == null) {
             message.showErrorMessage("Error", "Selecciona una universidad para editar");
             return;
         }
 
-        // Obtener datos actualizados
+        int universityId = selectedUniversity.getUniversityId(); 
         String universityName = txt_university_name.getText();
         String country = txt_university_country.getText();
         String sede = txt_university_sede.getText();
         String address = txt_university_address.getText();
 
-        // Crear JSON para actualización
-        JsonObject jsonBody = new JsonObject();
-        jsonBody.addProperty("universityName", universityName);
-        jsonBody.addProperty("uniCountry", country);
-        jsonBody.addProperty("uniSede", sede);
-        jsonBody.addProperty("uniAdress", address);
+        // Crear JSON para la actualización
+        JSONObject json = new JSONObject();
+        json.put("universityId", universityId);
+        json.put("newName", universityName);
+        json.put("newCountry", country);
+        json.put("newSede", sede);
+        json.put("newAddress", address);
 
-        boolean success = universityAPI.update(selectedUniversity.getUniversityId(),jsonBody.toString(),token);
+        UniversityAPI universityAPI = new UniversityAPI();
+        String token = TokenManager.getInstance().getToken(); 
+        boolean success = universityAPI.update(universityId, json.toString(), token); 
 
         if (success) {
             loadUniversities();
             message.showSuccessMessage("Universidad Actualizada", "La universidad ha sido actualizada exitosamente.");
             clear();
-            refreshUniversities();
         } else {
             message.showErrorMessage("Error", "No se pudo actualizar la universidad.");
         }
@@ -399,20 +393,34 @@ public class InterAdminController implements Initializable {
             return;
         }
 
+        int universityId = selectedUniversity.getUniversityId();
+
         boolean confirmed = confirmAction("Eliminar", selectedUniversity);
         if (confirmed) {
-            boolean success = universityAPI.delete(selectedUniversity.getUniversityId(), token);
+            UniversityAPI universityAPI = new UniversityAPI();
+            String token = TokenManager.getInstance().getToken();
 
+            JSONObject json = new JSONObject();
+            json.put("universityId", universityId);
+
+            boolean success = universityAPI.delete(json.toString(), token);
             if (success) {
                 loadUniversities();
                 message.showSuccessMessage("Universidad Eliminada", "La universidad ha sido eliminada exitosamente.");
                 clear();
-                refreshUniversities();
             } else {
                 message.showErrorMessage("Error", "No se pudo eliminar la universidad.");
             }
         }
-        
+    }
+
+    private String createUniversityJsonCrear(String universityName, String country, String sede, String address) {
+        JsonObject jsonBody = new JsonObject();
+        jsonBody.addProperty("universityName", universityName);
+        jsonBody.addProperty("uniCountry", country);
+        jsonBody.addProperty("uniSede", sede);
+        jsonBody.addProperty("uniAdress", address);
+        return jsonBody.toString();
     }
 
     private void showTableView_university() {
@@ -432,7 +440,7 @@ public class InterAdminController implements Initializable {
     private void faculty_create_inside(ActionEvent event) {
         String name = txt_faculty_name.getText();
         String type = txt_faculty_type.getText();
-        String token = "123";
+        String token = TokenManager.getInstance().getToken(); // Obtener el token de manera segura
 
     }
 
@@ -477,7 +485,8 @@ public class InterAdminController implements Initializable {
     private void createCourses(ActionEvent event) {  //para moverse entre ventanas(anchors Pane)
         switchForm(event);
     }
-       @FXML
+
+    @FXML
     private void course_delete_inside(ActionEvent event) {
     }
 
@@ -494,7 +503,7 @@ public class InterAdminController implements Initializable {
     private void createTeacher(ActionEvent event) { //para moverse entre ventanas(anchors Pane)
         switchForm(event);
     }
-    
+
     @FXML
     private void profe_serchBy(ActionEvent event) {
     }
@@ -520,7 +529,8 @@ public class InterAdminController implements Initializable {
     private void createStudent(ActionEvent event) { //para moverse entre ventanas(anchors Pane)
         switchForm(event);
     }
-      @FXML
+
+    @FXML
     private void student_viewStudentCourse(ActionEvent event) {
         switchForm_student_course(event);
     }
@@ -549,6 +559,7 @@ public class InterAdminController implements Initializable {
     @FXML
     private void student_create_inside(ActionEvent event) {
     }
+
     /////////////////////Solicitudes/////////////////////////
     @FXML
     private void admin_viewSolis(ActionEvent event) {
@@ -562,7 +573,7 @@ public class InterAdminController implements Initializable {
         App.setRoot("main");
         App.getStage().setWidth(624);
         App.getStage().setHeight(512);
-        App.getStage().setResizable(false); 
+        App.getStage().setResizable(false);
     }
 
     public void switchForm(ActionEvent event) {
@@ -574,7 +585,7 @@ public class InterAdminController implements Initializable {
             Course_form.setVisible(false);
             Teacher_form.setVisible(false);
             Student_form.setVisible(false);
-            
+
         } else if (event.getSource() == btn_createUniversity) {
 
             University_form.setVisible(true);
@@ -635,7 +646,7 @@ public class InterAdminController implements Initializable {
             viewSolis_form.setVisible(true);
         }
     }
-    
+
     public boolean confirmAction(String action, University university) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(action + " Universidad");
@@ -646,7 +657,7 @@ public class InterAdminController implements Initializable {
                 + "Dirección: " + university.getUniAdress());
         return alert.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK;
     }
-    
+
     private void clear() {
         txt_university_name.setText(" ");
         txt_university_country.setText(" ");
@@ -666,7 +677,7 @@ public class InterAdminController implements Initializable {
             AnchorPane_allStudents.setVisible(true);
             AnchorPane_students_viewCourses_of_anStudent.setVisible(false);
         }
-     }
+    }
 
     private void loadUniversitiesForComboBox_faculty(ComboBox<String> nameComboBox) throws IOException {
         try {
@@ -683,20 +694,12 @@ public class InterAdminController implements Initializable {
                 universityDetails.add(universityInfo);
             }
 
-          //  comboBox_faculty_AllUniversities.setItems(FXCollections.observableArrayList(universityDetails));
+            //  comboBox_faculty_AllUniversities.setItems(FXCollections.observableArrayList(universityDetails));
             nameComboBox.setItems(FXCollections.observableArrayList(universityDetails));
 
         } catch (IOException e) {
             message.showErrorMessage("Error", "No se pudieron cargar las universidades.");
         }
     }
-    private void refreshUniversities() throws IOException{
-        loadUniversitiesForComboBox_faculty(comboBox_faculty_AllUniversities);
-        loadUniversitiesForComboBox_faculty(comboBox_department_showUniversities);
-        loadUniversitiesForComboBox_faculty(comboBox_Courses_showUniversities);
-        loadUniversitiesForComboBox_faculty(comboBox_profe_showUniversities); 
-        loadUniversitiesForComboBox_faculty(comboBox_student_showUniversities);
 
-    }
-    
 }//fin clase
