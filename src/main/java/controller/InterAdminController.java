@@ -31,6 +31,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import utils.MessagesToUser;
+import utils.TokenManager;
 
 public class InterAdminController implements Initializable {
 
@@ -278,6 +279,7 @@ public class InterAdminController implements Initializable {
     private UniversityAPI universityAPI = new UniversityAPI();
     
     private MessagesToUser message =new MessagesToUser();
+    String token = TokenManager.getInstance().getToken();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -293,11 +295,7 @@ public class InterAdminController implements Initializable {
         });
         ///facultad///
         showTableView_faculty();
-        try {
-            refreshUniversities();
-         
-        } catch (IOException ex) { Logger.getLogger(InterAdminController.class.getName()).log(Level.SEVERE, null, ex);}
-         AnimatiosUtils.applyHoverAnimations(rootPane);
+
     }
     
     @FXML
@@ -311,6 +309,11 @@ public class InterAdminController implements Initializable {
     private void createUniversity(ActionEvent event) throws IOException { //para moverse entre ventanas(anchors Pane) para crear uni
         switchForm(event);
         loadUniversities();
+                try {
+            refreshUniversities();
+         
+        } catch (IOException ex) { Logger.getLogger(InterAdminController.class.getName()).log(Level.SEVERE, null, ex);}
+         AnimatiosUtils.applyHoverAnimations(rootPane);
 
     }
 
@@ -340,7 +343,7 @@ public class InterAdminController implements Initializable {
         // Llamar al método de la API para crear la universidad
         UniversityAPI universityAPI = new UniversityAPI();
         String json = jsonBody.toString();
-        String token = "123"; // Token provisional
+    
         boolean success = universityAPI.create(json, token);
 
         if (success) {
@@ -376,11 +379,7 @@ public class InterAdminController implements Initializable {
         jsonBody.addProperty("uniSede", sede);
         jsonBody.addProperty("uniAdress", address);
 
-        boolean success = universityAPI.update(
-            selectedUniversity.getUniversityId(), 
-            jsonBody.toString(), 
-            "123"
-        );
+        boolean success = universityAPI.update(selectedUniversity.getUniversityId(),jsonBody.toString(),token);
 
         if (success) {
             loadUniversities();
@@ -402,10 +401,7 @@ public class InterAdminController implements Initializable {
 
         boolean confirmed = confirmAction("Eliminar", selectedUniversity);
         if (confirmed) {
-            boolean success = universityAPI.delete(
-                selectedUniversity.getUniversityId(), 
-                "123"
-            );
+            boolean success = universityAPI.delete(selectedUniversity.getUniversityId(), token);
 
             if (success) {
                 loadUniversities();
@@ -562,10 +558,11 @@ public class InterAdminController implements Initializable {
     /////////////////////Config/////////////////////////
     @FXML
     private void Exit_LoggOut(ActionEvent event) throws IOException {
+        TokenManager.getInstance().clearToken(); // Limpia el token al cerrar sesión
         App.setRoot("main");
         App.getStage().setWidth(624);
         App.getStage().setHeight(512);
-        App.getStage().setResizable(false); // 
+        App.getStage().setResizable(false); 
     }
 
     public void switchForm(ActionEvent event) {

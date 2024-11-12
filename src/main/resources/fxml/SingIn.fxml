@@ -15,7 +15,7 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
          <children>
-            <Button fx:id="btn_createAccount" layoutX="525.0" layoutY="444.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="47.0" prefWidth="87.0" style="-fx-background-color: #ffffff;" text="crear cuenta">
+            <Button fx:id="btn_createAccount" layoutX="502.0" layoutY="442.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="47.0" prefWidth="87.0" style="-fx-background-color: #ffffff;" text="crear cuenta">
                <effect>
                   <DropShadow>
                      <color>
@@ -48,7 +48,7 @@
                   </DropShadow>
                </effect>
             </Label>
-            <ComboBox fx:id="comboBoxRol" layoutX="221.0" layoutY="213.0" prefHeight="25.0" prefWidth="203.0" promptText="rol universitario" style="-fx-background-color: #FFFFFF;">
+            <ComboBox fx:id="comboBoxRole" layoutX="221.0" layoutY="267.0" prefHeight="25.0" prefWidth="203.0" promptText="rol universitario" style="-fx-background-color: #FFFFFF;">
                <effect>
                   <DropShadow>
                      <color>
@@ -57,9 +57,9 @@
                   </DropShadow>
                </effect>
             </ComboBox>
-            <Label layoutX="155.0" layoutY="125.0" text="Nombre" />
-            <Label layoutX="155.0" layoutY="170.0" text="Apellido" />
-            <TextField fx:id="txt_user3" layoutX="221.0" layoutY="121.0" prefHeight="25.0" prefWidth="203.0">
+            <Label layoutX="155.0" layoutY="179.0" text="Nombre" />
+            <Label layoutX="155.0" layoutY="224.0" text="Apellido" />
+            <TextField fx:id="txt_userName" layoutX="221.0" layoutY="175.0" prefHeight="25.0" prefWidth="203.0">
                <effect>
                   <DropShadow>
                      <color>
@@ -68,11 +68,10 @@
                   </DropShadow>
                </effect>
             </TextField>
-            <Label layoutX="155.0" layoutY="270.0" prefHeight="17.0" prefWidth="44.0" text="Cédula" />
             <Label layoutX="155.0" layoutY="324.0" prefHeight="17.0" prefWidth="44.0" text="E-mail" />
             <Label layoutX="145.0" layoutY="379.0" prefHeight="17.0" prefWidth="75.0" text="Contraseña" />
-            <Label layoutX="155.0" layoutY="221.0" prefHeight="17.0" prefWidth="44.0" text="Rol" />
-            <TextField fx:id="txt_user32" layoutX="221.0" layoutY="166.0" prefHeight="25.0" prefWidth="203.0">
+            <Label layoutX="155.0" layoutY="275.0" prefHeight="17.0" prefWidth="44.0" text="Rol" />
+            <TextField fx:id="txt_userLastName" layoutX="221.0" layoutY="220.0" prefHeight="25.0" prefWidth="203.0">
                <effect>
                   <DropShadow>
                      <color>
@@ -81,7 +80,7 @@
                   </DropShadow>
                </effect>
             </TextField>
-            <TextField fx:id="txt_user33" layoutX="221.0" layoutY="266.0" prefHeight="25.0" prefWidth="203.0">
+            <TextField fx:id="txt_userEmail" layoutX="221.0" layoutY="320.0" prefHeight="25.0" prefWidth="203.0">
                <effect>
                   <DropShadow>
                      <color>
@@ -90,7 +89,7 @@
                   </DropShadow>
                </effect>
             </TextField>
-            <TextField fx:id="txt_user34" layoutX="221.0" layoutY="320.0" prefHeight="25.0" prefWidth="203.0">
+            <TextField fx:id="txt_userPassword" layoutX="221.0" layoutY="375.0" prefHeight="25.0" prefWidth="203.0">
                <effect>
                   <DropShadow>
                      <color>
@@ -99,7 +98,8 @@
                   </DropShadow>
                </effect>
             </TextField>
-            <TextField fx:id="txt_user35" layoutX="221.0" layoutY="375.0" prefHeight="25.0" prefWidth="203.0">
+            <Label layoutX="155.0" layoutY="132.0" prefHeight="17.0" prefWidth="44.0" text="Cédula" />
+            <TextField fx:id="txt_userId" layoutX="221.0" layoutY="128.0" prefHeight="25.0" prefWidth="203.0">
                <effect>
                   <DropShadow>
                      <color>

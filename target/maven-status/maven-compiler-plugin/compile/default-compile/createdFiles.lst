@@ -9,9 +9,11 @@ controller\InterAdminController.class
 controller\MainController.class
 APIs\FacultyAPI.class
 controller\SingInController.class
+APIs\UserAPI.class
 Model\AutoCorrection.class
 animations\AnimatiosUtils.class
 controller\InterTeacherController.class
+utils\TokenManager.class
 Model\Assignment.class
 Model\Department.class
 controller\InterStudentController.class
