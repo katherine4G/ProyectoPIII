@@ -287,11 +287,11 @@ public class InterAdminController implements Initializable {
     private MessagesToUser message = new MessagesToUser();
     
     private Map<String, Integer> universityMap = new HashMap<>();
-   // String token = TokenManager.getInstance().getToken();
+    String token = TokenManager.getInstance().getToken();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ///universidad///
+        // Configuración para universidades
         showTableView_university();
         TableViewUniversity.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -301,16 +301,27 @@ public class InterAdminController implements Initializable {
                 txt_university_address.setText(newSelection.getUniAdress());
             }
         });
-        ///facultad///
+
+        // Configuración para facultades
         showTableView_faculty();
         TableViewFaculty.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                txt_university_name.setText(newSelection.getFacultyName());
-                txt_university_country.setText(newSelection.getFacultyType());
-             //   txt_university_sede.setText(newSelection.getUniSede());
+                txt_faculty_name.setText(newSelection.getFacultyName());
+                txt_faculty_type.setText(newSelection.getFacultyType());
+
+                // Verifica si la facultad tiene una universidad asociada
+                if (newSelection.getUniversity() != null) {
+                    // Configura el comboBox con el nombre de la universidad asociada
+                    comboBox_faculty_AllUniversities.getSelectionModel().select(
+                            String.format("%s, %s, %s", 
+                                newSelection.getUniversity().getUniversityName(), 
+                                newSelection.getUniversity().getUniCountry(), 
+                                newSelection.getUniversity().getUniSede()));
+                } else {
+                    comboBox_faculty_AllUniversities.getSelectionModel().clearSelection();
+                }
             }
         });
-
     }
 
     @FXML
@@ -356,7 +367,7 @@ public class InterAdminController implements Initializable {
         if (success) {
             loadUniversities();
             message.showSuccessMessage("Universidad Creada", "La universidad ha sido creada exitosamente.");
-            clear();
+            clearAllFields();
         } else {
             message.showErrorMessage("Error", "No se pudo crear la universidad.");
         }
@@ -386,13 +397,13 @@ public class InterAdminController implements Initializable {
         json.put("newAddress", address);
 
         UniversityAPI universityAPI = new UniversityAPI();
-        String token = TokenManager.getInstance().getToken(); 
+       // String token = TokenManager.getInstance().getToken(); 
         boolean success = universityAPI.update(universityId, json.toString(), token); 
 
         if (success) {
             loadUniversities();
             message.showSuccessMessage("Universidad Actualizada", "La universidad ha sido actualizada exitosamente.");
-            clear();
+            clearAllFields();
         } else {
             message.showErrorMessage("Error", "No se pudo actualizar la universidad.");
         }
@@ -411,7 +422,7 @@ public class InterAdminController implements Initializable {
         boolean confirmed = confirmAction("Eliminar", selectedUniversity);
         if (confirmed) {
             UniversityAPI universityAPI = new UniversityAPI();
-            String token = TokenManager.getInstance().getToken();
+          //  String token = TokenManager.getInstance().getToken();
 
             JSONObject json = new JSONObject();
             json.put("universityId", universityId);
@@ -420,7 +431,7 @@ public class InterAdminController implements Initializable {
             if (success) {
                 loadUniversities();
                 message.showSuccessMessage("Universidad Eliminada", "La universidad ha sido eliminada exitosamente.");
-                clear();
+                clearAllFields();
             } else {
                 message.showErrorMessage("Error", "No se pudo eliminar la universidad.");
             }
@@ -466,13 +477,13 @@ public class InterAdminController implements Initializable {
         String json = createFacultyJsonCrear(name, type, universityId);  // Pasar el universityId
 
         FacultyAPI facultyAPI= new FacultyAPI();
-        String token = TokenManager.getInstance().getToken(); 
+      //  String token = TokenManager.getInstance().getToken(); 
         boolean success = facultyAPI.create(json, token);
 
         if (success) {
             loadFaculties();
             message.showSuccessMessage("Facultad Creada", "La facultad ha sido creada exitosamente.");
-            clear();
+            clearAllFields();
         } else {
             message.showErrorMessage("Error", "No se pudo crear la facultad.");
         }
@@ -499,19 +510,21 @@ public class InterAdminController implements Initializable {
 
         // Crear JSON para la actualización
         JSONObject json = new JSONObject();
+        // Cambia los nombres de los campos en el JSON para que coincidan con los de Flask
         json.put("facultyId", facultyId);
-        json.put("newName", facultyName);
-        json.put("newType", facultyType);
-        json.put("newUniversityId", universityId);
+        json.put("facultyName", facultyName);  // Cambiado de newName a facultyName
+        json.put("facultyType", facultyType);  // Cambiado de newType a facultyType
+        json.put("universityId", universityId);  // Cambiado de newUniversityId a universityId
+
 
         FacultyAPI facultyAPI = new FacultyAPI();
-        String token = TokenManager.getInstance().getToken();
+        //String token = TokenManager.getInstance().getToken();
         boolean success = facultyAPI.update(facultyId, json.toString(), token);
 
         if (success) {
             loadFaculties();
             message.showSuccessMessage("Facultad Actualizada", "La facultad ha sido actualizada exitosamente.");
-            clear();
+            clearAllFields();
         } else {
             message.showErrorMessage("Error", "No se pudo actualizar la facultad.");
         }
@@ -526,11 +539,10 @@ public class InterAdminController implements Initializable {
         }
 
         int facultyId = selectedFaculty.getFacultyId();
-
         boolean confirmed = confirmAction("Eliminar", selectedFaculty);
         if (confirmed) {
             FacultyAPI facultyAPI = new FacultyAPI();
-            String token = TokenManager.getInstance().getToken();
+         //   String token = TokenManager.getInstance().getToken();
 
             JSONObject json = new JSONObject();
             json.put("facultyId", facultyId);
@@ -539,7 +551,7 @@ public class InterAdminController implements Initializable {
             if (success) {
                 loadFaculties();
                 message.showSuccessMessage("Facultad Eliminada", "La facultad ha sido eliminada exitosamente.");
-                clear();
+                clearAllFields();
             } else {
                 message.showErrorMessage("Error", "No se pudo eliminar la facultad.");
             }
@@ -789,6 +801,7 @@ public class InterAdminController implements Initializable {
             Student_form.setVisible(false);
             viewSolis_form.setVisible(true);
         }
+        clearAllFields();
     }
 
     public boolean confirmAction(String action, University university) {
@@ -802,13 +815,19 @@ public class InterAdminController implements Initializable {
         return alert.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK;
     }
 
-    private void clear() {
-        txt_university_name.setText(" ");
-        txt_university_country.setText(" ");
-        txt_university_sede.setText(" ");
-        txt_university_address.setText(" ");
+//    private void clear() {
+//        txt_university_name.setText(" ");
+//        txt_university_country.setText(" ");
+//        txt_university_sede.setText(" ");
+//        txt_university_address.setText(" ");
+//    }
+        private void clearAllFields() {
+        rootPane.getChildren().forEach(node -> {
+            if (node instanceof TextField) {((TextField) node).clear();}});
+            // Si el nodo es un TextArea, limpia el texto
+          //  else if (node instanceof TextArea) { ((TextArea) node).clear();}});
+        }
 
-    }
 
     public void switchForm_student_course(ActionEvent event) {
 
