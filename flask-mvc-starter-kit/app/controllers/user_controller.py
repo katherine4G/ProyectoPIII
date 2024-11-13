@@ -7,7 +7,7 @@ from app import db
 
 # Obtener usuario por ID
 def get_user(id_user):
-    user = User.query.get(id_user)  # Ahora usamos id_user, que es VARCHAR
+    user = User.query.get(id_user) 
     if not user:
         return jsonify({"msg": "Usuario no encontrado"}), 404
 
@@ -92,3 +92,11 @@ def login():
         print(f"Error en el servidor: {e}")
         return jsonify({"msg": "Error en el servidor"}), 500
 
+def delete_user(id_user):
+    user = User.query.get(id_user)
+    if not user:
+        return jsonify({"msg": "Usuario no encontrado"}), 404
+
+    db.session.delete(user)
+    db.session.commit()
+    return jsonify({"msg": "Usuario eliminado exitosamente"}), 200

@@ -3,6 +3,7 @@ Model\Faculty.class
 APIs\UniversityAPI.class
 APIs\FacultyAPI.class
 controller\SingInController.class
+Manage\UserSession.class
 utils\TokenManager.class
 Model\Department.class
 pack\universityplatform\App.class

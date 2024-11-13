@@ -19,23 +19,3 @@ class Faculty(db.Model):
             "facultyType": self.facultyType,
             "university": self.university.to_dict() if self.university else None
         }
-
-# from app import db
-# #db = SQLAlchemy()
-# class Faculty(db.Model):
-#     __tablename__ = 'Faculty'
-#     facultyId = db.Column(db.Integer, primary_key=True)
-#     facultyName = db.Column(db.String(255), nullable=False)
-#     facultyType = db.Column(db.String(255), nullable=False)
-#     universityId = db.Column(db.Integer, db.ForeignKey('University.universityId'), nullable=False)
-
-#     # Relación con University
-#     university = db.relationship('University', backref=db.backref('faculties', lazy=True))
-
-#     def to_dict(self):
-#         return {
-#             'facultyId': self.facultyId,
-#             'facultyName': self.facultyName,
-#             'facultyType': self.facultyType,
-#             'universityId': self.universityId
-#         }

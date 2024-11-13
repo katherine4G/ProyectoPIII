@@ -1,5 +1,7 @@
 package controller;
 
+import Manage.UserSession;
+import Model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -116,6 +118,7 @@ public class InterStudentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         // TODO
     }    
 
@@ -127,6 +130,19 @@ public class InterStudentController implements Initializable {
         App.getStage().setResizable(false); 
     }
 
+    @FXML
+    private void viewProfile(ActionEvent event) {
+        switchForm( event);
+        User user = UserSession.getCurrentUser();
+
+        if (user != null) {
+            String u = user.getIdUser();  
+            if (u != null && !u.isEmpty()) { label_InfoUser.setText(user.toString());}
+            else {label_InfoUser.setText("ID de usuario vacío.");}
+            
+        } else {label_InfoUser.setText("No hay usuario en sesión.");}
+    }
+    
     @FXML
     private void matricularCourse(ActionEvent event) {
         switchForm( event);
@@ -147,27 +163,23 @@ public class InterStudentController implements Initializable {
             perfil_form.setVisible(true);
             MatricCourse_form.setVisible(false);
             viewCourse_form.setVisible(false);
-            viewAssignaments_form.setVisible(false);           
+            viewAssignaments_form.setVisible(false);   
         }else if (event.getSource() == btm_MatricularCourse) {
             perfil_form.setVisible(false);
             MatricCourse_form.setVisible(true);
             viewCourse_form.setVisible(false);
-            viewAssignaments_form.setVisible(false);           
+            viewAssignaments_form.setVisible(false);   
         }else if (event.getSource() == btn_viewCourses)
         { perfil_form.setVisible(false);
             MatricCourse_form.setVisible(false);
             viewCourse_form.setVisible(true);
-            viewAssignaments_form.setVisible(false);      
+            viewAssignaments_form.setVisible(false);   
         }else if (event.getSource() == btn_viewAssignaments)
         { perfil_form.setVisible(false);
             MatricCourse_form.setVisible(false);
             viewCourse_form.setVisible(false);
             viewAssignaments_form.setVisible(true);   
         }
-    }
-
-    @FXML
-    private void viewProfile(ActionEvent event) {
     }
 
     @FXML
@@ -189,4 +201,5 @@ public class InterStudentController implements Initializable {
     @FXML
     private void btn_viewAssign_saveChanges(ActionEvent event) {
     }
+
 }

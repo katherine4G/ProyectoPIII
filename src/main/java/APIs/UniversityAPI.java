@@ -39,4 +39,7 @@ public class UniversityAPI implements APIClient {
         String url = BASE_URL + "update";
         return HttpHelper.sendPutRequest(url, jsonBody, token);
     }
+ 
+    @Override
+    public <T> T getById(String id, String token) throws IOException {return null;}
 }

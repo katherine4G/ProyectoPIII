@@ -5,7 +5,6 @@ from flask import Blueprint
 from flask_jwt_extended import jwt_required
 from app.controllers import Faculty_controller
 
-
 route_facu = Blueprint('faculty', __name__, url_prefix='/faculty')
 
 @route_facu.route('/create', methods=['POST'])
@@ -34,8 +33,7 @@ def show_faculty_by_id():
     university_id = request.args.get('universityId')  # Obtiene el parámetro de la URL
     return Faculty_controller.showID(university_id)
 
-
-# Nueva ruta para obtener facultades con detalles de la universidad
+# obtener facultades con detalles de la universidad
 @route_facu.route('/showAllWithUniversity', methods=['GET'])
 @jwt_required()
 def show_all_faculties_with_university():

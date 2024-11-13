@@ -1,3 +1,4 @@
+#controllers/Faculty_controller.py
 from flask import request, jsonify
 from flask_jwt_extended import jwt_required
 from app.models.Faculty import Faculty
@@ -98,29 +99,3 @@ def showAllWithUniversity():
     ]
 
     return jsonify(result), 200
-
-# # mostrar facultades con detalles de la universidad
-# @jwt_required()
-# def showAllWithUniversity():
-#     faculties_with_university = db.session.query(
-#         Faculty.facultyId,
-#         Faculty.facultyName,
-#         Faculty.facultyType,
-#         University.universityName,
-#         University.uniCountry,
-#         University.uniSede
-#     ).join(University, Faculty.universityId == University.universityId).all()
-
-#     result = [
-#         {
-#             "facultyId": row[0],
-#             "facultyName": row[1],
-#             "facultyType": row[2],
-#             "universityName": row[3],
-#             "uniCountry": row[4],
-#             "uniSede": row[5]
-#         }
-#         for row in faculties_with_university
-#     ]
-
-#     return jsonify(result), 200

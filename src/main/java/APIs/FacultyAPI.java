@@ -50,6 +50,8 @@ public class FacultyAPI implements APIClient {
         String token = TokenManager.getInstance().getToken();
         return HttpHelper.sendGetRequest(BASE_URL + "showAllWithUniversity", Faculty.class, token);
     }
+     @Override
+    public <T> T getById(String id, String token) throws IOException {return null;}
 
 //    // (POST) Crear una facultad
 //    public boolean createFaculty(String jsonBody, String token) {

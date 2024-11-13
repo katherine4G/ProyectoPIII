@@ -1,5 +1,7 @@
 package controller;
 
+import Manage.UserSession;
+import Model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -131,6 +133,7 @@ public class InterTeacherController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         // TODO
     }    
 
@@ -150,8 +153,7 @@ public class InterTeacherController implements Initializable {
         App.getStage().setWidth(624); 
         App.getStage().setHeight(512); 
         App.getStage().setResizable(false); 
-    }
-        
+    }       
     public void switchForm(ActionEvent event) {
 
         if (event.getSource() == btn_viewProfile) {
@@ -217,6 +219,14 @@ public class InterTeacherController implements Initializable {
     @FXML
     private void viewProfile(ActionEvent event) {
         switchForm(event);
+        User user = UserSession.getCurrentUser();
+
+        if (user != null) {
+            String u = user.getIdUser();  
+            if (u != null && !u.isEmpty()) { label_InfoUser.setText(user.toString());}
+            else {label_InfoUser.setText("ID de usuario vacío.");}
+            
+        } else {label_InfoUser.setText("No hay usuario en sesión.");}
     }
 
     @FXML

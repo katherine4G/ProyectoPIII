@@ -13,7 +13,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HttpHelper {
+    
+    public static <T> T sendGetRequestById(String url, Class<T> clazz, String token) throws IOException {
+            HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Authorization", "Bearer " + token);  // Suponiendo que estás usando JWT
+            connection.setConnectTimeout(5000);
+            connection.setReadTimeout(5000);
 
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                InputStreamReader reader = new InputStreamReader(connection.getInputStream());
+                return new Gson().fromJson(reader, clazz);
+            } else {
+                throw new IOException("Error en la solicitud GET");
+            }
+    }
     public static boolean sendPostRequest(String url, String jsonBody, String token) {
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
@@ -60,27 +74,6 @@ public class HttpHelper {
         return result;
     }
 
-    public static <T> T sendGetRequestById(String url, Class<T> clazz, String token) throws IOException {
-        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-        connection.setRequestMethod("GET");
-        connection.setRequestProperty("Accept", "application/json");
-        connection.setRequestProperty("Authorization", "Bearer " + token);
-
-        int responseCode = connection.getResponseCode();
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"))) {
-                StringBuilder response = new StringBuilder();
-                String responseLine;
-                while ((responseLine = br.readLine()) != null) {
-                    response.append(responseLine.trim());
-                }
-                return new Gson().fromJson(response.toString(), clazz);
-            }
-        } else {
-            System.out.println("Error al obtener el recurso: " + responseCode);
-            return null;
-        }
-    }
 
     public static boolean sendDeleteRequest(String url, String token, String jsonBody) {
         try {
@@ -122,25 +115,4 @@ public class HttpHelper {
             return false;
         }
     }
-
-//    public static boolean sendPutRequest(String url, String jsonBody, String token) {
-//        try {
-//            HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-//            connection.setRequestMethod("PUT");
-//            connection.setRequestProperty("Content-Type", "application/json");
-//            connection.setRequestProperty("Authorization", "Bearer " + token);
-//            connection.setDoOutput(true);
-//
-//            try (OutputStream os = connection.getOutputStream()) {
-//                byte[] input = jsonBody.getBytes(StandardCharsets.UTF_8);
-//                os.write(input, 0, input.length);
-//            }
-//
-//            int responseCode = connection.getResponseCode();
-//            return responseCode == HttpURLConnection.HTTP_OK;
-//        } catch (IOException e) {
-//            System.out.println("Error en solicitud PUT: " + e.getMessage());
-//            return false;
-//        }
-//    }
 }

@@ -9,6 +9,7 @@ public class User {
     private String password;
     private Role role; 
 
+    public User(){}
     public User(String idUser, String nameUser, String lastName, String email, String password, Role role) {
         this.idUser = idUser;
         this.nameUser = nameUser;
@@ -32,12 +33,12 @@ public class User {
     public void setRole(Role role) { this.role = role; }
     @Override
     public String toString() {
-        return "User{" +
-                "cédula='" + idUser + '\'' +
-                ", Nombre='" + nameUser + '\'' +
-                ", Apellidos='" + lastName + '\'' +
-                ", correo='" + email + '\'' +
-                '}';
+        return "\n" +
+                "  Cédula: " + idUser + "\n\n" +
+                "  Nombre: " + nameUser + "\n\n" +
+                "  Apellidos: " + lastName + "\n\n" +
+                "  Correo: " + email;
     }
+
 
 }
