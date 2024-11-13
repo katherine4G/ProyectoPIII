@@ -28,11 +28,11 @@ public class UniversityAPI implements APIClient {
         return HttpHelper.sendGetRequestById(url, University.class, token);
     }
 
-@Override
-public boolean delete(String jsonBody, String token) {
-    String url = BASE_URL + "delete";
-    return HttpHelper.sendDeleteRequest(url, token, jsonBody); 
-}
+    @Override
+    public boolean delete(String jsonBody, String token) {
+        String url = BASE_URL + "delete";
+        return HttpHelper.sendDeleteRequest(url, token, jsonBody); 
+    }
 
     @Override
     public boolean update(int id, String jsonBody, String token) {

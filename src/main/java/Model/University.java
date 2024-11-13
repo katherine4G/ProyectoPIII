@@ -4,6 +4,7 @@ package Model;
  *
  * @author kathe
  */
+
 public class University {
     protected int universityId;
     protected String universityName;
@@ -58,5 +59,17 @@ public class University {
     public void setUniAdress(String uniAdress) {
         this.uniAdress = uniAdress;
     }
+    
+    @Override
+    public String toString() {
+        return "University{" +
+                "universityId=" + universityId +
+                ", universityName='" + universityName + '\'' +
+                ", uniCountry='" + uniCountry + '\'' +
+                ", uniSede='" + uniSede + '\'' +
+                ", uniAdress='" + uniAdress + '\'' +
+                '}';
+    }
+
     
 }

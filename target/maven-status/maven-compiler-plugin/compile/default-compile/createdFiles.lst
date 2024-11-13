@@ -30,4 +30,3 @@ Model\Role.class
 APIs\TelegramBot.class
 Manage\UserManager.class
 Model\ManualReview.class
-APIs\FacultyAPI$1.class

@@ -13,7 +13,7 @@ public class APIClientFactory {
         switch (resource.toLowerCase()) {
             //case "user"  -> {return new UserAPI();}
             case "university" -> {return new UniversityAPI();}
-            // case "faculty" -> {return new FacultyAPI();}
+            case "faculty" -> {return new FacultyAPI();}
  
             // tdos los casos  department, Course.....
                 

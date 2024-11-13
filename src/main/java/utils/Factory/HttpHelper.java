@@ -34,31 +34,56 @@ public class HttpHelper {
             return false;
         }
     }
+public static <T> List<T> sendGetRequest(String url, Class<T> clazz, String token) throws IOException {
+    List<T> result = new ArrayList<>();
+    HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+    connection.setRequestMethod("GET");
+    connection.setRequestProperty("Accept", "application/json");
+    connection.setRequestProperty("Authorization", "Bearer " + token);
 
-    public static <T> List<T> sendGetRequest(String url, Class<T> clazz, String token) throws IOException {
-        List<T> result = new ArrayList<>();
-        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-        connection.setRequestMethod("GET");
-        connection.setRequestProperty("Accept", "application/json");
-        connection.setRequestProperty("Authorization", "Bearer " + token);
-
-        int responseCode = connection.getResponseCode();
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"))) {
-                StringBuilder response = new StringBuilder();
-                String responseLine;
-                while ((responseLine = br.readLine()) != null) {
-                    response.append(responseLine.trim());
-                }
-
-                result = new Gson().fromJson(response.toString(),
-                        TypeToken.getParameterized(List.class, clazz).getType());
+    int responseCode = connection.getResponseCode();
+    if (responseCode == HttpURLConnection.HTTP_OK) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"))) {
+            StringBuilder response = new StringBuilder();
+            String responseLine;
+            while ((responseLine = br.readLine()) != null) {
+                response.append(responseLine.trim());
             }
-        } else {
-            throw new IOException("Error al obtener datos: " + responseCode);
+
+            // Usamos Gson para deserializar a la lista de facultades
+            result = new Gson().fromJson(response.toString(),
+                    TypeToken.getParameterized(List.class, clazz).getType());
         }
-        return result;
+    } else {
+        throw new IOException("Error al obtener datos: " + responseCode);
     }
+    return result;
+}
+
+//    public static <T> List<T> sendGetRequest(String url, Class<T> clazz, String token) throws IOException {
+//        List<T> result = new ArrayList<>();
+//        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+//        connection.setRequestMethod("GET");
+//        connection.setRequestProperty("Accept", "application/json");
+//        connection.setRequestProperty("Authorization", "Bearer " + token);
+//
+//        int responseCode = connection.getResponseCode();
+//        if (responseCode == HttpURLConnection.HTTP_OK) {
+//            try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"))) {
+//                StringBuilder response = new StringBuilder();
+//                String responseLine;
+//                while ((responseLine = br.readLine()) != null) {
+//                    response.append(responseLine.trim());
+//                }
+//
+//                result = new Gson().fromJson(response.toString(),
+//                        TypeToken.getParameterized(List.class, clazz).getType());
+//            }
+//        } else {
+//            throw new IOException("Error al obtener datos: " + responseCode);
+//        }
+//        return result;
+//    }
 
     public static <T> T sendGetRequestById(String url, Class<T> clazz, String token) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
