@@ -1,27 +1,19 @@
 package controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import org.json.JSONException;
-import org.json.JSONObject;
 import pack.universityplatform.App;
-import utils.TokenManager;
+import utils.Command.CommandInvoker;
+import utils.Command.Login;
 
 public class MainController implements Initializable {
 
@@ -46,79 +38,17 @@ public class MainController implements Initializable {
 
     @FXML
     private void getNextPage(ActionEvent event) throws IOException {
- String userId = txt_userId.getText();
-    String password = PassTxt_password.getText();
-    String selectedRole = comboBoxRol.getValue();
+        String userId = txt_userId.getText();
+        String password = PassTxt_password.getText();
+        String selectedRole = comboBoxRol.getValue();
 
-    if (userId.isEmpty() || password.isEmpty() || selectedRole == null) {
-        showAlert(AlertType.WARNING, "Form Error!", "Please fill in all fields.");
-        return;
+        Login loginCommand = new Login(userId, password, selectedRole);
+
+        CommandInvoker invoker = new CommandInvoker();
+        invoker.setCommand(loginCommand);
+        invoker.executeCommand();
     }
 
-    // Crear el JSON con los datos de login
-    JSONObject loginJson = new JSONObject();
-    loginJson.put("password", password);
-    loginJson.put("id_user", userId);
-
-    System.out.println("Login Request: " + loginJson.toString());
-
-    // Hacer la solicitud POST al servidor para iniciar sesión
-    URL url = new URL("http://localhost:5000/auth/login");
-    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-    connection.setRequestMethod("POST");
-    connection.setRequestProperty("Content-Type", "application/json");
-    connection.setDoOutput(true);
-
-    // Envia los datos
-    try (OutputStream os = connection.getOutputStream()) {
-        byte[] input = loginJson.toString().getBytes(StandardCharsets.UTF_8);
-        os.write(input, 0, input.length);
-    }
-
-    int responseCode = connection.getResponseCode();
-    if (responseCode == HttpURLConnection.HTTP_OK) {
-
-        StringBuilder response = new StringBuilder();
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-        }
-
-        // obtener el token
-        String responseMessage = response.toString();
-        try {
-            JSONObject responseObject = new JSONObject(responseMessage);
-
-            // Verificar si el campo token y role_id existen
-            if (responseObject.has("access_token") && responseObject.has("role_id")) {
-                String token = responseObject.getString("access_token");
-                
-                // Guardar el token utilizando el Singleton
-                TokenManager.getInstance().setToken(token); 
-
-                // Obtener el rol del usuario desde la respuesta
-                int roleId = responseObject.getInt("role_id");
-
-                // Verificar si el rol seleccionado coincide con el roleId del servidor
-                if (roleId == getRoleIdFromComboBox(selectedRole)) {
-                    // Redirigir según el rol
-                    loadUserDashboard(roleId); 
-                } else {
-                    showAlert(AlertType.ERROR, "Role Mismatch", "The selected role does not match the user's role.");
-                }
-            } else {
-                showAlert(AlertType.ERROR, "Login Failed", "Unexpected response format from server.");
-            }
-
-        } catch (JSONException e) {
-            showAlert(AlertType.ERROR, "Login Failed", "Error processing server response: " + e.getMessage());
-        }
-    } else {
-        showAlert(AlertType.ERROR, "Login Failed", "Invalid user ID or password.");
-    }
-    }
 
     @FXML
     private void createAccount(ActionEvent event) throws IOException {
@@ -126,12 +56,7 @@ public class MainController implements Initializable {
 
     }
 
-    private void showAlert(AlertType type, String title, String content) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
+
 
     @FXML
     private void get_passwordUser(ActionEvent event) {
@@ -143,76 +68,5 @@ public class MainController implements Initializable {
 
     }
 
-    private void loadUserDashboard(int roleId) throws IOException {
-        switch (roleId) {
-            case 1 ->
-                App.setRoot("InterAdmin");
-            case 2 ->
-                App.setRoot("InterTeacher");
-            case 3 ->
-                App.setRoot("InterStudent");
-            default -> {
-                showAlert(AlertType.WARNING, "Role Error", "Invalid role for user.");
-                return;
-            }
-        }
 
-        App.getStage().setWidth(900);
-        App.getStage().setHeight(800);
-        App.getStage().setResizable(true);
-    }
-
-    private int getRoleIdFromComboBox(String role) {
-        switch (role) {
-            case "Administrativo":
-                return 1;
-            case "Profesor":
-                return 2;
-            case "Estudiante":
-                return 3;
-            default:
-                return -1; // Rol no válido
-        }
-    }
 }
-
-//    @FXML
-//    private void getNextPage(ActionEvent event) throws IOException {
-//        
-//         String userType = comboBoxRol.getValue();
-//
-//        if ( userType == null) {
-//            showAlert(AlertType.WARNING, "Form Error!", "Please fill in all fields.");
-//            return;
-//        }
-//        
-//        loadUserDashboard(userType);    
-//    }
-//
-//    private void loadUserDashboard(String userType) throws IOException {
-//        
-//        switch (userType) {
-//            case "Estudiante" -> {
-//                App.setRoot("InterStudent");
-//                App.getStage().setWidth(900); 
-//                App.getStage().setHeight(800); 
-//                App.getStage().setResizable(true); 
-//               // App.getStage().setMaximized(true);  // Pantalla completa solo para estudiante
-//            }
-//            case "Profesor" -> {
-//                App.setRoot("InterTeacher");
-//               // App.getStage().setMaximized(true);  // Pantalla completa solo para profesor
-//                App.getStage().setWidth(900); // Establecer el ancho deseado
-//                App.getStage().setHeight(800); // Establecer la altura deseada
-//                App.getStage().setResizable(true); // 
-//            }
-//            case "Administrativo" -> {
-//                App.setRoot("InterAdmin");
-//                //App.getStage().setMaximized(true); // Pantalla completa solo para administrativo
-//                App.getStage().setWidth(900); // Establecer el ancho deseado
-//                App.getStage().setHeight(800); // Establecer la altura deseada
-//                App.getStage().setResizable(true); //
-//            }
-//            default -> throw new IllegalArgumentException("Unexpected value: " + userType);
-//        }
-//    }
