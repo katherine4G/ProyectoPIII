@@ -1,5 +1,3 @@
-
-# routes/faculty_route.py
 from urllib import request
 from flask import Blueprint
 from flask_jwt_extended import jwt_required
@@ -33,7 +31,6 @@ def show_faculty_by_id():
     university_id = request.args.get('universityId')  # Obtiene el parámetro de la URL
     return Faculty_controller.showID(university_id)
 
-# obtener facultades con detalles de la universidad
 @route_facu.route('/showAllWithUniversity', methods=['GET'])
 @jwt_required()
 def show_all_faculties_with_university():

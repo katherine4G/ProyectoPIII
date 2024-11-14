@@ -1,4 +1,3 @@
-# model/Faculty.py
 from app import db
 from app.models.University import University
 

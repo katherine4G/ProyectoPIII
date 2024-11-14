@@ -44,6 +44,7 @@ A Flask Starter Kit following the MVC pattern for rapidly building small applica
 5.1. set FLASK_ENV=development
 6. Run application -- `flask run`
 7. Go to [localhost:5000](http://localhost:5000) to see the welcome page
+Para crear : crafter route --name user
 
 ## User 
 - The starter kit includes a `user` resource (implemented with flask-login) to get you started.

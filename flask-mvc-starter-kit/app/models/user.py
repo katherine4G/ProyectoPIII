@@ -1,5 +1,3 @@
-
-# app/models/user.py
 from app import db
 from app.models.Role import Role  # Importar la clase Role
 
