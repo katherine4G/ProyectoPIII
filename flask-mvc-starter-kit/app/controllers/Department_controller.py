@@ -101,46 +101,26 @@ def showAllWithFaculty():
     return jsonify(result), 200
 
 @jwt_required()
-#@route_dept.route('/showAllWithFacultyAndUniversity', methods=['GET'])
 def showAllWithFacultyAndUniversity():
-    faculties_with_university = db.session.query(Faculty).join(University).all()
+    departments = db.session.query(Department).join(Faculty).join(University).all()
 
     result = [
         {
-            "facultyId": faculty.facultyId,
-            "facultyName": faculty.facultyName,
-            "facultyType": faculty.facultyType,
-            "university": faculty.university.to_dict() if faculty.university else None
+            "idDepartment": department.idDepartment,
+            "nameDepartment": department.nameDepartment,
+            "faculty": {
+                "facultyId": department.faculty.facultyId,
+                "facultyName": department.faculty.facultyName,
+                "facultyType": department.faculty.facultyType,
+                "university": {
+                    "universityId": department.faculty.university.universityId,
+                    "universityName": department.faculty.university.universityName,
+                    "uniCountry": department.faculty.university.uniCountry,
+                    "uniSede": department.faculty.university.uniSede,
+                }
+            } if department.faculty and department.faculty.university else None
         }
-        for faculty in faculties_with_university
+        for department in departments
     ]
-
     return jsonify(result), 200
 
-# def showAllWithFacultyAndUniversity():
-#     # Realiza la consulta uniendo las tres tablas: Department, Faculty, y University
-#     departments_with_faculty_university = (
-#         db.session.query(Department)
-#         .join(Faculty, Department.facultyId == Faculty.facultyId)
-#         .join(University, Faculty.universityId == University.idUniversity)
-#         .all()
-#     )
-
-#     # Construye el resultado con los datos del departamento, facultad, y universidad
-#     result = [
-#         {
-#             "idDepartment": department.idDepartment,
-#             "nameDepartment": department.nameDepartment,
-#             "faculty": {
-#                 "idFaculty": department.faculty.facultyId,
-#                 "nameFaculty": department.faculty.nameFaculty,
-#                 "university": {
-#                     "idUniversity": department.faculty.university.idUniversity,
-#                     "nameUniversity": department.faculty.university.nameUniversity,
-#                 }
-#             }
-#         }
-#         for department in departments_with_faculty_university
-#     ]
-
-#     return jsonify(result), 200

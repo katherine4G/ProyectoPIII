@@ -1,6 +1,6 @@
 package APIs;
 
-import Model.Department;
+import Model.Course;
 import java.io.IOException;
 import java.util.List;
 import utils.Factory.APIClient;
@@ -21,26 +21,18 @@ public class CourseAPI implements APIClient {
     }
 
     @Override
-    public List<Department> getAll() throws IOException {
+    public List<Course> getAll() throws IOException {
         String token = TokenManager.getInstance().getToken();
-        return HttpHelper.sendGetRequest(BASE_URL + "showAll", Department.class, token);
-    }
-
-    public List<Department> showAllWithFaculty() throws IOException {
-        String token = TokenManager.getInstance().getToken();
-        return HttpHelper.sendGetRequest(BASE_URL + "showAllWithFaculty", Department.class, token);
-    }
-
-    public List<Department> showAllWithFacultyAndUniversity() throws IOException {
-        String token = TokenManager.getInstance().getToken();
-        return HttpHelper.sendGetRequest(BASE_URL + "showAllWithFacultyAndUniversity", Department.class, token);
+        return HttpHelper.sendGetRequest(BASE_URL + "showAll", Course.class, token);
     }
 
     @Override
-    public Department getById(int departmentId, String token) throws IOException {
-        String url = BASE_URL + "showID?departmentId=" + departmentId;
-        return HttpHelper.sendGetRequestById(url, Department.class, token);
+    public <T> T getById(String NRC, String token) throws IOException {
+        return (T) HttpHelper.sendGetRequestById(BASE_URL + "showID?NRC=" + NRC, Course.class, token);      
     }
+    
+    @Override
+    public Course getById(int departmentId, String token) throws IOException { return null;}
 
     @Override
     public boolean delete(String jsonBody, String token) {
@@ -54,6 +46,4 @@ public class CourseAPI implements APIClient {
         return HttpHelper.sendPutRequest(url, jsonBody, token);
     }
 
-    @Override
-    public <T> T getById(String id, String token) throws IOException { return null;}
 }

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package APIs;
 
 import Model.Department;
@@ -42,8 +39,8 @@ public class DepartmentAPI implements APIClient {
     }
 
     @Override
-    public Department getById(int departmentId, String token) throws IOException {
-        String url = BASE_URL + "showID?departmentId=" + departmentId;
+    public Department getById(int idDepartment, String token) throws IOException {
+        String url = BASE_URL + "showID?idDepartment=" + idDepartment;
         return HttpHelper.sendGetRequestById(url, Department.class, token);
     }
 

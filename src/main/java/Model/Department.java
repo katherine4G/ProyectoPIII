@@ -1,15 +1,13 @@
 package Model;
 
 /**
- *@ManyToOne(fetch = FetchType.LAZY)
- *@JoinColumn(name = "faculty_id")
+
  * @author kathe
  */
 
 public class Department {
     private int idDepartment;
-    private String nameDepartment;
-    
+    private String nameDepartment;   
     private Faculty faculty;
 
     public Department(int idDepartment, String nameDepartment, Faculty faculty) {

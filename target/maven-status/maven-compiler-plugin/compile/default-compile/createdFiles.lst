@@ -5,6 +5,7 @@ APIs\FacultyAPI.class
 controller\SingInController.class
 Manage\UserSession.class
 utils\TokenManager.class
+APIs\RegistrationRequestAPI.class
 Model\Department.class
 pack\universityplatform\App.class
 Model\EnrollmentProfessor.class
@@ -13,8 +14,10 @@ controller\ExampleController.class
 APIs\TelegramBot.class
 Manage\UserManager.class
 Model\ManualReview.class
+APIs\Enrollment_studentAPI.class
 utils\ChildThread.class
 utils\Factory\APIClientFactory.class
+APIs\AssignmentAPI.class
 utils\MessagesToUser.class
 utils\Factory\HttpHelper.class
 controller\InterAdminController.class
@@ -30,9 +33,13 @@ utils\Command\Login.class
 utils\Factory\APIClient.class
 Model\EnrollmentStudent.class
 Model\User.class
+APIs\StudentGroupAPI.class
 Model\Course.class
 Model\StudentGroup.class
 Model\Role.class
+APIs\CourseAPI.class
+APIs\SubmissionAPI.class
 utils\Command\Command.class
 utils\Command\CreateAccount.class
 utils\Command\CommandInvoker.class
+APIs\Enrollment_professorAPI.class
