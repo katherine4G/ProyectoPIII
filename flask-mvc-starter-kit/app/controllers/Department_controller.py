@@ -2,6 +2,7 @@ from flask import request, jsonify
 from flask_jwt_extended import jwt_required
 from app.models.Department import Department
 from app.models.Faculty import Faculty
+from app.models.University import University
 from app import db
 
 @jwt_required()
@@ -20,7 +21,8 @@ def create():
 
         new_department = Department(
             nameDepartment=nameDepartment,
-            facultyId=facultyId
+           # facultyId=facultyId
+             faculty=faculty
         )
         db.session.add(new_department)
         db.session.commit()
@@ -97,3 +99,48 @@ def showAllWithFaculty():
     ]
 
     return jsonify(result), 200
+
+@jwt_required()
+#@route_dept.route('/showAllWithFacultyAndUniversity', methods=['GET'])
+def showAllWithFacultyAndUniversity():
+    faculties_with_university = db.session.query(Faculty).join(University).all()
+
+    result = [
+        {
+            "facultyId": faculty.facultyId,
+            "facultyName": faculty.facultyName,
+            "facultyType": faculty.facultyType,
+            "university": faculty.university.to_dict() if faculty.university else None
+        }
+        for faculty in faculties_with_university
+    ]
+
+    return jsonify(result), 200
+
+# def showAllWithFacultyAndUniversity():
+#     # Realiza la consulta uniendo las tres tablas: Department, Faculty, y University
+#     departments_with_faculty_university = (
+#         db.session.query(Department)
+#         .join(Faculty, Department.facultyId == Faculty.facultyId)
+#         .join(University, Faculty.universityId == University.idUniversity)
+#         .all()
+#     )
+
+#     # Construye el resultado con los datos del departamento, facultad, y universidad
+#     result = [
+#         {
+#             "idDepartment": department.idDepartment,
+#             "nameDepartment": department.nameDepartment,
+#             "faculty": {
+#                 "idFaculty": department.faculty.facultyId,
+#                 "nameFaculty": department.faculty.nameFaculty,
+#                 "university": {
+#                     "idUniversity": department.faculty.university.idUniversity,
+#                     "nameUniversity": department.faculty.university.nameUniversity,
+#                 }
+#             }
+#         }
+#         for department in departments_with_faculty_university
+#     ]
+
+#     return jsonify(result), 200

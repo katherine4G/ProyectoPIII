@@ -22,6 +22,7 @@ controller\MainController.class
 APIs\UserAPI.class
 Model\AutoCorrection.class
 animations\AnimatiosUtils.class
+APIs\DepartmentAPI.class
 controller\InterTeacherController.class
 Model\Assignment.class
 controller\InterStudentController.class
