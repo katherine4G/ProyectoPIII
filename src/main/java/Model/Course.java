@@ -10,12 +10,14 @@ public class Course {
     private String NRC;
     private String codeCourse; 
     private String nameCourse;
+    private Department department; 
 
 
-    public Course(String NRC, String codeCourse, String nameCourse) {
+    public Course(String NRC, String codeCourse, String nameCourse, Department department) {
         this.NRC = NRC;
         this.codeCourse = codeCourse;
         this.nameCourse = nameCourse;
+        this.department = department;
     }
     
     public String getNRC() {
@@ -40,12 +42,18 @@ public class Course {
     public void setNameCourse(String nameCourse) {
         this.nameCourse = nameCourse;
     }
-       @Override
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    @Override
     public String toString() {
-        return "Course{" +
-                "NRC='" + NRC + '\'' +
-                ", código='" + codeCourse + '\'' +
-                ", Nombre='" + nameCourse + '\'' +
-                '}';
+        return "Department [NRC=" + NRC + ", codeCourse=" + codeCourse + ",nameCourse="+
+               ", course=" + (department != null ? department.toString() : "null") + "]";
     }
 }

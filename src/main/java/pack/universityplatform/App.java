@@ -29,39 +29,14 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-    // Método para obtener el Stage actual
     public static Stage getStage() {
         return primaryStage;
     }
 
     public static void main(String[] args) {
-       
-//        // Obtener la instancia del Singleton MySqlConn
-//        MySqlConn dbConnection = MySqlConn.getInstance();
-//
-//        // Conectar a la base de datos
-//        Connection connection = dbConnection.connectDb();
-//
-//        // Verificar si la conexión fue exitosa
-//        if (connection != null) {
-//            System.out.println("Conexión a la base de datos establecida exitosamente.");
-//        } else {
-//            System.out.println("Error al establecer la conexión a la base de datos.");
-//        }
-//        
-        
          launch();
-
-        // Cerrar la conexión al terminar
-        //dbConnection.closeConnection();
     }
 
-
-
-//    public static void main(String[] args) {
-//          
-//        launch();
-//    }
 }
 
 //package pack.universityplatform;

@@ -33,3 +33,7 @@ def show_department_by_id():
 @jwt_required()
 def show_all_departments_with_faculty():
     return Department_controller.showAllWithFaculty()
+
+@route_dept.route('/showAllWithFacultyAndUniversity', methods=['GET'])
+def show_all_with_faculty_and_university():
+    return Department_controller.showAllWithFacultyAndUniversity()

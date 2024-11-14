@@ -1,5 +1,6 @@
 package utils.Factory;
 
+import APIs.DepartmentAPI;
 import APIs.FacultyAPI;
 import APIs.UniversityAPI;
 import APIs.UserAPI;
@@ -15,6 +16,8 @@ public class APIClientFactory {
             case "user"  -> {return new UserAPI();}
             case "university" -> {return new UniversityAPI();}
             case "faculty" -> {return new FacultyAPI();}
+            case "department" -> {return new DepartmentAPI();}
+
             //...
                 
             default -> throw new IllegalArgumentException("API Client no disponible para: " + resource);
