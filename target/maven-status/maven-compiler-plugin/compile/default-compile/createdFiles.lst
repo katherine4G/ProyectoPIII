@@ -10,7 +10,6 @@ Model\Department.class
 pack\universityplatform\App.class
 Model\EnrollmentProfessor.class
 Model\RegistrationRequest.class
-controller\ExampleController.class
 APIs\TelegramBot.class
 Manage\UserManager.class
 Model\ManualReview.class
@@ -24,7 +23,6 @@ controller\InterAdminController.class
 controller\MainController.class
 APIs\UserAPI.class
 Model\AutoCorrection.class
-animations\AnimatiosUtils.class
 APIs\DepartmentAPI.class
 controller\InterTeacherController.class
 Model\Assignment.class

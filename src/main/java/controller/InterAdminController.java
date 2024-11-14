@@ -9,7 +9,6 @@ import Model.Department;
 import Model.Faculty;
 import Model.University;
 import Model.User;
-import animations.AnimatiosUtils;
 import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.net.URL;
