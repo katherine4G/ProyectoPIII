@@ -29,7 +29,7 @@ def show_all_faculties():
 @route_facu.route('/showID', methods=['GET'])
 @jwt_required()
 def show_faculty_by_id():
-    university_id = request.args.get('universityId')  # Obtiene el parámetro de la URL
+    university_id = request.args.get('universityId')  
     return Faculty_controller.showID(university_id)
 
 @route_facu.route('/showAllWithUniversity', methods=['GET'])

@@ -1,5 +1,5 @@
 from app import db
-from app.models.Role import Role  # Importar la clase Role
+from app.models.Role import Role
 
 from werkzeug.security import generate_password_hash
 
@@ -27,7 +27,7 @@ class User(db.Model):
             lastName=lastName,
             email=email,
             password=hashed_password,
-            role_id=role_id  # Asignación directa del role_id
+            role_id=role_id 
         )
         db.session.add(new_user)
         db.session.commit()
@@ -39,6 +39,5 @@ class User(db.Model):
             "nameUser ": self.nameUser ,
             "lastName": self.lastName,
             "email": self.email,
-            # No incluyas la contraseña por razones de seguridad
             "role_id": self.role_id
         }

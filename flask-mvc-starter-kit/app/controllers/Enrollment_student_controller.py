@@ -63,6 +63,16 @@ def update():
         return jsonify({"Error": -1, "msg": "ID y todos los nuevos valores son necesarios"}), 400
 
     try:
+        # Verificar si el nuevo id_student existe
+        student = User.query.get(new_id_student)
+        if not student:
+            return jsonify({"Error": -1, "msg": "El ID del estudiante no existe"}), 400
+
+        # Verificar si el nuevo NRC existe
+        course = Course.query.get(new_NRC)
+        if not course:
+            return jsonify({"Error": -1, "msg": "El NRC no existe"}), 400
+
         enrollment = EnrollmentStudent.query.get(enroll_studentId)
         if not enrollment:
             return jsonify({"Error": -1, "msg": "Inscripción no encontrada"}), 404
@@ -70,11 +80,11 @@ def update():
         enrollment.id_student = new_id_student
         enrollment.NRC = new_NRC
 
-        with db.session.begin():
-            db.session.merge(enrollment)
+        db.session.commit()
 
         return jsonify({"code": 1, "msg": "Inscripción actualizada exitosamente", "enrollment": enrollment.to_dict()}), 200
     except Exception as e:
+        db.session.rollback()
         print(f"Error al actualizar la inscripción: {e}")
         return jsonify({"Error": -1, "msg": "Error al actualizar la inscripción"}), 500
 

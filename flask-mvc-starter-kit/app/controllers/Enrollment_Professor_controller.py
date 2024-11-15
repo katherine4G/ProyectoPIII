@@ -63,6 +63,16 @@ def update():
         return jsonify({"Error": -1, "msg": "ID y todos los nuevos valores son necesarios"}), 400
 
     try:
+        # Verificar si el nuevo id_professor existe
+        professor = User.query.get(new_id_professor)
+        if not professor:
+            return jsonify({"Error": -1, "msg": "El ID del profesor no existe"}), 400
+
+        # Verificar si el nuevo NRC existe
+        course = Course.query.get(new_NRC)
+        if not course:
+            return jsonify({"Error": -1, "msg": "El NRC no existe"}), 400
+
         enrollment = Enrollment_Professor.query.get(enroll_profeId)
         if not enrollment:
             return jsonify({"Error": -1, "msg": "Inscripción del profesor no encontrada"}), 404
@@ -70,14 +80,14 @@ def update():
         enrollment.id_professor = new_id_professor
         enrollment.NRC = new_NRC
 
-        with db.session.begin():
-            db.session.merge(enrollment)
+        db.session.commit()
 
         return jsonify({"code": 1, "msg": "Inscripción del profesor actualizada exitosamente", "enrollment": enrollment.to_dict()}), 200
     except Exception as e:
+        db.session.rollback()
         print(f"Error al actualizar la inscripción del profesor: {e}")
         return jsonify({"Error": -1, "msg": "Error al actualizar la inscripción del profesor"}), 500
-
+    
 @jwt_required()
 def showAll():
     try:
@@ -95,7 +105,7 @@ def showID():
         return jsonify({"Error": -1, "msg": "ID necesario"}), 400
 
     try:
-        enroll_profeId = int(enroll_profeId)  # Asegúrate de convertir a entero
+        enroll_profeId = int(enroll_profeId) 
     except ValueError:
         return jsonify({"Error": -1, "msg": "ID debe ser un número entero"}), 400
 

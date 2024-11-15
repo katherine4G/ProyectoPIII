@@ -21,7 +21,6 @@ def create():
 
         new_department = Department(
             nameDepartment=nameDepartment,
-           # facultyId=facultyId
              faculty=faculty
         )
         db.session.add(new_department)

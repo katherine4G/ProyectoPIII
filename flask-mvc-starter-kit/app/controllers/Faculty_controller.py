@@ -1,4 +1,3 @@
-#controllers/Faculty_controller.py
 from flask import request, jsonify
 from flask_jwt_extended import jwt_required
 from app.models.Faculty import Faculty
@@ -118,31 +117,3 @@ def show_faculties_by_university(universityId):
 
     return jsonify(result), 200
 
-# @jwt_required()
-# def showAllWithUniversity():
-#     # Obtener los parámetros de paginación de la solicitud
-#     page = request.args.get('page', 1, type=int)  # Página actual, valor predeterminado es 1
-#     per_page = request.args.get('per_page', 10, type=int)  # Número de facultades por página, valor predeterminado es 10
-
-#     # Consultar las facultades con universidad asociada y aplicar paginación
-#     faculties_with_university = db.session.query(Faculty).join(University).paginate(page, per_page, False)
-
-#     # Crear una lista de diccionarios con la información de cada facultad y universidad
-#     result = [
-#         {
-#             "facultyId": faculty.facultyId,
-#             "facultyName": faculty.facultyName,
-#             "facultyType": faculty.facultyType,
-#             "university": faculty.university.to_dict() if faculty.university else None
-#         }
-#         for faculty in faculties_with_university.items
-#     ]
-
-#     # Devolver la respuesta con la información de paginación
-#     return jsonify({
-#         'faculties': result,
-#         'total': faculties_with_university.total,  # Total de facultades
-#         'pages': faculties_with_university.pages,  # Número total de páginas
-#         'current_page': faculties_with_university.page,  # Página actual
-#         'per_page': faculties_with_university.per_page  # Elementos por página
-#     }), 200

@@ -1,7 +1,5 @@
-# app/routes/user_route.py
-
 from flask import Blueprint
-from app.controllers.user_controller import create_user, get_user, get_all_users, login, delete_user  # Añadir delete_user
+from app.controllers.user_controller import create_user, get_user, get_all_users, login, delete_user
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -21,7 +19,6 @@ def get_single_user(id_user):
 def list_users():
     return get_all_users()
 
-# Nueva ruta para eliminar un usuario por ID
 @auth_bp.route('/user/delete/<string:id_user>', methods=['DELETE'])
 def remove_user(id_user):
     return delete_user(id_user)

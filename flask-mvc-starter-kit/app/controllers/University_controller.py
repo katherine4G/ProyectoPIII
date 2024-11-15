@@ -1,4 +1,3 @@
-# controller/University_controller.py
 from flask import request, jsonify
 from flask_jwt_extended import jwt_required
 from app.models.University import University
@@ -40,7 +39,7 @@ def delete():
         return jsonify({"Error": -1, "msg": "ID necesario"}), 400
 
     try:
-        with db.session.begin():  # Manejo automático de la sesión
+        with db.session.begin(): 
             university = db.session.merge(University.query.get(university_id))
             if not university:
                 return jsonify({"Error": -1, "msg": "Universidad no encontrada"}), 404
@@ -66,12 +65,11 @@ def update():
         return jsonify({"Error": -1, "msg": "ID y todos los nuevos valores son necesarios"}), 400
 
     try:
-        with db.session.begin():  # Manejo automático de la sesión
+        with db.session.begin(): 
             university = University.query.get(university_id)
             if not university:
                 return jsonify({"Error": -1, "msg": "Universidad no encontrada"}), 404
 
-            # Actualizar todos los campos
             university.universityName = new_name
             university.uniCountry = new_country
             university.uniSede = new_sede
@@ -79,7 +77,6 @@ def update():
 
             db.session.merge(university)  # Sincroniza con la sesión
 
-        # Opcional: Realiza una consulta para verificar si los cambios fueron aplicados
         updated_university = University.query.get(university_id)
         return jsonify({"code": 1, "msg": "Universidad actualizada exitosamente", "university": updated_university.to_dict()}), 200
 
@@ -114,7 +111,7 @@ def showPaginated():
 
         paginated_universities = University.query.paginate(page=page, per_page=per_page, error_out=False)
 
-        universities = [university.to_dict() for university in paginated_universities.items] #unis en pag actual
+        universities = [university.to_dict() for university in paginated_universities.items] 
 
         response = {
             "page": paginated_universities.page,
