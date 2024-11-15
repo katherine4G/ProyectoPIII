@@ -2,11 +2,14 @@ package controller;
 
 import APIs.CourseAPI;
 import APIs.DepartmentAPI;
+import APIs.Enrollment_professorAPI;
 import APIs.FacultyAPI;
 import APIs.UniversityAPI;
 import Manage.UserSession;
 import Model.Course;
 import Model.Department;
+import Model.Enrollment_professor;
+import Model.Enrollment_student;
 import Model.Faculty;
 import Model.University;
 import Model.User;
@@ -188,45 +191,45 @@ public class InterAdminController implements Initializable {
     @FXML
     private TableColumn<Course, String> col_course_universityName;
     @FXML
-    private TableView<?> tableView_professors;
+    private TableView<Enrollment_professor> tableView_professors;
     @FXML
-    private TableColumn<?, ?> col_profe_id;
+    private TableColumn<Enrollment_professor, String> col_profe_id;
     @FXML
-    private TableColumn<?, ?> col_profe_name;
+    private TableColumn<Enrollment_professor, String> col_profe_name;
     @FXML
-    private TableColumn<?, ?> col_profe_lastName;
+    private TableColumn<Enrollment_professor, String> col_profe_lastName;
     @FXML
-    private TableColumn<?, ?> col_profe_email;
+    private TableColumn<Enrollment_professor, String> col_profe_email;
     @FXML
-    private TableColumn<?, ?> col_profe_course;
+    private TableColumn<Enrollment_professor, String> col_profe_course;
     @FXML
-    private TableColumn<?, ?> col_profe_university;
+    private TableColumn<Enrollment_professor, String> col_profe_university;
     @FXML
-    private TableColumn<?, ?> col_profe_faculty;
+    private TableColumn<Enrollment_professor, String> col_profe_faculty;
     @FXML
-    private TableColumn<?, ?> col_profe_department;
+    private TableColumn<Enrollment_professor, String> col_profe_department;
     @FXML
     private TextField txt_profe_serchBy;
     @FXML
-    private ComboBox<?> comboBox_profe_showCourses;
+    private ComboBox<String> comboBox_profe_showCourses;
     @FXML
-    private ComboBox<?> comboBox_profe_serchByVariable;
+    private ComboBox<String> comboBox_profe_serchByVariable;
     @FXML
     private ComboBox<String> comboBox_profe_showUniversities;
     @FXML
-    private ComboBox<?> comboBox_profe_showFacultyByUniversity;
+    private ComboBox<String> comboBox_profe_showFacultyByUniversity;
     @FXML
-    private ComboBox<?> comboBox_profe_showDepartmentByFacultyByUni;
+    private ComboBox<String> comboBox_profe_showDepartmentByFacultyByUni;
     @FXML
     private ComboBox<String> comboBox_student_showUniversities;
     @FXML
-    private ComboBox<?> comboBox_student_showFacultyByUniversity;
+    private ComboBox<String> comboBox_student_showFacultyByUniversity;
     @FXML
-    private ComboBox<?> comboBox_student_showDepartmentByFacultyByUni1;
+    private ComboBox<String> comboBox_student_showDepartmentByFacultyByUni1;
     @FXML
     private ComboBox<String> comboBox_student_showCourses1;
     @FXML
-    private ComboBox<?> comboBox_student_serchByVariable;
+    private ComboBox<String> comboBox_student_serchByVariable;
     @FXML
     private TextField txt_profesor_id;
     @FXML
@@ -244,19 +247,19 @@ public class InterAdminController implements Initializable {
     @FXML
     private AnchorPane AnchorPane_allStudents;
     @FXML
-    private TableView<?> TableView_students;
+    private TableView<Enrollment_student> TableView_students;
     @FXML
-    private TableColumn<?, ?> col_students_id;
+    private TableColumn<Enrollment_student, String> col_students_id;
     @FXML
-    private TableColumn<?, ?> col_students_name;
+    private TableColumn<Enrollment_student, String> col_students_name;
     @FXML
-    private TableColumn<?, ?> col_students_lastName;
+    private TableColumn<Enrollment_student, String> col_students_lastName;
     @FXML
-    private TableColumn<?, ?> col_students_email;
+    private TableColumn<Enrollment_student, String> col_students_email;
     @FXML
-    private TableColumn<?, ?> col_students_nameUniversity;
+    private TableColumn<Enrollment_student, String> col_students_nameUniversity;
     @FXML
-    private TableColumn<?, ?> col_students_universitySede;
+    private TableColumn<Enrollment_student, String> col_students_universitySede;
     @FXML
     private Button btn_student_viewStudentCourse;
     @FXML
@@ -268,7 +271,7 @@ public class InterAdminController implements Initializable {
     @FXML
     private Label txt_student_selectToViewCourses;
     @FXML
-    private ListView<?> ListView_student_courses;
+    private ListView<String> ListView_student_courses;
     @FXML
     private TextField txt_student_id;
     @FXML
@@ -333,6 +336,7 @@ public class InterAdminController implements Initializable {
     FacultyAPI facultyAPI = new FacultyAPI();
     DepartmentAPI departmentAPI =new DepartmentAPI();
     CourseAPI courseAPI =new CourseAPI();
+    Enrollment_professorAPI enrollment_professorAPI = new Enrollment_professorAPI();
 
     private Map<String, Integer> universityMap = new HashMap<>();
     private Map<String, Integer> facultyMap = new HashMap<>();
@@ -353,28 +357,63 @@ public class InterAdminController implements Initializable {
 
     ///////////////////////Professors//////////////////////////////////
     @FXML
-    private void createTeacher(ActionEvent event) { //para moverse entre ventanas(anchors Pane)
+    private void createTeacher(ActionEvent event) throws IOException { //para moverse entre ventanas(anchors Pane)
         switchForm(event);
+        loadEnrollment_professor(); 
+        showTableView_enroll_profe();
     }
 
+    @FXML
+    private void profe_create_inside(ActionEvent event) {
+        //comboBox selcción
+        String selectedUni = comboBox_profe_showUniversities.getSelectionModel().getSelectedItem();
+        Integer idUni = departmentMap.get(selectedUni);
+        String selectedFaculty = comboBox_profe_showFacultyByUniversity.getSelectionModel().getSelectedItem();
+        Integer idFaculty = departmentMap.get(selectedFaculty);
+        String selectedDepa = comboBox_profe_showDepartmentByFacultyByUni.getSelectionModel().getSelectedItem();
+        Integer idDepa = departmentMap.get(selectedDepa);
+        String selectedCourse = comboBox_profe_showCourses.getSelectionModel().getSelectedItem();
+        Integer idCourse = departmentMap.get(selectedCourse);
+        //lenar los textField
+        String idProf = txt_profesor_id.getText();
+        String nameProf = txt_profesor_names.getText();
+        String lastNameProf = txt_profesor_lastName.getText();
+        String emailProf = txt_profesor_email.getText(); 
+    }
+    
+    @FXML
+    private void profe_edit_inside(ActionEvent event) {
+    }
+
+    @FXML
+    private void profe_delete_inside(ActionEvent event) {
+    }
     @FXML
     private void profe_serchBy(ActionEvent event) {
     }
 
     @FXML
     private void profe_serchByVariable(ActionEvent event) {
+        
+    }
+//    public void loadEnrollment_professor() throws IOException {
+//       LoadDataThread<Enrollment_professor> loadDataThread = new LoadDataThread<>(tableView_professors, enrollment_professorAPI, message);
+//       loadDataThread.start(); 
+//    }
+    public void loadEnrollment_professor() throws IOException {
+        List<Enrollment_professor> enrollmentProfessors = enrollment_professorAPI.getLoadData();  // Asegúrate de que este método esté funcionando correctamente.
+        tableView_professors.getItems().setAll(enrollmentProfessors); 
     }
 
-    @FXML
-    private void profe_delete_inside(ActionEvent event) {
-    }
-
-    @FXML
-    private void profe_edit_inside(ActionEvent event) {
-    }
-
-    @FXML
-    private void profe_create_inside(ActionEvent event) {
+    private void showTableView_enroll_profe() {
+        col_profe_id.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId_professor() != null ? cellData.getValue().getId_professor().getIdUser() : "No asignado"));
+        col_profe_name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId_professor() != null ? cellData.getValue().getId_professor().getNameUser() : "No asignado"));
+        col_profe_lastName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId_professor() != null ? cellData.getValue().getId_professor().getLastName() : "No asignado"));
+        col_profe_email.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId_professor() != null ? cellData.getValue().getId_professor().getEmail() : "No asignado"));
+        col_profe_course.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNRC() != null ? cellData.getValue().getNRC().getNRC() : "No asignado"));
+        col_profe_university.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNRC() != null && cellData.getValue().getNRC().getDepartment() != null && cellData.getValue().getNRC().getDepartment().getFaculty() != null && cellData.getValue().getNRC().getDepartment().getFaculty().getUniversity() != null ? cellData.getValue().getNRC().getDepartment().getFaculty().getUniversity().getUniversityName() : "No asignado"));
+        col_profe_faculty.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNRC() != null && cellData.getValue().getNRC().getDepartment() != null && cellData.getValue().getNRC().getDepartment().getFaculty() != null? cellData.getValue().getNRC().getDepartment().getFaculty().getFacultyName() : "No asignado"));
+        col_profe_department.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNRC() != null && cellData.getValue().getNRC().getDepartment() != null ? cellData.getValue().getNRC().getDepartment().getNameDepartment() : "No asignado"));
     }
 
     ///////////////////////Students//////////////////////////////////
@@ -429,7 +468,6 @@ public class InterAdminController implements Initializable {
         App.getStage().setHeight(512);
         App.getStage().setResizable(false);
     }
-
     public void switchForm(ActionEvent event) {
         if (event.getSource() == btn_myProfile){myProfile_form.setVisible(true);University_form.setVisible(false); Faculty_form.setVisible(false); Department_form.setVisible(false); Course_form.setVisible(false); Teacher_form.setVisible(false);  Student_form.setVisible(false); viewSolis_form.setVisible(false);}
         else if (event.getSource() == btn_createUniversity) { myProfile_form.setVisible(false); University_form.setVisible(true); Faculty_form.setVisible(false); Department_form.setVisible(false); Course_form.setVisible(false); Teacher_form.setVisible(false);Student_form.setVisible(false);viewSolis_form.setVisible(false);}
@@ -672,16 +710,19 @@ public class InterAdminController implements Initializable {
         }
     }
     public void loadFaculties() throws IOException {
-//        LoadDataThread<Faculty> loadDataThread = new LoadDataThread<>(TableViewFaculty, facultyAPI, message);
-//       loadDataThread.start(); 
-        BaseAPI<Faculty> facultyAPI = new FacultyAPI();
-        loadDataThread = new LoadDataThread<>(TableViewFaculty, facultyAPI, message, currentPage, pageSize);
+       LoadDataThread<Faculty> loadDataThread = new LoadDataThread<>(TableViewFaculty, facultyAPI, message);
+       loadDataThread.start(); 
+    //     LoadDataThread<Faculty> loadDataThread = new LoadDataThread<>(TableViewFaculty, facultyAPI, message);
+    //     loadDataThread.start(); 
+    //     BaseAPI<Faculty> facultyAPI = new FacultyAPI();
+    //     loadDataThread = new LoadDataThread<>(TableViewFaculty, facultyAPI, message, currentPage, pageSize);
 
-//        btn_facu_getPrevTable.setOnAction(event -> goToPreviousPage());
-//        btn_facu_getNextTable.setOnAction(event -> goToNextPage());
+     //    btn_facu_getPrevTable.setOnAction(event -> goToPreviousPage());
+     //    btn_facu_getNextTable.setOnAction(event -> goToNextPage());
 
-        loadDataThread.setPage(currentPage);//
-        loadDataThread.start();
+     //    loadDataThread.setPage(currentPage);//
+     //    loadDataThread.start();
+        
     }
 
     private String createFacultyJsonCrear(String facultyName, String facultyType, int universityId) {
@@ -929,7 +970,7 @@ public class InterAdminController implements Initializable {
                 List<String> faculties = facultiesByUniversityMap.getOrDefault(newValue, new ArrayList<>());
                 comboBox_department_showFacultyByUniversity.setItems(FXCollections.observableArrayList(faculties));}});
     }
-       ///////////////////////Courses//////////////////////////////////
+    ///////////////////////Courses//////////////////////////////////
     @FXML
     private void createCourses(ActionEvent event) throws IOException {  //para moverse entre ventanas(anchors Pane)
         switchForm(event);
@@ -1076,9 +1117,6 @@ public class InterAdminController implements Initializable {
         if (NRC.length() > 5) {message.showErrorMessage("Error", "El NRC no puede tener más de 5 dígitos.");return;}
         if (NRC.length() < 0) {message.showErrorMessage("Error", "El NRC no puede tener menos de 5 dígitos.");return;}
     }
-    
-
-
     @FXML
     private void facu_getPrevTable(ActionEvent event) {
     }

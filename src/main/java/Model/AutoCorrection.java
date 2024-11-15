@@ -1,25 +1,19 @@
 package Model;
 
-/**
- *
- * @author kathe
- */
-public class AutoCorrection {
+public final class AutoCorrection {
     private int autoCorrectionId;
-    private int submissionId;  // Relacionado con la entrega de la tarea
-    private double grade;  // Nota generada automáticamente
-    private String comments;  // Comentarios generados automáticamente
+    private Submission submissionId;
+    private double grade; // Nota generada automáticamente
+    private String comments; // Comentarios generados automáticamente
 
     public AutoCorrection() {}
 
-    public AutoCorrection(int autoCorrectionId, int submissionId, double grade, String comments) {
+    public AutoCorrection(int autoCorrectionId, Submission submissionId, double grade, String comments) {
         this.autoCorrectionId = autoCorrectionId;
         this.submissionId = submissionId;
-        this.grade = grade;
+        this.setGrade(grade);
         this.comments = comments;
     }
-
-    // Getters y Setters
     public int getAutoCorrectionId() {
         return autoCorrectionId;
     }
@@ -28,11 +22,11 @@ public class AutoCorrection {
         this.autoCorrectionId = autoCorrectionId;
     }
 
-    public int getSubmissionId() {
+    public Submission getSubmissionId() {
         return submissionId;
     }
 
-    public void setSubmissionId(int submissionId) {
+    public void setSubmissionId(Submission submissionId) {
         this.submissionId = submissionId;
     }
 
@@ -41,6 +35,9 @@ public class AutoCorrection {
     }
 
     public void setGrade(double grade) {
+        if (grade < 0 || grade > 100) {
+            throw new IllegalArgumentException("calificación inválida");
+        }
         this.grade = grade;
     }
 

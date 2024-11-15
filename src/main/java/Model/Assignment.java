@@ -1,32 +1,43 @@
 package Model;
 
 /**
- *
+ *CREATE TABLE Assignment (
+  assignmentId INT AUTO_INCREMENT PRIMARY KEY,
+  NRC VARCHAR(20),                             
+  id_professor VARCHAR(50),                             
+  title VARCHAR(255) NOT NULL,                 
+  description TEXT,                            
+  due_date DATE,                               
+  file_path VARCHAR(255),                       -- Ruta del archivo de la asignación
+  groupId INT,                                  -- Relación con el grupo
+  FOREIGN KEY (id_professor) REFERENCES User(id_user) ON DELETE CASCADE,
+  FOREIGN KEY (NRC) REFERENCES Course(NRC) ON DELETE CASCADE,
+  FOREIGN KEY (groupId) REFERENCES StudentGroup(groupId) ON DELETE CASCADE
+);
  * @author kathe
  */
 public class Assignment {
-    private int assignmentId;
-    private String NRC;  // Relacionado con el curso
-    private String idProfessor;  // Relacionado con el profesor
-    private String title;  // Título de la asignación
-    private String description;  // Descripción de la tarea
-    private String dueDate;  // Fecha límite para entregar
-    private int groupId;  // Relacionado con el grupo
+   private int assignmentId;
+    private Course NRC;
+    private User id_professor;
+    private String title;
+    private String description;
+    private String due_date;
+    private String file_path;
+    private StudentGroup groupId;
 
-    // Constructor vacío y con parámetros
-    public Assignment() {}
-
-    public Assignment(int assignmentId, String NRC, String idProfessor, String title, String description, String dueDate, int groupId) {
+    public Assignment(int assignmentId, Course NRC, User id_professor, String title, String description, String due_date, String file_path, StudentGroup groupId) {
         this.assignmentId = assignmentId;
         this.NRC = NRC;
-        this.idProfessor = idProfessor;
+        this.id_professor = id_professor;
         this.title = title;
         this.description = description;
-        this.dueDate = dueDate;
+        this.due_date = due_date;
+        this.file_path = file_path;
         this.groupId = groupId;
     }
+     public Assignment(){}
 
-    // Getters y Setters
     public int getAssignmentId() {
         return assignmentId;
     }
@@ -35,20 +46,20 @@ public class Assignment {
         this.assignmentId = assignmentId;
     }
 
-    public String getNRC() {
+    public Course getNRC() {
         return NRC;
     }
 
-    public void setNRC(String NRC) {
+    public void setNRC(Course NRC) {
         this.NRC = NRC;
     }
 
-    public String getIdProfessor() {
-        return idProfessor;
+    public User getId_professor() {
+        return id_professor;
     }
 
-    public void setIdProfessor(String idProfessor) {
-        this.idProfessor = idProfessor;
+    public void setId_professor(User id_professor) {
+        this.id_professor = id_professor;
     }
 
     public String getTitle() {
@@ -67,32 +78,28 @@ public class Assignment {
         this.description = description;
     }
 
-    public String getDueDate() {
-        return dueDate;
+    public String getDue_date() {
+        return due_date;
     }
 
-    public void setDueDate(String dueDate) {
-        this.dueDate = dueDate;
+    public void setDue_date(String due_date) {
+        this.due_date = due_date;
     }
 
-    public int getGroupId() {
+    public String getFile_path() {
+        return file_path;
+    }
+
+    public void setFile_path(String file_path) {
+        this.file_path = file_path;
+    }
+
+    public StudentGroup getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(int groupId) {
+    public void setGroupId(StudentGroup groupId) {
         this.groupId = groupId;
     }
-
-    @Override
-    public String toString() {
-        return "Assignment{" +
-                "assignmentId=" + assignmentId +
-                ", NRC='" + NRC + '\'' +
-                ", idProfessor='" + idProfessor + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", dueDate='" + dueDate + '\'' +
-                ", groupId=" + groupId +
-                '}';
-    }
+     
 }

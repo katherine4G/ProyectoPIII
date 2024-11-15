@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
 /**
@@ -10,13 +6,13 @@ package Model;
  */
 public class StudentGroup {
     private int groupId;
-    private String NRC;  // Relacionado con el curso
-    private String groupName;  // Nombre del grupo
-    private String idProfessor;  // Relacionado con el profesor
+    private Course NRC;  
+    private String groupName;
+    private User idProfessor; 
 
     public StudentGroup() {}
 
-    public StudentGroup(int groupId, String NRC, String groupName, String idProfessor) {
+    public StudentGroup(int groupId, Course NRC, String groupName, User idProfessor) {
         this.groupId = groupId;
         this.NRC = NRC;
         this.groupName = groupName;
@@ -32,11 +28,11 @@ public class StudentGroup {
         this.groupId = groupId;
     }
 
-    public String getNRC() {
+    public Course getNRC() {
         return NRC;
     }
 
-    public void setNRC(String NRC) {
+    public void setNRC(Course NRC) {
         this.NRC = NRC;
     }
 
@@ -48,11 +44,11 @@ public class StudentGroup {
         this.groupName = groupName;
     }
 
-    public String getIdProfessor() {
+    public User getIdProfessor() {
         return idProfessor;
     }
 
-    public void setIdProfessor(String idProfessor) {
+    public void setIdProfessor(User idProfessor) {
         this.idProfessor = idProfessor;
     }
 

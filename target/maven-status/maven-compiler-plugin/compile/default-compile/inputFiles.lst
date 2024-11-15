@@ -5,7 +5,6 @@ C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\utils\Thread\BaseAPI.j
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\APIs\RegistrationRequestAPI.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\utils\ChildThread.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\utils\Thread\ClearFieldsThread.java
-C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\Model\EnrollmentProfessor.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\utils\Command\CommandInvoker.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\APIs\UniversityAPI.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\APIs\StudentGroupAPI.java
@@ -17,11 +16,12 @@ C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\APIs\Enrollment_profes
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\Model\StudentGroup.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\utils\Factory\APIClient.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\APIs\TelegramBot.java
+C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\Model\Enrollment_student.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\controller\InterAdminController.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\Model\Course.java
+C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\Model\Enrollment_professor.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\controller\SingInController.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\APIs\Enrollment_studentAPI.java
-C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\Model\EnrollmentStudent.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\APIs\SubmissionAPI.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\utils\Factory\APIClientFactory.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\utils\TokenManager.java
@@ -36,6 +36,7 @@ C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\utils\Command\Login.ja
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\Model\ManualReview.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\Model\Role.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\Model\AutoCorrection.java
+C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\Model\Submission.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\Manage\UserManager.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\Model\RegistrationRequest.java
 C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\java\controller\MainController.java

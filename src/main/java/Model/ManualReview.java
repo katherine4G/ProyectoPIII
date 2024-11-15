@@ -1,24 +1,36 @@
 package Model;
 
+import java.sql.Timestamp;
+
 /**
- *
+ * Representación de la tabla 'ManualReview' en la base de datos.
+ * 
+ * CREATE TABLE ManualReview (
+ *    reviewId INT AUTO_INCREMENT PRIMARY KEY,
+ *    submissionId INT,                      -- Referencia a la tarea entregada
+ *    id_professor VARCHAR(50),              -- Referencia al profesor que revisó
+ *    grade DECIMAL(5,2),                    -- Calificación manual
+ *    comments TEXT,                          -- Comentarios manuales
+ *    reviewDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha de la revisión
+ *    FOREIGN KEY (submissionId) REFERENCES Submission(submissionId) ON DELETE CASCADE,
+ *    FOREIGN KEY (id_professor) REFERENCES User(id_user) ON DELETE CASCADE
+ * );
+ * 
  * @author kathe
  */
 public class ManualReview {
     private int reviewId;
-    private int submissionId;  // Relacionado con la entrega de la tarea
-    private String idProfessor;  // Relacionado con el profesor que revisa
-    private double grade;  // Calificación manual
-    private String comments;  // Comentarios manuales
-    private String reviewDate;  // Fecha de la revisión
+    private Submission submissionId;   
+    private User id_professor;  
+    private double grade;   
+    private String comments;            // Comentarios del profesor
+    private Timestamp reviewDate;       // Fecha de la revisión
 
-    // Constructor vacío y con parámetros
-    public ManualReview() {}
-
-    public ManualReview(int reviewId, int submissionId, String idProfessor, double grade, String comments, String reviewDate) {
+    // Constructor
+    public ManualReview(int reviewId, Submission submissionId, User id_professor, double grade, String comments, Timestamp reviewDate) {
         this.reviewId = reviewId;
         this.submissionId = submissionId;
-        this.idProfessor = idProfessor;
+        this.id_professor = id_professor;
         this.grade = grade;
         this.comments = comments;
         this.reviewDate = reviewDate;
@@ -33,20 +45,20 @@ public class ManualReview {
         this.reviewId = reviewId;
     }
 
-    public int getSubmissionId() {
+    public Submission getSubmissionId() {
         return submissionId;
     }
 
-    public void setSubmissionId(int submissionId) {
+    public void setSubmissionId(Submission submissionId) {
         this.submissionId = submissionId;
     }
 
-    public String getIdProfessor() {
-        return idProfessor;
+    public User getId_professor() {
+        return id_professor;
     }
 
-    public void setIdProfessor(String idProfessor) {
-        this.idProfessor = idProfessor;
+    public void setId_professor(User id_professor) {
+        this.id_professor = id_professor;
     }
 
     public double getGrade() {
@@ -65,23 +77,24 @@ public class ManualReview {
         this.comments = comments;
     }
 
-    public String getReviewDate() {
+    public Timestamp getReviewDate() {
         return reviewDate;
     }
 
-    public void setReviewDate(String reviewDate) {
+    public void setReviewDate(Timestamp reviewDate) {
         this.reviewDate = reviewDate;
     }
 
+    // Método toString() para representar el objeto en formato legible
     @Override
     public String toString() {
         return "ManualReview{" +
                 "reviewId=" + reviewId +
                 ", submissionId=" + submissionId +
-                ", idProfessor='" + idProfessor + '\'' +
+                ", id_professor=" + id_professor +
                 ", grade=" + grade +
                 ", comments='" + comments + '\'' +
-                ", reviewDate='" + reviewDate + '\'' +
+                ", reviewDate=" + reviewDate +
                 '}';
     }
 }

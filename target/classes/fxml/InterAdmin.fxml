@@ -665,7 +665,7 @@ C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\resources\css
                         </AnchorPane>
                         <AnchorPane fx:id="Department_form" layoutX="10.0" layoutY="10.0" prefHeight="509.3333333333333" prefWidth="598.0" style="-fx-background-color: #007399;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <HBox layoutX="26.0" layoutY="348.0" prefHeight="318.0" prefWidth="757.0">
+                              <HBox layoutX="26.0" layoutY="348.0" prefHeight="295.0" prefWidth="765.0">
                                  <children>
                                     <TableView fx:id="TableViewDepartment" prefHeight="318.0" prefWidth="775.0">
                                        <columns>
@@ -715,55 +715,56 @@ C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\resources\css
                                     <Font name="Bell MT" size="17.0" />
                                  </font>
                               </Label>
-                              <Pagination fx:id="Pagination_Department" layoutX="320.0" layoutY="666.0" maxPageIndicatorCount="3" pageCount="10" prefHeight="42.0" prefWidth="121.0" />
+                              <Pagination fx:id="Pagination_Department" layoutX="338.0" layoutY="643.0" maxPageIndicatorCount="3" pageCount="10" prefHeight="42.0" prefWidth="121.0" />
+                              <Button fx:id="btn_faculty_seccionarTabla1" layoutX="625.0" layoutY="647.0" mnemonicParsing="false" onAction="#faculty_seleccionarTabla" prefHeight="36.0" prefWidth="166.0" text="Seleccionar" />
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="Course_form" layoutX="10.0" layoutY="10.0" prefHeight="519.3333333333334" prefWidth="608.0" style="-fx-background-color: #007399;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Pane layoutX="82.0" layoutY="34.0" prefHeight="345.0" prefWidth="656.0" style="-fx-background-color: #cceeff;">
+                              <Pane layoutX="24.0" layoutY="34.0" prefHeight="345.0" prefWidth="777.0" style="-fx-background-color: #cceeff;">
                                  <children>
-                                    <ComboBox fx:id="comboBox_Courses_showUniversities" layoutX="26.0" layoutY="84.0" prefHeight="25.0" prefWidth="258.0" promptText="Universidad" />
-                                    <ComboBox fx:id="comboBox_Course_showFacultyByUniversity" layoutX="26.0" layoutY="186.0" prefHeight="25.0" prefWidth="257.0" promptText="Facultad" />
-                                    <Label layoutX="26.0" layoutY="46.0" text="Seleccione la Universidad a la  que pertenece" />
-                                    <Label layoutX="26.0" layoutY="60.0" text="el Curso" />
-                                    <Label layoutX="25.0" layoutY="138.0" text="Seleccione la Facultad a la " />
-                                    <Label layoutX="25.0" layoutY="152.0" text="que pertenece el curso:" />
-                                    <ComboBox fx:id="comboBox_Course_showDepartmentByFacultyByUni" layoutX="26.0" layoutY="281.0" prefHeight="25.0" prefWidth="259.0" promptText="Departamento" />
-                                    <Label layoutX="26.0" layoutY="237.0" text="Seleccione el Departamento al que" />
-                                    <Label layoutX="26.0" layoutY="251.0" text="pertenece el Curso:" />
-                                    <TextField fx:id="txt_course_NRC" layoutX="342.0" layoutY="71.0" prefHeight="25.0" prefWidth="185.0" promptText="ej: 20390" />
-                                    <Label layoutX="346.0" layoutY="24.0" prefHeight="17.0" prefWidth="100.0" text="NRC :" />
-                                    <HBox layoutX="381.0" layoutY="291.0" prefHeight="34.0" prefWidth="244.0">
+                                    <ComboBox fx:id="comboBox_Courses_showUniversities" layoutX="49.0" layoutY="91.0" prefHeight="25.0" prefWidth="258.0" promptText="Universidad" />
+                                    <ComboBox fx:id="comboBox_Course_showFacultyByUniversity" layoutX="49.0" layoutY="193.0" prefHeight="25.0" prefWidth="257.0" promptText="Facultad" />
+                                    <Label layoutX="49.0" layoutY="53.0" text="Seleccione la Universidad a la  que pertenece" />
+                                    <Label layoutX="49.0" layoutY="67.0" text="el Curso" />
+                                    <Label layoutX="48.0" layoutY="145.0" text="Seleccione la Facultad a la " />
+                                    <Label layoutX="48.0" layoutY="159.0" text="que pertenece el curso:" />
+                                    <ComboBox fx:id="comboBox_Course_showDepartmentByFacultyByUni" layoutX="49.0" layoutY="288.0" prefHeight="25.0" prefWidth="259.0" promptText="Departamento" />
+                                    <Label layoutX="49.0" layoutY="244.0" text="Seleccione el Departamento al que" />
+                                    <Label layoutX="49.0" layoutY="258.0" text="pertenece el Curso:" />
+                                    <TextField fx:id="txt_course_NRC" layoutX="385.0" layoutY="74.0" prefHeight="25.0" prefWidth="185.0" promptText="ej: 20390" />
+                                    <Label layoutX="389.0" layoutY="27.0" prefHeight="17.0" prefWidth="100.0" text="NRC :" />
+                                    <HBox layoutX="460.0" layoutY="294.0" prefHeight="34.0" prefWidth="275.0">
                                        <children>
-                                          <Button fx:id="btn_course_delete_inside" mnemonicParsing="false" onAction="#course_delete_inside" prefHeight="33.0" prefWidth="87.0" text="eliminar" />
+                                          <Button fx:id="btn_course_delete_inside" mnemonicParsing="false" onAction="#course_delete_inside" prefHeight="33.0" prefWidth="101.0" text="eliminar" />
                                           <Separator orientation="VERTICAL" prefHeight="23.0" prefWidth="6.0" />
-                                          <Button fx:id="btn_course_edit_inside" mnemonicParsing="false" onAction="#course_edit_inside" prefHeight="34.0" prefWidth="75.0" text="editar" />
+                                          <Button fx:id="btn_course_edit_inside" mnemonicParsing="false" onAction="#course_edit_inside" prefHeight="34.0" prefWidth="86.0" text="editar" />
                                           <Separator orientation="VERTICAL" prefHeight="23.0" prefWidth="6.0" />
-                                          <Button fx:id="btn_course_create_inside" mnemonicParsing="false" onAction="#course_create_inside" prefHeight="33.0" prefWidth="66.0" text="crear" />
+                                          <Button fx:id="btn_course_create_inside" mnemonicParsing="false" onAction="#course_create_inside" prefHeight="33.0" prefWidth="75.0" text="crear" />
                                           <Separator orientation="VERTICAL" prefHeight="23.0" prefWidth="6.0" />
                                        </children>
                                     </HBox>
-                                    <TextField fx:id="txt_course_code" layoutX="342.0" layoutY="152.0" prefHeight="25.0" prefWidth="185.0" promptText="ej: EIF206" />
-                                    <Label layoutX="341.0" layoutY="109.0" prefHeight="17.0" prefWidth="117.0" text="Código:" />
-                                    <TextField fx:id="txt_course_nameCourse" layoutX="342.0" layoutY="226.0" prefHeight="25.0" prefWidth="187.0" />
-                                    <Label layoutX="340.0" layoutY="205.0" prefHeight="17.0" prefWidth="153.0" text="Nombre del curso:" />
-                                    <Label layoutX="343.0" layoutY="48.0" prefHeight="14.0" prefWidth="228.0" text="*Número compuesto de cinco dígitos." textFill="#343bff">
+                                    <TextField fx:id="txt_course_code" layoutX="385.0" layoutY="155.0" prefHeight="25.0" prefWidth="185.0" promptText="ej: EIF206" />
+                                    <Label layoutX="384.0" layoutY="112.0" prefHeight="17.0" prefWidth="117.0" text="Código:" />
+                                    <TextField fx:id="txt_course_nameCourse" layoutX="384.0" layoutY="228.0" prefHeight="25.0" prefWidth="258.0" />
+                                    <Label layoutX="383.0" layoutY="208.0" prefHeight="17.0" prefWidth="153.0" text="Nombre del curso:" />
+                                    <Label layoutX="386.0" layoutY="51.0" prefHeight="14.0" prefWidth="228.0" text="*Número compuesto de cinco dígitos." textFill="#343bff">
                                        <font>
                                           <Font name="Bell MT" size="12.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="342.0" layoutY="131.0" prefHeight="14.0" prefWidth="167.0" text="*Alfanumérico." textFill="#343bff">
+                                    <Label layoutX="385.0" layoutY="134.0" prefHeight="14.0" prefWidth="167.0" text="*Alfanumérico." textFill="#343bff">
                                        <font>
                                           <Font name="Bell MT" size="12.0" />
                                        </font>
                                     </Label>
-                                    <Separator layoutX="314.0" layoutY="23.0" orientation="VERTICAL" prefHeight="285.0" prefWidth="7.0" />
-                                    <Label layoutX="13.0" layoutY="15.0" prefHeight="17.0" prefWidth="61.0" text="Cursos:" />
+                                    <Separator layoutX="357.0" layoutY="26.0" orientation="VERTICAL" prefHeight="285.0" prefWidth="7.0" />
+                                    <Label layoutX="36.0" layoutY="22.0" prefHeight="17.0" prefWidth="61.0" text="Cursos:" />
                                  </children>
                               </Pane>
-                              <HBox layoutX="37.0" layoutY="399.0" prefHeight="275.0" prefWidth="746.0">
+                              <HBox layoutX="25.0" layoutY="399.0" prefHeight="268.0" prefWidth="776.0">
                                  <children>
-                                    <TableView fx:id="tableView_course" prefHeight="291.0" prefWidth="753.0">
+                                    <TableView fx:id="tableView_course" prefHeight="275.0" prefWidth="778.0">
                                        <columns>
                                           <TableColumn fx:id="col_course_NRC" prefWidth="45.33329904079437" text="NRC" />
                                           <TableColumn fx:id="col_course_codigo" prefWidth="62.00008773803711" text="código" />
@@ -779,11 +780,12 @@ C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\resources\css
                                  </children>
                               </HBox>
                               <Pagination fx:id="Pagination_Course" layoutX="350.0" layoutY="674.0" maxPageIndicatorCount="3" pageCount="10" prefHeight="42.0" prefWidth="121.0" />
+                              <Button fx:id="btn_faculty_seccionarTabla2" layoutX="637.0" layoutY="675.0" mnemonicParsing="false" onAction="#faculty_seleccionarTabla" prefHeight="36.0" prefWidth="166.0" text="Seleccionar" />
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="Teacher_form" layoutX="10.0" layoutY="10.0" prefHeight="529.3333333333334" prefWidth="618.0" style="-fx-background-color: #007399;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <VBox layoutX="15.0" layoutY="425.0" prefHeight="244.0" prefWidth="774.0">
+                              <VBox layoutX="21.0" layoutY="425.0" prefHeight="219.0" prefWidth="773.0">
                                  <children>
                                     <TableView fx:id="tableView_professors" prefHeight="315.0" prefWidth="640.0">
                                        <columns>
@@ -802,9 +804,9 @@ C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\resources\css
                                     </TableView>
                                  </children>
                               </VBox>
-                              <TextField fx:id="txt_profe_serchBy" layoutX="466.0" layoutY="389.0" onAction="#profe_serchBy" prefHeight="28.0" prefWidth="151.0" promptText="Buscar por" />
-                              <ComboBox fx:id="comboBox_profe_serchByVariable" layoutX="617.0" layoutY="387.0" onAction="#profe_serchByVariable" prefHeight="25.0" prefWidth="150.0" promptText="variable" style="-fx-background-color: #FFFFFF;" />
-                              <AnchorPane layoutX="35.0" layoutY="14.0" prefHeight="360.0" prefWidth="712.0" style="-fx-background-color: #cceeff;">
+                              <TextField fx:id="txt_profe_serchBy" layoutX="466.0" layoutY="393.0" onAction="#profe_serchBy" prefHeight="24.0" prefWidth="151.0" promptText="Buscar por" />
+                              <ComboBox fx:id="comboBox_profe_serchByVariable" layoutX="617.0" layoutY="391.0" onAction="#profe_serchByVariable" prefHeight="25.0" prefWidth="150.0" promptText="variable" style="-fx-background-color: #FFFFFF;" />
+                              <AnchorPane layoutX="20.0" layoutY="14.0" prefHeight="360.0" prefWidth="775.0" style="-fx-background-color: #cceeff;">
                                  <children>
                                     <ComboBox fx:id="comboBox_profe_showUniversities" layoutX="44.0" layoutY="60.0" prefHeight="25.0" prefWidth="275.0" promptText="Universidad" />
                                     <ComboBox fx:id="comboBox_profe_showFacultyByUniversity" layoutX="43.0" layoutY="149.0" prefHeight="25.0" prefWidth="273.0" promptText="Facultad" />
@@ -813,26 +815,26 @@ C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\resources\css
                                     <Label layoutX="43.0" layoutY="111.0" text="Seleccione la Facultad a la que pertenece " />
                                     <ComboBox fx:id="comboBox_profe_showDepartmentByFacultyByUni" layoutX="42.0" layoutY="227.0" prefHeight="25.0" prefWidth="272.0" promptText="Departamento" />
                                     <Label layoutX="43.0" layoutY="190.0" text="Seleccione el Departamento al que pertenece" />
-                                    <TextField fx:id="txt_profesor_id" layoutX="368.0" layoutY="40.0" prefHeight="25.0" prefWidth="268.0" promptText="cédula" />
-                                    <Label layoutX="367.0" layoutY="14.0" text="Número de Identificación:" />
-                                    <HBox layoutX="437.0" layoutY="309.0" prefHeight="34.0" prefWidth="244.0">
+                                    <TextField fx:id="txt_profesor_id" layoutX="418.0" layoutY="42.0" prefHeight="25.0" prefWidth="268.0" promptText="cédula" />
+                                    <Label layoutX="417.0" layoutY="16.0" text="Número de Identificación:" />
+                                    <HBox layoutX="487.0" layoutY="311.0" prefHeight="34.0" prefWidth="270.0">
                                        <children>
-                                          <Button fx:id="btn_profe_delete_inside" mnemonicParsing="false" onAction="#profe_delete_inside" prefHeight="33.0" prefWidth="87.0" text="eliminar" />
+                                          <Button fx:id="btn_profe_delete_inside" mnemonicParsing="false" onAction="#profe_delete_inside" prefHeight="33.0" prefWidth="95.0" text="eliminar" />
                                           <Separator orientation="VERTICAL" prefHeight="23.0" prefWidth="6.0" />
-                                          <Button fx:id="btn_profe_edit_inside" mnemonicParsing="false" onAction="#profe_edit_inside" prefHeight="34.0" prefWidth="75.0" text="editar" />
+                                          <Button fx:id="btn_profe_edit_inside" mnemonicParsing="false" onAction="#profe_edit_inside" prefHeight="34.0" prefWidth="84.0" text="editar" />
                                           <Separator orientation="VERTICAL" prefHeight="23.0" prefWidth="6.0" />
-                                          <Button fx:id="btn_profe_create_inside" mnemonicParsing="false" onAction="#profe_create_inside" prefHeight="33.0" prefWidth="66.0" text="crear" />
+                                          <Button fx:id="btn_profe_create_inside" mnemonicParsing="false" onAction="#profe_create_inside" prefHeight="33.0" prefWidth="69.0" text="crear" />
                                           <Separator orientation="VERTICAL" prefHeight="23.0" prefWidth="6.0" />
                                        </children>
                                     </HBox>
-                                    <TextField fx:id="txt_profesor_names" layoutX="368.0" layoutY="114.0" prefHeight="25.0" prefWidth="269.0" />
-                                    <Label layoutX="368.0" layoutY="86.0" text="Nombre completo:" />
+                                    <TextField fx:id="txt_profesor_names" layoutX="418.0" layoutY="116.0" prefHeight="25.0" prefWidth="269.0" />
+                                    <Label layoutX="418.0" layoutY="88.0" text="Nombre completo:" />
                                     <Label layoutX="44.0" layoutY="281.0" text="Nombre del curso que imparte/impartirá:" />
-                                    <Separator layoutX="350.0" layoutY="17.0" orientation="VERTICAL" prefHeight="291.0" prefWidth="6.0" />
-                                    <TextField fx:id="txt_profesor_email" layoutX="368.0" layoutY="256.0" prefHeight="25.0" prefWidth="268.0" />
-                                    <Label layoutX="367.0" layoutY="231.0" text="Correo institucional:" />
-                                    <TextField fx:id="txt_profesor_lastName" layoutX="368.0" layoutY="186.0" prefHeight="25.0" prefWidth="269.0" />
-                                    <Label layoutX="368.0" layoutY="158.0" text="Apellidos:" />
+                                    <Separator layoutX="385.0" layoutY="23.0" orientation="VERTICAL" prefHeight="291.0" prefWidth="6.0" />
+                                    <TextField fx:id="txt_profesor_email" layoutX="418.0" layoutY="258.0" prefHeight="25.0" prefWidth="268.0" />
+                                    <Label layoutX="417.0" layoutY="233.0" text="Correo institucional:" />
+                                    <TextField fx:id="txt_profesor_lastName" layoutX="418.0" layoutY="188.0" prefHeight="25.0" prefWidth="269.0" />
+                                    <Label layoutX="418.0" layoutY="160.0" text="Apellidos:" />
                                     <Label layoutX="43.0" layoutY="202.0" text="el Profesor:" />
                                     <Label layoutX="44.0" layoutY="124.0" text="el Profesor:" />
                                     <ComboBox fx:id="comboBox_profe_showCourses" layoutX="42.0" layoutY="303.0" prefHeight="25.0" prefWidth="273.0" promptText="Cursos" />
@@ -843,19 +845,20 @@ C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\resources\css
                                     <Font name="Century Gothic Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Pagination fx:id="Pagination_Professor" layoutX="338.0" layoutY="669.0" maxPageIndicatorCount="3" pageCount="10" prefHeight="16.0" prefWidth="126.0" />
+                              <Pagination fx:id="Pagination_Professor" layoutX="339.0" layoutY="644.0" maxPageIndicatorCount="3" pageCount="10" prefHeight="16.0" prefWidth="126.0" />
+                              <Button fx:id="btn_faculty_seccionarTabla3" layoutX="628.0" layoutY="648.0" mnemonicParsing="false" onAction="#faculty_seleccionarTabla" prefHeight="36.0" prefWidth="166.0" text="Seleccionar" />
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="Student_form" layoutX="10.0" layoutY="10.0" prefHeight="539.3333333333334" prefWidth="628.0" style="-fx-background-color: #007399;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <AnchorPane fx:id="AnchorPane_allStudents" layoutX="22.0" layoutY="385.0" prefHeight="297.0" prefWidth="765.0" style="-fx-background-color: #cceeff;">
+                              <AnchorPane fx:id="AnchorPane_allStudents" layoutX="22.0" layoutY="385.0" prefHeight="297.0" prefWidth="778.0" style="-fx-background-color: #cceeff;">
                                  <children>
                                     <Button fx:id="btn_student_viewStudentCourse" layoutX="8.0" layoutY="16.0" mnemonicParsing="false" onAction="#student_viewStudentCourse" prefHeight="27.0" prefWidth="155.0" text="Ver cursos del estudiante" />
-                                    <TextField fx:id="txt_student_serchBy" layoutX="354.0" layoutY="17.0" onAction="#student_serchBy" prefHeight="29.0" prefWidth="151.0" promptText="Buscar por" />
-                                    <ComboBox fx:id="comboBox_student_serchByVariable" layoutX="513.0" layoutY="20.0" onAction="#student_serchByVariable" prefHeight="23.0" prefWidth="150.0" promptText="variable" style="-fx-background-color: #FFFFFF;" />
-                                    <HBox layoutX="8.0" layoutY="57.0" prefHeight="195.0" prefWidth="750.0">
+                                    <TextField fx:id="txt_student_serchBy" layoutX="453.0" layoutY="18.0" onAction="#student_serchBy" prefHeight="21.0" prefWidth="151.0" promptText="Buscar por" />
+                                    <ComboBox fx:id="comboBox_student_serchByVariable" layoutX="614.0" layoutY="18.0" onAction="#student_serchByVariable" prefHeight="23.0" prefWidth="150.0" promptText="variable" style="-fx-background-color: #FFFFFF;" />
+                                    <HBox layoutX="8.0" layoutY="57.0" prefHeight="195.0" prefWidth="762.0">
                                        <children>
-                                          <TableView fx:id="TableView_students" prefHeight="195.0" prefWidth="746.0">
+                                          <TableView fx:id="TableView_students" prefHeight="195.0" prefWidth="760.0">
                                              <columns>
                                                 <TableColumn fx:id="col_students_id" prefWidth="27.999999403953552" text="ID" />
                                                 <TableColumn fx:id="col_students_name" prefWidth="69.9999828338623" text="Nombre" />
@@ -871,9 +874,10 @@ C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\resources\css
                                        </children>
                                     </HBox>
                                     <Pagination fx:id="Pagination_Student" layoutX="284.0" layoutY="253.0" maxPageIndicatorCount="3" pageCount="10" prefHeight="42.0" prefWidth="121.0" />
+                                    <Button fx:id="btn_faculty_seccionarTabla31" layoutX="604.0" layoutY="257.0" mnemonicParsing="false" onAction="#faculty_seleccionarTabla" prefHeight="36.0" prefWidth="166.0" text="Seleccionar" />
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="AnchorPane_students_viewCourses_of_anStudent" layoutX="22.0" layoutY="385.0" prefHeight="296.0" prefWidth="765.0" style="-fx-background-color: #cceeff;" visible="false">
+                              <AnchorPane fx:id="AnchorPane_students_viewCourses_of_anStudent" layoutX="22.0" layoutY="385.0" prefHeight="298.0" prefWidth="778.0" style="-fx-background-color: #cceeff;" visible="false">
                                  <children>
                                     <Button fx:id="btn_students_volver_ToViewAllStudents" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#students_btnBack_ToViewAll" text="Volver" />
                                     <Label layoutX="90.0" layoutY="19.0" text="Estudiante" />
@@ -882,7 +886,7 @@ C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\resources\css
                                     <Label layoutX="90.0" layoutY="54.0" text="Cursos activos matriculados:" />
                                  </children>
                               </AnchorPane>
-                              <Pane layoutX="23.0" layoutY="20.0" prefHeight="347.0" prefWidth="763.0" style="-fx-background-color: #cceeff;">
+                              <Pane layoutX="23.0" layoutY="20.0" prefHeight="347.0" prefWidth="776.0" style="-fx-background-color: #cceeff;">
                                  <children>
                                     <Label layoutX="46.0" layoutY="11.0" prefHeight="25.0" prefWidth="121.0" text="Estudiante">
                                        <font>
@@ -896,9 +900,9 @@ C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\resources\css
                                     <Label layoutX="46.0" layoutY="119.0" prefHeight="17.0" prefWidth="279.0" text="Facultad a la que pertenece el Estudiante:" />
                                     <ComboBox fx:id="comboBox_student_showDepartmentByFacultyByUni1" layoutX="54.0" layoutY="220.0" prefHeight="25.0" prefWidth="261.0" promptText="Departamento" />
                                     <Label layoutX="46.0" layoutY="191.0" prefHeight="17.0" prefWidth="308.0" text="Departamento al que pertenece el Estudiante:" />
-                                    <TextField fx:id="txt_student_id" layoutX="399.0" layoutY="44.0" prefHeight="25.0" prefWidth="268.0" promptText="cédula" />
-                                    <Label layoutX="398.0" layoutY="18.0" prefHeight="17.0" prefWidth="200.0" text="Número de Idendificación:" />
-                                    <HBox layoutX="498.0" layoutY="302.0" prefHeight="34.0" prefWidth="244.0">
+                                    <TextField fx:id="txt_student_id" layoutX="419.0" layoutY="50.0" prefHeight="25.0" prefWidth="268.0" promptText="cédula" />
+                                    <Label layoutX="418.0" layoutY="24.0" prefHeight="17.0" prefWidth="200.0" text="Número de Idendificación:" />
+                                    <HBox layoutX="518.0" layoutY="308.0" prefHeight="34.0" prefWidth="244.0">
                                        <children>
                                           <Button fx:id="btn_student_delete_inside" mnemonicParsing="false" onAction="#student_delete_inside" prefHeight="33.0" prefWidth="87.0" text="eliminar" />
                                           <Separator orientation="VERTICAL" prefHeight="23.0" prefWidth="6.0" />
@@ -908,14 +912,14 @@ C:\PROGRA_3\Laboratorios\UniversityPlatform\src\main\resources\css
                                           <Separator orientation="VERTICAL" prefHeight="23.0" prefWidth="6.0" />
                                        </children>
                                     </HBox>
-                                    <TextField fx:id="txt_student_names" layoutX="399.0" layoutY="118.0" prefHeight="25.0" prefWidth="269.0" />
-                                    <Label layoutX="399.0" layoutY="90.0" prefHeight="17.0" prefWidth="161.0" text="Nombre completo:" />
+                                    <TextField fx:id="txt_student_names" layoutX="419.0" layoutY="124.0" prefHeight="25.0" prefWidth="269.0" />
+                                    <Label layoutX="419.0" layoutY="96.0" prefHeight="17.0" prefWidth="161.0" text="Nombre completo:" />
                                     <Label layoutX="46.0" layoutY="261.0" prefHeight="17.0" prefWidth="240.0" text="Curso que matricula:" />
-                                    <Separator layoutX="354.0" layoutY="18.0" orientation="VERTICAL" prefHeight="291.0" prefWidth="6.0" />
-                                    <TextField fx:id="txt_student_email" layoutX="399.0" layoutY="260.0" prefHeight="25.0" prefWidth="268.0" />
-                                    <Label layoutX="398.0" layoutY="235.0" prefHeight="17.0" prefWidth="192.0" text="Correo institucional:" />
-                                    <TextField fx:id="txt_student_lastName" layoutX="399.0" layoutY="190.0" prefHeight="25.0" prefWidth="269.0" />
-                                    <Label layoutX="399.0" layoutY="162.0" prefHeight="17.0" prefWidth="120.0" text="Apellidos:" />
+                                    <Separator layoutX="385.0" layoutY="25.0" orientation="VERTICAL" prefHeight="291.0" prefWidth="6.0" />
+                                    <TextField fx:id="txt_student_email" layoutX="419.0" layoutY="266.0" prefHeight="25.0" prefWidth="273.0" />
+                                    <Label layoutX="418.0" layoutY="241.0" prefHeight="17.0" prefWidth="192.0" text="Correo institucional:" />
+                                    <TextField fx:id="txt_student_lastName" layoutX="419.0" layoutY="196.0" prefHeight="25.0" prefWidth="269.0" />
+                                    <Label layoutX="419.0" layoutY="168.0" prefHeight="17.0" prefWidth="120.0" text="Apellidos:" />
                                     <ComboBox fx:id="comboBox_student_showCourses1" layoutX="54.0" layoutY="289.0" prefHeight="25.0" prefWidth="260.0" promptText="Cursos" />
                                  </children>
                               </Pane>

@@ -1,32 +1,75 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
-
-/**
- *
+import java.sql.Timestamp;
+/*
+ * CREATE TABLE RegistrationRequest (
+ *    requestId INT AUTO_INCREMENT PRIMARY KEY,
+ *    id_user VARCHAR(50),                             -- ID del usuario solicitante
+ *    request_type ENUM('Profesor', 'Estudiante') NOT NULL,  -- Tipo de solicitud
+ *    status ENUM('Pendiente', 'Aceptada', 'Denegada') DEFAULT 'Pendiente', -- Estado de la solicitud
+ *    requested_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Fecha de la solicitud
+ *    FOREIGN KEY (id_user) REFERENCES User(id_user) ON DELETE CASCADE
+ * );
+ * 
  * @author kathe
  */
-public class RegistrationRequest {
-    private int requestId;
-    private int userId;  // ID del usuario solicitante
-    private String requestType;  // Tipo de solicitud ('Profesor' o 'Estudiante')
-    private String status;  // Estado de la solicitud
-    private String requestedAt;  // Fecha en la que se realizó la solicitud
-
-    // Constructor vacío y con parámetros
-    public RegistrationRequest() {}
-
-    public RegistrationRequest(int requestId, int userId, String requestType, String status, String requestedAt) {
-        this.requestId = requestId;
-        this.userId = userId;
-        this.requestType = requestType;
-        this.status = status;
-        this.requestedAt = requestedAt;
+    enum RequestType {
+       PROFESOR, ESTUDIANTE
     }
 
-    // Getters y Setters
+    enum RequestStatus {
+       PENDIENTE, ACEPTADA, DENEGADA
+    }
+
+public class RegistrationRequest {
+    private int requestId;
+    private User id_user;
+    private RequestType request_type; 
+   // private String request_type; 
+   // private String status; 
+    private RequestStatus status;
+    private Timestamp requested_at; 
+
+    public RegistrationRequest(int requestId, User id_user, RequestType request_type, RequestStatus status, Timestamp requested_at) {
+        this.requestId = requestId;
+        this.id_user = id_user;
+        this.request_type = request_type;
+        this.status = status;
+        this.requested_at = requested_at;
+    }
+
+    public User getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(User id_user) {
+        this.id_user = id_user;
+    }
+
+    public RequestType getRequest_type() {
+        return request_type;
+    }
+
+    public void setRequest_type(RequestType request_type) {
+        this.request_type = request_type;
+    }
+
+    public RequestStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(RequestStatus status) {
+        this.status = status;
+    }
+
+    public Timestamp getRequested_at() {
+        return requested_at;
+    }
+
+    public void setRequested_at(Timestamp requested_at) {
+        this.requested_at = requested_at;
+    }
+
+
     public int getRequestId() {
         return requestId;
     }
@@ -35,46 +78,30 @@ public class RegistrationRequest {
         this.requestId = requestId;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getIdUser() {
+        return id_user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setIdUser(User id_user) {
+        this.id_user = id_user;
     }
 
-    public String getRequestType() {
-        return requestType;
+    public Timestamp getRequestedAt() {
+        return requested_at;
     }
 
-    public void setRequestType(String requestType) {
-        this.requestType = requestType;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getRequestedAt() {
-        return requestedAt;
-    }
-
-    public void setRequestedAt(String requestedAt) {
-        this.requestedAt = requestedAt;
+    public void setRequestedAt(Timestamp requested_at) {
+        this.requested_at = requested_at;
     }
 
     @Override
     public String toString() {
-        return "RegistrationRequest{" +
+        return "RegistrationRequestAPI{" +
                 "requestId=" + requestId +
-                ", userId=" + userId +
-                ", requestType='" + requestType + '\'' +
+                ", id_user=" + id_user +
+                ", request_type='" + request_type + '\'' +
                 ", status='" + status + '\'' +
-                ", requestedAt='" + requestedAt + '\'' +
+                ", requested_at=" + requested_at +
                 '}';
     }
 }
