@@ -137,3 +137,33 @@ def showAllWithDepartment():
     ]
 
     return jsonify(result), 200
+
+@jwt_required()
+def getAllWithDepartmentAndFacultyAndUniversity():
+    courses = db.session.query(Course).join(Department).all()
+    result = []
+    for course in courses:
+        course_data = {
+            "NRC": course.NRC,
+            "codeCourse": course.codeCourse,
+            "nameCourse": course.nameCourse,
+            "department": None,
+            "faculty": None,
+            "university": None
+        }
+  
+        if course.department:
+            department = course.department
+            course_data["department"] = department.to_dict()
+
+            if department.faculty:
+                faculty = department.faculty
+                course_data["faculty"] = faculty.to_dict()
+
+                if faculty.university:
+                    university = faculty.university
+                    course_data["university"] = university.to_dict()
+
+        result.append(course_data)
+
+    return jsonify(result), 200

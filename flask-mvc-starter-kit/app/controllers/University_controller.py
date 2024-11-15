@@ -104,3 +104,51 @@ def showID():
         return jsonify({"Error": -1, "msg": "Universidad no encontrada"}), 404
 
     return jsonify({"code": 1, "msg": "Universidad encontrada", "university": university.to_dict()}), 200
+
+
+@jwt_required()
+def showPaginated():
+    try:
+        page = request.args.get("page", 1)
+        per_page = request.args.get("per_page", 10) #10 elementos
+
+        paginated_universities = University.query.paginate(page=page, per_page=per_page, error_out=False)
+
+        universities = [university.to_dict() for university in paginated_universities.items] #unis en pag actual
+
+        response = {
+            "page": paginated_universities.page,
+            "total_pages": paginated_universities.pages,
+            "total_items": paginated_universities.total,
+            "universities": universities
+        }
+        return jsonify(response), 200
+
+    except Exception as e:
+        print(f"Error al obtener universidades paginadas: {e}")
+        return jsonify({"Error": -1, "msg": "Error al obtener universidades"}), 500
+
+  
+@jwt_required()  
+def showPage():
+    try:
+        # Parámetros de la página y límite de elementos
+        page = int(request.args.get('page', 1))  # Página actual, por defecto la 1
+        per_page = int(request.args.get('per_page', 10))  # Elementos por página, por defecto 10
+        universities_paged = University.query.paginate(page=page, per_page=per_page, error_out=False)
+        
+        # Verificar si hay resultados y definir 'universities'
+        if universities_paged.items:
+            universities = [university.to_dict() for university in universities_paged.items]
+            return jsonify({
+                "code": 1,
+                "msg": "Universities found",
+                "universities": universities,
+                "total_pages": universities_paged.pages,
+                "current_page": universities_paged.page
+            })
+        else:
+            return jsonify({"Error": -1, "msg": "No universities found"})
+
+    except Exception as e:
+        return jsonify({"Error": -1, "msg": f"An error occurred: {e}"})

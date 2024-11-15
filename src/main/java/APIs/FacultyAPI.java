@@ -10,9 +10,9 @@ import java.io.IOException;
 import java.util.List;
 import utils.Factory.APIClient;
 import utils.Factory.HttpHelper;
+import utils.Thread.BaseAPI;
 import utils.TokenManager;
-
-public class FacultyAPI implements APIClient {
+public class FacultyAPI implements BaseAPI<Faculty>, APIClient {
 
     private static final String BASE_URL = "http://localhost:5000/faculty/"; 
 
@@ -51,7 +51,25 @@ public class FacultyAPI implements APIClient {
         return HttpHelper.sendGetRequest(BASE_URL + "showAllWithUniversity", Faculty.class, token);
     }
 
+    public List<Faculty> getPaginated(int page, int perPage, String token) throws IOException {
+        String url = BASE_URL + "showAllWithUniversity?page=" + page + "&per_page=" + perPage;
+        return HttpHelper.sendGetRequest(url, Faculty.class, token);
+    }
+
      @Override
     public <T> T getById(String id, String token) throws IOException {return null;}
+
+    @Override
+    public List<Faculty> getLoadData(int page, int pageSize) throws IOException {
+        return null; }
+    @Override
+    public List<Faculty> getLoadData() throws IOException {
+        return getAllWithUniversity();
+    }
+    public List<Faculty> getFacultiesByUniversity(int universityId) throws IOException {
+        String token = TokenManager.getInstance().getToken();
+        return HttpHelper.sendGetRequest( BASE_URL + "byUniversity/" + universityId, Faculty.class, token);
+    }
+
 
 }

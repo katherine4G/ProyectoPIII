@@ -28,3 +28,14 @@ def show_all_universities():
 @jwt_required()
 def show_university_by_id():
     return University_controller.showID()
+	
+@route.route('/showPaginated', methods=['GET'])
+@jwt_required()
+def show_paginated_universities():
+    return University_controller.showPaginated()
+
+
+@route.route('/showPage', methods=['GET'])
+@jwt_required()
+def showPage():
+    return University_controller.showPage()

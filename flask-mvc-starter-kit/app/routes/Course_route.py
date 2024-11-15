@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask_jwt_extended import jwt_required
 from app.controllers.Course_controller import (
-    create_course, delete_course, update_course, showID, show_all_courses, showAllWithDepartment
+    create_course, delete_course, update_course, showID, show_all_courses, showAllWithDepartment, getAllWithDepartmentAndFacultyAndUniversity
 )
 
 route_course = Blueprint('course', __name__, url_prefix='/course')
@@ -35,3 +35,8 @@ def get_all_courses_list():
 @jwt_required()
 def get_all_courses_with_department():
     return showAllWithDepartment()
+
+@route_course.route('/getAllWithDepartmentAndFacultyAndUniversity', methods=['GET'])
+@jwt_required()
+def get_all_courses_with_department_faculty_Universities():
+    return getAllWithDepartmentAndFacultyAndUniversity()

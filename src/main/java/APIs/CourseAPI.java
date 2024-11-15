@@ -5,13 +5,14 @@ import java.io.IOException;
 import java.util.List;
 import utils.Factory.APIClient;
 import utils.Factory.HttpHelper;
+import utils.Thread.BaseAPI;
 import utils.TokenManager;
 
 /**
  *
  * @author kathe
  */
-public class CourseAPI implements APIClient {
+public class CourseAPI implements  BaseAPI<Course>, APIClient  {
 
     private static final String BASE_URL = "http://localhost:5000/course/";
 
@@ -45,5 +46,27 @@ public class CourseAPI implements APIClient {
         String url = BASE_URL + "update";
         return HttpHelper.sendPutRequest(url, jsonBody, token);
     }
+    public boolean update(String id, String jsonBody, String token) {
+        String url = BASE_URL + "update";
+        return HttpHelper.sendPutRequest(url, jsonBody, token);
+    }
+    @Override
+    public List<Course> getLoadData(int page, int pageSize) throws IOException {       
+        String token = TokenManager.getInstance().getToken();
+        return getAllWithDepartmentAndFacultyAndUniversity(token);
+    }
 
+    @Override
+    public List<Course> getLoadData() throws IOException {
+         String token = TokenManager.getInstance().getToken();
+         return getAllWithDepartmentAndFacultyAndUniversity(token);
+      }
+
+    public List<Course> getAllWithDepartmentAndFacultyAndUniversity(String token) throws IOException {    
+        return HttpHelper.sendGetRequest(BASE_URL + "getAllWithDepartmentAndFacultyAndUniversity", Course.class, token);
+    }
+
+    public List<Course> showPage(String token,int page, int pageSize) throws IOException {    
+        return HttpHelper.sendGetRequest(BASE_URL + "showPage", Course.class, token);
+    }
 }

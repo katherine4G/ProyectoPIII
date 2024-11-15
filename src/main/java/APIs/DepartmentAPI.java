@@ -2,18 +2,18 @@
 package APIs;
 
 import Model.Department;
-import Model.Faculty;
 import java.io.IOException;
 import java.util.List;
 import utils.Factory.APIClient;
 import utils.Factory.HttpHelper;
+import utils.Thread.BaseAPI;
 import utils.TokenManager;
 
 /**
  *
  * @author kathe
  */
-public class DepartmentAPI implements APIClient {
+public class DepartmentAPI implements BaseAPI<Department>, APIClient {
 
     private static final String BASE_URL = "http://localhost:5000/department/";
 
@@ -58,4 +58,13 @@ public class DepartmentAPI implements APIClient {
 
     @Override
     public <T> T getById(String id, String token) throws IOException { return null;}
+
+    @Override
+    public List<Department> getLoadData() throws IOException {
+        return showAllWithFacultyAndUniversity();
+    }
+    
+
+    @Override
+    public List<Department> getLoadData(int page, int pageSize) throws IOException {return null; }
 }

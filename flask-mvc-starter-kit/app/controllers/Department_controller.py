@@ -124,3 +124,17 @@ def showAllWithFacultyAndUniversity():
     ]
     return jsonify(result), 200
 
+def show_faculties_by_university(university_id):
+    try:
+        university = University.query.get(university_id)
+        if not university:
+            return jsonify({"Error": -1, "msg": "Universidad no encontrada"}), 404
+        
+        faculties = Faculty.query.filter_by(universityId=university_id).all()
+        result = [faculty.to_dict() for faculty in faculties]
+
+        return jsonify({"code": 1, "faculties": result}), 200
+
+    except Exception as e:
+        print(f"Error al obtener facultades por universidad: {e}")
+        return jsonify({"Error": -1, "msg": "Error al obtener facultades"}), 500

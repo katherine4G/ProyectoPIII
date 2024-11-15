@@ -1,7 +1,8 @@
 from urllib import request
-from flask import Blueprint
+from flask import Blueprint, jsonify
 from flask_jwt_extended import jwt_required
 from app.controllers import Faculty_controller
+from app.models.Faculty import Faculty
 
 route_facu = Blueprint('faculty', __name__, url_prefix='/faculty')
 
@@ -35,3 +36,8 @@ def show_faculty_by_id():
 @jwt_required()
 def show_all_faculties_with_university():
     return Faculty_controller.showAllWithUniversity()
+
+@route_facu.route('/byUniversity/<int:university_id>', methods=['GET'])
+def show_faculties_by_university(university_id):
+    faculties = Faculty.query.filter_by(universityId=university_id).all()
+    return jsonify([faculty.to_dict() for faculty in faculties])

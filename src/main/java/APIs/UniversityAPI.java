@@ -5,10 +5,11 @@ import java.io.IOException;
 import java.util.List;
 import utils.Factory.APIClient;
 import utils.Factory.HttpHelper;
+import utils.Thread.BaseAPI;
 import utils.TokenManager;
 
-public class UniversityAPI implements APIClient {
-
+public class UniversityAPI implements BaseAPI<University>, APIClient {
+    
     private static final String BASE_URL = "http://localhost:5000/university/";
 
     @Override
@@ -39,7 +40,14 @@ public class UniversityAPI implements APIClient {
         String url = BASE_URL + "update";
         return HttpHelper.sendPutRequest(url, jsonBody, token);
     }
- 
     @Override
     public <T> T getById(String id, String token) throws IOException {return null;}
+    //hilo de LoadData
+     @Override
+    public List<University> getLoadData() throws IOException {
+        return getAll();
+     }
+    @Override
+    public List<University> getLoadData(int page, int pageSize) throws IOException {return null; }
 }
+

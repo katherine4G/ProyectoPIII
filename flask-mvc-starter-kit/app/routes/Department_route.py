@@ -1,3 +1,4 @@
+#routes/Department_route.py
 from flask import Blueprint
 from flask_jwt_extended import jwt_required
 from app.controllers import Department_controller
@@ -37,3 +38,4 @@ def show_all_departments_with_faculty():
 @route_dept.route('/showAllWithFacultyAndUniversity', methods=['GET'])
 def show_all_with_faculty_and_university():
     return Department_controller.showAllWithFacultyAndUniversity()
+
