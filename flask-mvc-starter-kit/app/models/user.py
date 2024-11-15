@@ -33,3 +33,12 @@ class User(db.Model):
         db.session.commit()
         return new_user
     
+    def to_dict(self):
+        return {
+            "id_user": self.id_user,
+            "nameUser ": self.nameUser ,
+            "lastName": self.lastName,
+            "email": self.email,
+            # No incluyas la contraseña por razones de seguridad
+            "role_id": self.role_id
+        }
