@@ -11,6 +11,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -103,8 +105,6 @@ public class InterTeacherController implements Initializable {
     @FXML
     private Button btn_viewCourses_next;
     @FXML
-    private Button btn_viewAssign_saveChanges;
-    @FXML
     private Button btn_viewAssign_editSubmission;
     @FXML
     private Button btn_viewAssign_addSubmission;
@@ -130,6 +130,48 @@ public class InterTeacherController implements Initializable {
     private TextField txt_revisaAssign_notaStudent;
     @FXML
     private TextArea txt_revisaAssign_commentToStudent;
+    @FXML
+    private AnchorPane StudentsGroup_form;
+    @FXML
+    private Pagination pagination_group;
+    @FXML
+    private TableView<?> tableView_course1;
+    @FXML
+    private TableColumn<?, ?> col_group_NRC;
+    @FXML
+    private TableColumn<?, ?> col_group_codigo;
+    @FXML
+    private TableColumn<?, ?> col_group_courseName;
+    @FXML
+    private TableColumn<?, ?> col_group_groupName;
+    @FXML
+    private TableView<?> tableView_studentToCourse_Students;
+    @FXML
+    private TableColumn<?, ?> col_studentToCourse_Id;
+    @FXML
+    private TableColumn<?, ?> col_studentToCourse_nameStudent;
+    @FXML
+    private TableColumn<?, ?> col_studentToCourse_lastName;
+    @FXML
+    private TableColumn<?, ?> col_studentToCourse_Email;
+    @FXML
+    private TableColumn<?, ?> col_studentToCourse_gropName;
+    @FXML
+    private Button btn_viewAssign_selectStudent;
+    @FXML
+    private ListView<?> ListView_EnrollingStudentCourses;
+    @FXML
+    private Label label_studnetData;
+    @FXML
+    private TableView<?> tableView_studentToCourse_course;
+    @FXML
+    private TableColumn<?, ?> col_studentToCourse_NRC;
+    @FXML
+    private TableColumn<?, ?> col_studentToCourse_codigo;
+    @FXML
+    private TableColumn<?, ?> col_studentToCourse_courseName;
+    @FXML
+    private Button btn_groupStudents;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -155,55 +197,13 @@ public class InterTeacherController implements Initializable {
         App.getStage().setResizable(false); 
     }       
     public void switchForm(ActionEvent event) {
-
-        if (event.getSource() == btn_viewProfile) {
-            perfil_form.setVisible(true);
-            viewMyCourses_form.setVisible(false);
-            registerCourse_form.setVisible(false);
-            asignStudentToCourse_form.setVisible(false);       
-            NewAsignation_form.setVisible(false);  
-            revisarAsignattions_form.setVisible(false);  
-          
-        }else if (event.getSource() == btn_viewMyCourse){
-            perfil_form.setVisible(false);
-            viewMyCourses_form.setVisible(true);
-            registerCourse_form.setVisible(false);
-            asignStudentToCourse_form.setVisible(false);       
-            NewAsignation_form.setVisible(false);
-            revisarAsignattions_form.setVisible(false);  
-  
-        }else if (event.getSource() == btn_registerToCourse){
-            perfil_form.setVisible(false);
-            viewMyCourses_form.setVisible(false);
-            registerCourse_form.setVisible(true);
-            asignStudentToCourse_form.setVisible(false);       
-            NewAsignation_form.setVisible(false);
-            revisarAsignattions_form.setVisible(false);  
-  
-        }else if (event.getSource() == btn_studentToCourse){
-            perfil_form.setVisible(false);
-            viewMyCourses_form.setVisible(false);
-            registerCourse_form.setVisible(false);
-            asignStudentToCourse_form.setVisible(true);       
-            NewAsignation_form.setVisible(false);
-            revisarAsignattions_form.setVisible(false);  
-  
-        }else if (event.getSource() == btn_createAssignation){
-            perfil_form.setVisible(false);
-            viewMyCourses_form.setVisible(false);
-            registerCourse_form.setVisible(false);
-            asignStudentToCourse_form.setVisible(false);       
-            NewAsignation_form.setVisible(true);
-            revisarAsignattions_form.setVisible(false);
-            
-        }else if (event.getSource() == btn_revisarAssignation){         
-            perfil_form.setVisible(false);
-            viewMyCourses_form.setVisible(false);
-            registerCourse_form.setVisible(false);
-            asignStudentToCourse_form.setVisible(false);       
-            NewAsignation_form.setVisible(false);
-            revisarAsignattions_form.setVisible(true);  
-        }
+             if (event.getSource() == btn_viewProfile)       {perfil_form.setVisible(true); viewMyCourses_form.setVisible(false);registerCourse_form.setVisible(false);StudentsGroup_form.setVisible(false);asignStudentToCourse_form.setVisible(false);NewAsignation_form.setVisible(false);revisarAsignattions_form.setVisible(false);}
+        else if (event.getSource() == btn_viewMyCourse)      {perfil_form.setVisible(false);viewMyCourses_form.setVisible(true); registerCourse_form.setVisible(false);StudentsGroup_form.setVisible(false);asignStudentToCourse_form.setVisible(false);NewAsignation_form.setVisible(false);revisarAsignattions_form.setVisible(false);}
+        else if (event.getSource() == btn_registerToCourse)  {perfil_form.setVisible(false);viewMyCourses_form.setVisible(false);registerCourse_form.setVisible(true); StudentsGroup_form.setVisible(false);asignStudentToCourse_form.setVisible(false);NewAsignation_form.setVisible(false);revisarAsignattions_form.setVisible(false);}
+        else if (event.getSource() == btn_groupStudents)     {perfil_form.setVisible(false);viewMyCourses_form.setVisible(false);registerCourse_form.setVisible(false);StudentsGroup_form.setVisible(true); asignStudentToCourse_form.setVisible(false);NewAsignation_form.setVisible(false);revisarAsignattions_form.setVisible(false);}
+        else if (event.getSource() == btn_studentToCourse)   {perfil_form.setVisible(false);viewMyCourses_form.setVisible(false);registerCourse_form.setVisible(false);StudentsGroup_form.setVisible(false);asignStudentToCourse_form.setVisible(true); NewAsignation_form.setVisible(false);revisarAsignattions_form.setVisible(false);}
+        else if (event.getSource() == btn_createAssignation) {perfil_form.setVisible(false);viewMyCourses_form.setVisible(false);registerCourse_form.setVisible(false);StudentsGroup_form.setVisible(false);asignStudentToCourse_form.setVisible(false);NewAsignation_form.setVisible(true); revisarAsignattions_form.setVisible(false);}
+        else if (event.getSource() == btn_revisarAssignation){perfil_form.setVisible(false);viewMyCourses_form.setVisible(false);registerCourse_form.setVisible(false);StudentsGroup_form.setVisible(false);asignStudentToCourse_form.setVisible(false);NewAsignation_form.setVisible(false);revisarAsignattions_form.setVisible(true);}
     }
 
     @FXML
@@ -254,9 +254,6 @@ public class InterTeacherController implements Initializable {
     private void student_edit_inside(ActionEvent event) {
     }
 
-    @FXML
-    private void btn_viewAssign_saveChanges(ActionEvent event) {
-    }
 
     @FXML
     private void viewAssign_editSubmission(ActionEvent event) {
@@ -268,6 +265,14 @@ public class InterTeacherController implements Initializable {
 
     @FXML
     private void reviewAssig_selectStudent(ActionEvent event) {
+    }
+
+    @FXML
+    private void btn_viewAssign_selectStudent(ActionEvent event) {
+    }
+
+    @FXML
+    private void groupStudents(ActionEvent event) {
     }
 
     

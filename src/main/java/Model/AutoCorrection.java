@@ -3,8 +3,8 @@ package Model;
 public final class AutoCorrection {
     private int autoCorrectionId;
     private Submission submissionId;
-    private double grade; // Nota generada automáticamente
-    private String comments; // Comentarios generados automáticamente
+    private double grade;
+    private String comments;
 
     public AutoCorrection() {}
 

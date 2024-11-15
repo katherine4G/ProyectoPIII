@@ -21,7 +21,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -36,8 +35,6 @@ import pack.universityplatform.App;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
@@ -47,7 +44,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Pagination;
 import org.json.JSONObject;
 import utils.MessagesToUser;
-import utils.Thread.BaseAPI;
 import utils.Thread.ClearFieldsThread;
 import utils.Thread.LoadDataThread;
 import utils.TokenManager;
@@ -346,9 +342,10 @@ public class InterAdminController implements Initializable {
     // Almacena selecciones de los comboBox según sea el caso
     Map<String, List<String>> facultiesByUniversityMap = new HashMap<>();
     
-    private int currentPage = 1;
-    private final int pageSize = 10;
-    private LoadDataThread<Faculty> loadDataThread;
+//    private int currentPage = 1;
+//    private final int pageSize = 10;
+//    
+
       
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -374,7 +371,7 @@ public class InterAdminController implements Initializable {
         Integer idDepa = departmentMap.get(selectedDepa);
         String selectedCourse = comboBox_profe_showCourses.getSelectionModel().getSelectedItem();
         Integer idCourse = departmentMap.get(selectedCourse);
-        //lenar los textField
+        //llenar los textField
         String idProf = txt_profesor_id.getText();
         String nameProf = txt_profesor_names.getText();
         String lastNameProf = txt_profesor_lastName.getText();
@@ -469,14 +466,14 @@ public class InterAdminController implements Initializable {
         App.getStage().setResizable(false);
     }
     public void switchForm(ActionEvent event) {
-        if (event.getSource() == btn_myProfile){myProfile_form.setVisible(true);University_form.setVisible(false); Faculty_form.setVisible(false); Department_form.setVisible(false); Course_form.setVisible(false); Teacher_form.setVisible(false);  Student_form.setVisible(false); viewSolis_form.setVisible(false);}
-        else if (event.getSource() == btn_createUniversity) { myProfile_form.setVisible(false); University_form.setVisible(true); Faculty_form.setVisible(false); Department_form.setVisible(false); Course_form.setVisible(false); Teacher_form.setVisible(false);Student_form.setVisible(false);viewSolis_form.setVisible(false);}
-        else if (event.getSource() == btn_createFaculty) { myProfile_form.setVisible(false); University_form.setVisible(false); Faculty_form.setVisible(true);  Department_form.setVisible(false);Course_form.setVisible(false);Teacher_form.setVisible(false);Student_form.setVisible(false);viewSolis_form.setVisible(false);}
-        else if (event.getSource() == btn_createDepartment) { myProfile_form.setVisible(false); University_form.setVisible(false); Faculty_form.setVisible(false);  Department_form.setVisible(true);Course_form.setVisible(false);Teacher_form.setVisible(false); Student_form.setVisible(false); viewSolis_form.setVisible(false);}
-        else if (event.getSource() == btn_createCourses) {myProfile_form.setVisible(false); University_form.setVisible(false);Faculty_form.setVisible(false);Department_form.setVisible(false);Course_form.setVisible(true);Teacher_form.setVisible(false);Student_form.setVisible(false);viewSolis_form.setVisible(false);}
-        else if (event.getSource() == btn_createTeacher) {myProfile_form.setVisible(false);University_form.setVisible(false); Faculty_form.setVisible(false); Department_form.setVisible(false); Course_form.setVisible(false); Teacher_form.setVisible(true); Student_form.setVisible(false); viewSolis_form.setVisible(false);}
-        else if (event.getSource() == btn_createStudent) {myProfile_form.setVisible(false); University_form.setVisible(false);Faculty_form.setVisible(false); Department_form.setVisible(false);Course_form.setVisible(false); Teacher_form.setVisible(false); Student_form.setVisible(true);viewSolis_form.setVisible(false);}
-        else if (event.getSource() == btn_viewSolis) {myProfile_form.setVisible(false); University_form.setVisible(false); Faculty_form.setVisible(false); Department_form.setVisible(false); Course_form.setVisible(false); Teacher_form.setVisible(false); Student_form.setVisible(false);viewSolis_form.setVisible(true);}
+             if (event.getSource() == btn_myProfile)        {myProfile_form.setVisible(true); University_form.setVisible(false);Faculty_form.setVisible(false); Department_form.setVisible(false);Course_form.setVisible(false); Teacher_form.setVisible(false); Student_form.setVisible(false);viewSolis_form.setVisible(false);}
+        else if (event.getSource() == btn_createUniversity) {myProfile_form.setVisible(false);University_form.setVisible(true); Faculty_form.setVisible(false); Department_form.setVisible(false);Course_form.setVisible(false); Teacher_form.setVisible(false); Student_form.setVisible(false);viewSolis_form.setVisible(false);}
+        else if (event.getSource() == btn_createFaculty)    {myProfile_form.setVisible(false);University_form.setVisible(false);Faculty_form.setVisible(true);  Department_form.setVisible(false);Course_form.setVisible(false); Teacher_form.setVisible(false); Student_form.setVisible(false);viewSolis_form.setVisible(false);}
+        else if (event.getSource() == btn_createDepartment) {myProfile_form.setVisible(false);University_form.setVisible(false);Faculty_form.setVisible(false); Department_form.setVisible(true); Course_form.setVisible(false); Teacher_form.setVisible(false); Student_form.setVisible(false);viewSolis_form.setVisible(false);}
+        else if (event.getSource() == btn_createCourses)    {myProfile_form.setVisible(false);University_form.setVisible(false);Faculty_form.setVisible(false); Department_form.setVisible(false);Course_form.setVisible(true);  Teacher_form.setVisible(false); Student_form.setVisible(false);viewSolis_form.setVisible(false);}
+        else if (event.getSource() == btn_createTeacher)    {myProfile_form.setVisible(false);University_form.setVisible(false);Faculty_form.setVisible(false); Department_form.setVisible(false);Course_form.setVisible(false); Teacher_form.setVisible(true);  Student_form.setVisible(false);viewSolis_form.setVisible(false);}
+        else if (event.getSource() == btn_createStudent)    {myProfile_form.setVisible(false);University_form.setVisible(false);Faculty_form.setVisible(false); Department_form.setVisible(false);Course_form.setVisible(false); Teacher_form.setVisible(false); Student_form.setVisible(true); viewSolis_form.setVisible(false);}
+        else if (event.getSource() == btn_viewSolis)        {myProfile_form.setVisible(false);University_form.setVisible(false);Faculty_form.setVisible(false); Department_form.setVisible(false);Course_form.setVisible(false); Teacher_form.setVisible(false); Student_form.setVisible(false);viewSolis_form.setVisible(true);}
         clearAllFields();
     }
 
@@ -755,7 +752,7 @@ public class InterAdminController implements Initializable {
     private void loadUniversitiesForComboBox_faculty(ComboBox<String> comboBox) throws IOException {
       try {
           List<University> universityList = universityAPI.getAll();
-          List<String> universityDetails = new ArrayList<>(); // Lista para almacenar los detalles completos
+          List<String> universityDetails = new ArrayList<>(); 
 
           for (University university : universityList) {
               // Crear una cadena con el nombre de la universidad, el país y la sede
@@ -1115,7 +1112,7 @@ public class InterAdminController implements Initializable {
         if (NRC == null || NRC.isEmpty()) {message.showErrorMessage("Error", "El campo NRC no puede estar vacío."); return;}
         if (!NRC.matches("[0-9]+")) {message.showErrorMessage("Error", "El NRC solo puede contener números.");return;}
         if (NRC.length() > 5) {message.showErrorMessage("Error", "El NRC no puede tener más de 5 dígitos.");return;}
-        if (NRC.length() < 0) {message.showErrorMessage("Error", "El NRC no puede tener menos de 5 dígitos.");return;}
+        if (NRC.length() < 0) {message.showErrorMessage("Error", "El NRC no puede tener menos de 5 dígitos.");}
     }
     @FXML
     private void facu_getPrevTable(ActionEvent event) {
